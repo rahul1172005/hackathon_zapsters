@@ -38,7 +38,7 @@ export const LiveLeaderboardTable: React.FC<LiveLeaderboardTableProps> = ({
   return (
     <div className="w-full bg-[#FFFFFF] border border-[#E5E5E2] rounded-3xl overflow-hidden font-inter shadow-xs">
       {/* Header bar — NO divided lines */}
-      <div className="p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 bg-[#FFFFFF] border-b border-[#E5E5E2]">
+      <div className="p-5 sm:p-6 flex flex-wrap items-center justify-between gap-4 bg-[#FFFFFF]">
         <div className="flex items-center gap-3.5">
           <div className="w-10 h-10 bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-base rounded-full shadow-xs">
             <Trophy className="w-5 h-5" />

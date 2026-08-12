@@ -7,22 +7,22 @@ import { ArrowRight, User, Mail, Lock } from 'lucide-react';
 
 export default function RegisterPage() {
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex flex-col font-inter">
+    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
       <PublicNavbar />
 
       <main className="flex-1 flex items-center justify-center p-6">
-        <div className="bg-[#FFFFFF] border border-[#E5E5E2] p-8 max-w-md w-full space-y-6">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-8 max-w-md w-full space-y-6 rounded-3xl shadow-xs font-inter">
           
           <div className="space-y-1">
-            <h1 className="text-2xl font-geist font-bold text-[#111111]">
+            <h1 className="text-3xl font-geist font-bold text-[#111111] dark:text-white">
               Create Zapsters Account
             </h1>
-            <p className="text-xs text-[#777777]">
+            <p className="text-xs text-[#777777] dark:text-neutral-400 font-inter">
               Join the competition infrastructure platform for hackathons.
             </p>
           </div>
 
-          <form action="/auth/onboarding" className="space-y-4 text-xs">
+          <form action="/auth/onboarding" className="space-y-4 text-xs font-inter">
             <div className="space-y-1">
               <label className="font-mono text-[10px] font-bold text-[#777777] block">FULL NAME</label>
               <div className="relative">
@@ -31,7 +31,7 @@ export default function RegisterPage() {
                   type="text"
                   required
                   placeholder="Rahul Sharma"
-                  className="w-full bg-[#F7F7F5] border border-[#E5E5E2] focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors"
+                  className="w-full bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors dark:text-white"
                 />
               </div>
             </div>
@@ -44,7 +44,7 @@ export default function RegisterPage() {
                   type="email"
                   required
                   placeholder="hacker@zapsters.dev"
-                  className="w-full bg-[#F7F7F5] border border-[#E5E5E2] focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors"
+                  className="w-full bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors dark:text-white"
                 />
               </div>
             </div>
@@ -57,20 +57,20 @@ export default function RegisterPage() {
                   type="password"
                   required
                   placeholder="••••••••••••"
-                  className="w-full bg-[#F7F7F5] border border-[#E5E5E2] focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors"
+                  className="w-full bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors dark:text-white"
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full py-3 bg-[#800000] hover:bg-[#660000] text-white text-xs font-bold uppercase tracking-wider rounded-full transition-colors shadow-xs flex items-center justify-center gap-2"
+              className="w-full py-3.5 bg-[#800000] hover:bg-[#660000] text-white text-xs font-bold uppercase tracking-wider rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
             >
               Continue to Onboarding <ArrowRight className="w-4 h-4" />
             </button>
           </form>
 
-          <div className="pt-4 border-t border-[#E5E5E2] text-center text-xs text-[#777777]">
+          <div className="pt-2 text-center text-xs text-[#777777] dark:text-neutral-400 font-inter">
             Already registered?{' '}
             <Link href="/auth/login" className="text-[#800000] font-bold hover:underline">
               Sign in →

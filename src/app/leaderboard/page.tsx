@@ -19,31 +19,31 @@ export default function PublicLeaderboardPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex flex-col font-sans">
+    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
       <PublicNavbar />
 
-      {/* Header Banner */}
-      <section className="bg-[#FFFFFF] border-b border-[#E5E5E2] py-8">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
+      {/* Header Banner — NO divided lines */}
+      <section className="bg-white dark:bg-black py-8">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-2 font-inter">
           <div className="flex items-center gap-2">
-            <Trophy className="w-5 h-5 text-[#16803C]" />
-            <span className="font-mono text-xs text-[#16803C] uppercase tracking-widest font-bold">
+            <Trophy className="w-5 h-5 text-[#800000]" />
+            <span className="font-mono text-xs text-[#800000] uppercase tracking-widest font-bold">
               OFFICIAL BROADCAST LEADERBOARD
             </span>
           </div>
-          <h1 className="text-3xl font-serif text-[#111111]">
+          <h1 className="text-3xl font-geist font-bold text-[#111111] dark:text-white">
             Quantum Build 2026 Live Standings
           </h1>
-          <p className="text-xs text-[#666666] font-mono">
+          <p className="text-xs text-[#777777] dark:text-neutral-400 font-inter">
             Scores dynamically reflect judge rubric evaluations, code velocity telemetry, and track metrics.
           </p>
         </div>
       </section>
 
       {/* Leaderboard Table Container */}
-      <section className="py-8 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1">
+      <section className="py-6 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 font-inter">
         {loading ? (
-          <div className="bg-[#FFFFFF] border border-[#E5E5E2] p-12 text-center text-xs font-mono text-[#666666]">
+          <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-12 text-center text-xs font-inter text-[#777777] rounded-3xl shadow-xs">
             Calculating Live Score Matrices...
           </div>
         ) : (

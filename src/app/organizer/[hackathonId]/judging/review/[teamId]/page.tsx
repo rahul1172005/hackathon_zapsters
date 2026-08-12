@@ -95,16 +95,16 @@ export default function OrganizerTeamEvaluationStudioPage() {
 
       <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
         {/* Top Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E5E2] pb-5">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
           <div>
             <Link
               href={`/organizer/${hackathonId}/judging`}
-              className="inline-flex items-center gap-1.5 text-xs text-[#777777] hover:text-[#111111] font-inter font-semibold mb-1 transition-colors"
+              className="inline-flex items-center gap-1.5 text-xs text-[#777777] hover:text-[#111111] dark:hover:text-white font-inter font-semibold mb-1 transition-colors"
             >
-              <ArrowLeft className="w-3.5 h-3.5" /> Back to Assigned Queue
+              <ArrowLeft className="w-3.5 h-3.5 text-[#800000]" /> Back to Assigned Queue
             </Link>
             <div className="flex items-center gap-3">
-              <h1 className="text-3xl font-geist font-bold text-[#111111]">{team.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">{team.name}</h1>
               <span className="font-inter text-xs font-bold text-[#800000] bg-[#800000]/10 px-3 py-1 rounded-full">
                 {team.track}
               </span>
@@ -112,18 +112,17 @@ export default function OrganizerTeamEvaluationStudioPage() {
           </div>
 
           {/* Total Score & Autosave Indicator */}
-          <div className="flex items-center gap-4 bg-[#FFFFFF] border border-[#E5E5E2] px-5 py-3 rounded-2xl font-inter shadow-xs">
+          <div className="flex items-center gap-4 bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 px-5 py-3 rounded-2xl font-inter shadow-xs">
             <div className="text-right">
-              <div className="text-[10px] text-[#777777] uppercase font-bold tracking-wider">EVALUATION TOTAL</div>
+              <div className="text-[10px] text-[#777777] dark:text-neutral-400 uppercase font-bold tracking-wider">EVALUATION TOTAL</div>
               <div className="text-2xl font-extrabold font-geist text-[#800000]">{totalScore} / 100</div>
             </div>
-            <div className="h-8 w-px bg-[#E5E5E2]" />
-            <div className="text-xs text-[#777777]">
+            <div className="text-xs text-[#777777] dark:text-neutral-400 font-medium">
               {isSaving ? (
-                <span className="text-[#A15C00] font-bold">AUTOSAVING...</span>
+                <span className="text-[#800000] font-bold">AUTOSAVING...</span>
               ) : (
-                <span className="text-[#16803C] font-semibold flex items-center gap-1">
-                  <Check className="w-3.5 h-3.5 text-[#16803C]" /> SAVED AT {autosavedTime}
+                <span className="text-[#800000] font-semibold flex items-center gap-1">
+                  <Check className="w-3.5 h-3.5 text-[#800000]" /> SAVED AT {autosavedTime}
                 </span>
               )}
             </div>
@@ -131,15 +130,15 @@ export default function OrganizerTeamEvaluationStudioPage() {
         </div>
 
         {/* Main Split View Studio Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 font-inter">
           
           {/* LEFT SIDE: Project Deliverables & Spec (Col 6) */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-[#FFFFFF] p-6 space-y-5 font-inter rounded-3xl shadow-xs border border-neutral-100">
-              <div className="border-b border-[#E5E5E2] pb-3">
-                <div className="text-xs text-[#777777] uppercase font-bold tracking-wider">SUBMISSION DELIVERABLES</div>
-                <h2 className="text-xl font-geist font-bold text-[#111111] mt-0.5">{team.project.name}</h2>
-                <p className="text-xs text-[#777777] mt-0.5">{team.project.tagline}</p>
+            <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 space-y-5 font-inter rounded-3xl shadow-xs">
+              <div>
+                <div className="text-xs text-[#800000] font-mono uppercase font-bold tracking-wider">SUBMISSION DELIVERABLES</div>
+                <h2 className="text-xl font-geist font-bold text-[#111111] dark:text-white mt-0.5">{team.project.name}</h2>
+                <p className="text-xs text-[#777777] dark:text-neutral-400 mt-0.5">{team.project.tagline}</p>
               </div>
 
               {/* Action Buttons */}
@@ -184,13 +183,13 @@ export default function OrganizerTeamEvaluationStudioPage() {
               </div>
 
               {/* Team Roster Specs */}
-              <div className="space-y-2 pt-3 border-t border-[#E5E5E2] text-xs">
-                <h3 className="text-xs font-bold uppercase text-[#777777]">TEAM MEMBERS & ROLES</h3>
+              <div className="space-y-2 pt-1 text-xs">
+                <h3 className="text-xs font-bold uppercase text-[#777777] dark:text-neutral-400">TEAM MEMBERS & ROLES</h3>
                 <div className="grid grid-cols-2 gap-2">
                   {team.members.map((m) => (
-                    <div key={m.id} className="p-3 bg-[#F7F7F5] rounded-2xl">
-                      <div className="font-bold text-[#111111]">{m.name}</div>
-                      <div className="text-[11px] text-[#777777]">{m.role} • {m.contributionPercentage}% Contrib</div>
+                    <div key={m.id} className="p-3 bg-[#F7F7F5] dark:bg-neutral-900 rounded-2xl">
+                      <div className="font-bold text-[#111111] dark:text-white">{m.name}</div>
+                      <div className="text-[11px] text-[#777777] dark:text-neutral-400">{m.role} • {m.contributionPercentage}% Contrib</div>
                     </div>
                   ))}
                 </div>
@@ -198,21 +197,21 @@ export default function OrganizerTeamEvaluationStudioPage() {
 
               {/* Telemetry Stats */}
               <div className="grid grid-cols-4 gap-2 pt-2 text-center text-xs">
-                <div className="p-3 bg-[#F7F7F5] rounded-2xl">
-                  <div className="text-[10px] text-[#777777] uppercase font-bold">COMMITS</div>
-                  <div className="font-geist font-bold text-sm text-[#111111]">{team.project.commitsCount}</div>
+                <div className="p-3 bg-[#F7F7F5] dark:bg-neutral-900 rounded-2xl">
+                  <div className="text-[10px] text-[#777777] dark:text-neutral-400 uppercase font-bold">COMMITS</div>
+                  <div className="font-geist font-bold text-sm text-[#111111] dark:text-white">{team.project.commitsCount}</div>
                 </div>
-                <div className="p-3 bg-[#F7F7F5] rounded-2xl">
-                  <div className="text-[10px] text-[#777777] uppercase font-bold">PULL REQS</div>
-                  <div className="font-geist font-bold text-sm text-[#111111]">{team.project.prsCount}</div>
+                <div className="p-3 bg-[#F7F7F5] dark:bg-neutral-900 rounded-2xl">
+                  <div className="text-[10px] text-[#777777] dark:text-neutral-400 uppercase font-bold">PULL REQS</div>
+                  <div className="font-geist font-bold text-sm text-[#111111] dark:text-white">{team.project.prsCount}</div>
                 </div>
-                <div className="p-3 bg-[#F7F7F5] rounded-2xl">
-                  <div className="text-[10px] text-[#777777] uppercase font-bold">ISSUES</div>
-                  <div className="font-geist font-bold text-sm text-[#111111]">{team.project.issuesCount}</div>
+                <div className="p-3 bg-[#F7F7F5] dark:bg-neutral-900 rounded-2xl">
+                  <div className="text-[10px] text-[#777777] dark:text-neutral-400 uppercase font-bold">ISSUES</div>
+                  <div className="font-geist font-bold text-sm text-[#111111] dark:text-white">{team.project.issuesCount}</div>
                 </div>
-                <div className="p-3 bg-[#F7F7F5] rounded-2xl">
-                  <div className="text-[10px] text-[#777777] uppercase font-bold">ACTIVE DAYS</div>
-                  <div className="font-geist font-bold text-sm text-[#16803C]">{team.project.activeDays}</div>
+                <div className="p-3 bg-[#F7F7F5] dark:bg-neutral-900 rounded-2xl">
+                  <div className="text-[10px] text-[#777777] dark:text-neutral-400 uppercase font-bold">ACTIVE DAYS</div>
+                  <div className="font-geist font-bold text-sm text-[#800000]">{team.project.activeDays}</div>
                 </div>
               </div>
 
@@ -221,10 +220,10 @@ export default function OrganizerTeamEvaluationStudioPage() {
 
           {/* RIGHT SIDE: Interactive Rubric Evaluation Studio (Col 6) */}
           <div className="lg:col-span-6 space-y-6">
-            <div className="bg-[#FFFFFF] p-6 space-y-6 font-inter rounded-3xl shadow-xs border border-neutral-100">
+            <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 space-y-6 font-inter rounded-3xl shadow-xs">
               
-              <div className="flex justify-between items-center border-b border-[#E5E5E2] pb-3">
-                <h3 className="text-xs font-bold uppercase tracking-widest text-[#111111] flex items-center gap-2">
+              <div className="flex justify-between items-center">
+                <h3 className="text-xs font-bold uppercase tracking-widest text-[#111111] dark:text-white flex items-center gap-2">
                   <Sliders className="w-4 h-4 text-[#800000]" /> OFFICIAL JUDGING RUBRIC
                 </h3>
                 <span className="text-xs font-bold text-[#800000] bg-[#800000]/10 px-3 py-1 rounded-full">
@@ -238,10 +237,10 @@ export default function OrganizerTeamEvaluationStudioPage() {
                 {/* 1. Innovation (0 - 30) */}
                 <div className="space-y-1.5">
                   <div className="flex justify-between text-xs font-bold">
-                    <span className="text-[#111111]">INNOVATION &amp; NOVELTY</span>
+                    <span className="text-[#111111] dark:text-white">INNOVATION &amp; NOVELTY</span>
                     <span className="text-[#800000]">{scores.innovation} / 30</span>
                   </div>
-                  <p className="text-[11px] text-[#777777]">
+                  <p className="text-[11px] text-[#777777] dark:text-neutral-400">
                     Originality of core IP, unique engineering approach, and competitive differentiation.
                   </p>
                   <input
@@ -250,17 +249,17 @@ export default function OrganizerTeamEvaluationStudioPage() {
                     max="30"
                     value={scores.innovation}
                     onChange={(e) => handleScoreChange('innovation', parseInt(e.target.value))}
-                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 rounded-lg"
+                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-lg"
                   />
                 </div>
 
                 {/* 2. Technical Complexity (0 - 30) */}
-                <div className="space-y-1.5 pt-3 border-t border-[#E5E5E2]">
+                <div className="space-y-1.5 pt-2">
                   <div className="flex justify-between text-xs font-bold">
-                    <span className="text-[#111111]">TECHNICAL ARCHITECTURE</span>
+                    <span className="text-[#111111] dark:text-white">TECHNICAL ARCHITECTURE</span>
                     <span className="text-[#800000]">{scores.technical} / 30</span>
                   </div>
-                  <p className="text-[11px] text-[#777777]">
+                  <p className="text-[11px] text-[#777777] dark:text-neutral-400">
                     Code quality, sub-system integration, model optimization, and repository structure.
                   </p>
                   <input
@@ -269,17 +268,17 @@ export default function OrganizerTeamEvaluationStudioPage() {
                     max="30"
                     value={scores.technical}
                     onChange={(e) => handleScoreChange('technical', parseInt(e.target.value))}
-                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 rounded-lg"
+                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-lg"
                   />
                 </div>
 
                 {/* 3. Real-World Impact (0 - 20) */}
-                <div className="space-y-1.5 pt-3 border-t border-[#E5E5E2]">
+                <div className="space-y-1.5 pt-2">
                   <div className="flex justify-between text-xs font-bold">
-                    <span className="text-[#111111]">REAL-WORLD IMPACT</span>
+                    <span className="text-[#111111] dark:text-white">REAL-WORLD IMPACT</span>
                     <span className="text-[#800000]">{scores.impact} / 20</span>
                   </div>
-                  <p className="text-[11px] text-[#777777]">
+                  <p className="text-[11px] text-[#777777] dark:text-neutral-400">
                     Market applicability, scalability, and potential for industry adoption.
                   </p>
                   <input
@@ -288,17 +287,17 @@ export default function OrganizerTeamEvaluationStudioPage() {
                     max="20"
                     value={scores.impact}
                     onChange={(e) => handleScoreChange('impact', parseInt(e.target.value))}
-                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 rounded-lg"
+                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-lg"
                   />
                 </div>
 
                 {/* 4. UX & Polish (0 - 10) */}
-                <div className="space-y-1.5 pt-3 border-t border-[#E5E5E2]">
+                <div className="space-y-1.5 pt-2">
                   <div className="flex justify-between text-xs font-bold">
-                    <span className="text-[#111111]">UX &amp; INTERFACE POLISH</span>
+                    <span className="text-[#111111] dark:text-white">UX &amp; INTERFACE POLISH</span>
                     <span className="text-[#800000]">{scores.ux} / 10</span>
                   </div>
-                  <p className="text-[11px] text-[#777777]">
+                  <p className="text-[11px] text-[#777777] dark:text-neutral-400">
                     User experience precision, aesthetic clarity, and friction-free interactions.
                   </p>
                   <input
@@ -307,17 +306,17 @@ export default function OrganizerTeamEvaluationStudioPage() {
                     max="10"
                     value={scores.ux}
                     onChange={(e) => handleScoreChange('ux', parseInt(e.target.value))}
-                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 rounded-lg"
+                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-lg"
                   />
                 </div>
 
                 {/* 5. Presentation (0 - 10) */}
-                <div className="space-y-1.5 pt-3 border-t border-[#E5E5E2]">
+                <div className="space-y-1.5 pt-2">
                   <div className="flex justify-between text-xs font-bold">
-                    <span className="text-[#111111]">PRESENTATION &amp; DEMO</span>
+                    <span className="text-[#111111] dark:text-white">PRESENTATION &amp; DEMO</span>
                     <span className="text-[#800000]">{scores.presentation} / 10</span>
                   </div>
-                  <p className="text-[11px] text-[#777777]">
+                  <p className="text-[11px] text-[#777777] dark:text-neutral-400">
                     Clarity of video demo, pitch deck quality, and live system demonstration.
                   </p>
                   <input
@@ -326,15 +325,15 @@ export default function OrganizerTeamEvaluationStudioPage() {
                     max="10"
                     value={scores.presentation}
                     onChange={(e) => handleScoreChange('presentation', parseInt(e.target.value))}
-                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 rounded-lg"
+                    className="w-full accent-[#800000] cursor-pointer h-1.5 bg-neutral-200 dark:bg-neutral-800 rounded-lg"
                   />
                 </div>
 
               </div>
 
               {/* Judge Notes */}
-              <div className="space-y-2 pt-4 border-t border-[#E5E5E2]">
-                <label className="text-xs font-bold text-[#111111] block">
+              <div className="space-y-2 pt-2">
+                <label className="text-xs font-bold text-[#111111] dark:text-white block">
                   JUDGE EVALUATION NOTES
                 </label>
                 <textarea
@@ -345,12 +344,12 @@ export default function OrganizerTeamEvaluationStudioPage() {
                     triggerAutosave(scores, e.target.value);
                   }}
                   placeholder="Provide feedback on innovation, architecture, edge execution, and performance..."
-                  className="w-full p-4 bg-[#F7F7F5] border border-neutral-200 focus:border-[#800000] text-xs font-inter rounded-2xl outline-none"
+                  className="w-full p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 focus:border-[#800000] text-xs font-inter rounded-2xl outline-none text-[#111111] dark:text-white"
                 />
               </div>
 
               {/* Save & Submit Button Bar */}
-              <div className="pt-4 border-t border-[#E5E5E2] flex items-center justify-between text-xs">
+              <div className="pt-2 flex items-center justify-between text-xs font-inter">
                 {isSubmitted ? (
                   <div className="w-full py-3.5 bg-[#16803C] text-white text-center font-bold uppercase rounded-full flex items-center justify-center gap-2">
                     <CheckCircle2 className="w-4 h-4" /> Evaluation Locked &amp; Submitted

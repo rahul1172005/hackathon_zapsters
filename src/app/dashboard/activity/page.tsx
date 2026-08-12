@@ -8,45 +8,48 @@ export default function HackerActivityPage() {
   const activityLog = MOCK_TEAMS[2].activityLog;
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex flex-col lg:flex-row font-sans">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-8 overflow-y-auto pb-24 lg:pb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E5E2] pb-5">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+        
+        {/* Header — NO divided lines */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
           <div>
-            <div className="text-xs font-mono text-[#666666] uppercase tracking-widest">
+            <div className="text-xs font-mono text-[#800000] font-bold uppercase tracking-widest">
               OBSERVABILITY LOGS
             </div>
-            <h1 className="text-2xl font-bold text-[#111111] mt-0.5">Real-time Hacker Activity Stream</h1>
+            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white mt-0.5">Real-time Hacker Activity Stream</h1>
           </div>
 
-          <div className="font-mono text-xs text-[#16803C] bg-[#16803C]/10 border border-[#16803C]/20 px-3 py-1.5 rounded-xs flex items-center gap-1.5">
-            <span className="w-2 h-2 rounded-full bg-[#16803C] animate-pulse" />
+          <div className="font-mono text-xs text-[#800000] bg-[#800000]/10 border border-[#800000]/20 px-4 py-2 rounded-full font-bold flex items-center gap-2 self-start sm:self-auto">
+            <span className="w-2 h-2 rounded-full bg-[#800000] animate-pulse" />
             GITHUB HOOK ACTIVE
           </div>
         </div>
 
-        <div className="bg-[#FFFFFF] border border-[#E5E5E2] p-6 space-y-4 font-sans">
-          <div className="flex justify-between items-center border-b border-[#E5E5E2] pb-3">
-            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-[#111111]">
+        {/* Activity Container — Curved Corners rounded-3xl, NO divided lines */}
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 sm:p-8 space-y-4 font-inter rounded-3xl shadow-xs">
+          <div className="flex justify-between items-center">
+            <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-[#800000]">
               CHRONOLOGICAL EVENT LOG (CYBERFORGE)
             </h2>
-            <span className="text-[10px] font-mono text-[#666666]">{activityLog.length} RECENT EVENTS</span>
+            <span className="text-[10px] font-mono text-[#777777] dark:text-neutral-400 font-bold">{activityLog.length} RECENT EVENTS</span>
           </div>
 
-          <div className="space-y-3 font-mono text-xs">
+          <div className="space-y-3 text-xs font-inter">
             {activityLog.map((act) => (
-              <div key={act.id} className="p-4 bg-[#F7F7F5] border border-[#E5E5E2] rounded-xs flex items-start justify-between gap-4">
+              <div key={act.id} className="p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 rounded-2xl flex items-start justify-between gap-4">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="font-bold text-[#111111]">{act.author}</span>
-                    <span className="text-[10px] text-[#16803C] font-semibold bg-[#16803C]/10 px-1.5 py-0.2 rounded-xs">
+                    <span className="font-bold text-[#111111] dark:text-white">{act.author}</span>
+                    <span className="text-[10px] font-mono text-[#800000] font-bold bg-[#800000]/10 px-2 py-0.5 rounded-full uppercase">
                       {act.action}
                     </span>
                   </div>
-                  <div className="text-xs text-[#111111] font-sans">{act.detail}</div>
+                  <div className="text-xs text-[#777777] dark:text-neutral-300 font-inter">{act.detail}</div>
                 </div>
-                <div className="text-[10px] text-[#666666] shrink-0">
+                <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400 shrink-0 font-bold">
                   {act.timestamp} IST
                 </div>
               </div>

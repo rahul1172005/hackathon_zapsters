@@ -36,38 +36,38 @@ export default function ParticipantHackathonWorkspacePage() {
 
       <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
         
-        {/* Workspace Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E5E2] pb-5">
+        {/* Workspace Header — NO divided lines */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
           <div>
-            <h1 className="text-2xl font-geist font-bold text-[#111111]">{hackathon.title} Workspace</h1>
+            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">{hackathon.title} Workspace</h1>
           </div>
 
           <div className="flex items-center gap-3">
             <Link
               href="/my-teams/team-003/overview"
-              className="px-4 py-2 bg-[#111111] hover:bg-[#222222] text-white text-xs font-mono font-bold uppercase rounded-full transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#111111] dark:bg-white text-white dark:text-[#111111] text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center gap-1.5 shadow-2xs"
             >
               <Users className="w-3.5 h-3.5" /> Team Workspace
             </Link>
             <Link
               href="/my-teams/team-003/submission"
-              className="px-4 py-2 bg-[#800000] hover:bg-[#660000] text-white text-xs font-mono font-bold uppercase rounded-full transition-colors flex items-center gap-1.5"
+              className="px-4 py-2 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center gap-1.5 shadow-xs"
             >
               <Send className="w-3.5 h-3.5" /> Submission Flow
             </Link>
           </div>
         </div>
 
-        {/* Workspace Sub-nav Tabs */}
-        <div className="flex items-center gap-2 border-b border-[#E5E5E2] pb-3 text-xs font-mono overflow-x-auto">
+        {/* Workspace Sub-nav Tabs — NO divided lines */}
+        <div className="flex items-center gap-2 pb-2 text-xs font-inter overflow-x-auto">
           {(['Overview', 'Timeline', 'Tracks', 'Rules', 'Announcements', 'Resources'] as const).map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-1.5 rounded-full transition-colors ${
+              className={`px-4 py-2 rounded-full transition-colors cursor-pointer font-medium ${
                 activeTab === tab
-                  ? 'bg-[#800000] text-white font-bold'
-                  : 'bg-[#FFFFFF] border border-[#E5E5E2] text-[#777777] hover:text-[#111111]'
+                  ? 'bg-[#800000] text-white font-bold shadow-xs'
+                  : 'bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 text-[#777777] hover:text-[#111111] dark:hover:text-white'
               }`}
             >
               {tab}
@@ -75,27 +75,27 @@ export default function ParticipantHackathonWorkspacePage() {
           ))}
         </div>
 
-        {/* Tab Body Content */}
-        <div className="bg-[#FFFFFF] border border-[#E5E5E2] p-6 space-y-6">
+        {/* Tab Body Content — Curved Corners rounded-3xl, NO divided lines */}
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 sm:p-8 rounded-3xl shadow-xs space-y-6 font-inter">
           {activeTab === 'Overview' && (
-            <div className="space-y-6 text-xs">
+            <div className="space-y-6 text-xs font-inter">
               <div className="space-y-2">
-                <h2 className="text-base font-geist font-bold text-[#111111]">COMPETITION OBJECTIVE</h2>
-                <p className="text-xs text-[#111111] leading-relaxed">{hackathon.description}</p>
+                <h2 className="text-lg font-geist font-bold text-[#111111] dark:text-white">COMPETITION OBJECTIVE</h2>
+                <p className="text-xs text-[#777777] dark:text-neutral-400 leading-relaxed">{hackathon.description}</p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 border-t border-[#E5E5E2]">
-                <div className="p-4 bg-[#F7F7F5] border border-[#E5E5E2] space-y-1">
-                  <div className="text-[10px] font-mono text-[#777777]">TOTAL PRIZE POOL</div>
-                  <div className="text-xl font-mono font-bold text-[#800000]">{hackathon.prizePool}</div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                <div className="p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 rounded-2xl space-y-1">
+                  <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400 font-bold uppercase">TOTAL PRIZE POOL</div>
+                  <div className="text-xl font-geist font-bold text-[#800000]">{hackathon.prizePool}</div>
                 </div>
-                <div className="p-4 bg-[#F7F7F5] border border-[#E5E5E2] space-y-1">
-                  <div className="text-[10px] font-mono text-[#777777]">ACTIVE TEAMS</div>
-                  <div className="text-xl font-mono font-bold text-[#111111]">{hackathon.activeTeamsCount} Teams</div>
+                <div className="p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 rounded-2xl space-y-1">
+                  <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400 font-bold uppercase">ACTIVE TEAMS</div>
+                  <div className="text-xl font-geist font-bold text-[#111111] dark:text-white">{hackathon.activeTeamsCount} Teams</div>
                 </div>
-                <div className="p-4 bg-[#F7F7F5] border border-[#E5E5E2] space-y-1">
-                  <div className="text-[10px] font-mono text-[#777777]">SUBMISSION RATE</div>
-                  <div className="text-xl font-mono font-bold text-[#800000]">{hackathon.submissionRate}%</div>
+                <div className="p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 rounded-2xl space-y-1">
+                  <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400 font-bold uppercase">SUBMISSION RATE</div>
+                  <div className="text-xl font-geist font-bold text-[#800000]">{hackathon.submissionRate}%</div>
                 </div>
               </div>
             </div>

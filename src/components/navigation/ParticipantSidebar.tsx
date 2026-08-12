@@ -130,7 +130,7 @@ export const ParticipantSidebar: React.FC = () => {
               <span>THEME:</span>
               <ThemeToggle />
             </div>
-            <div className="flex justify-between pt-1 border-t border-neutral-100 dark:border-neutral-800">
+            <div className="flex justify-between pt-1">
               <span>TEAM:</span>
               <span className="font-bold text-[#111111] dark:text-white">CyberForge</span>
             </div>
@@ -143,7 +143,7 @@ export const ParticipantSidebar: React.FC = () => {
       </aside>
 
       {/* ===================== MOBILE BOTTOM NAV BAR ===================== */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#FFFFFF] dark:bg-[#111111] border-t border-[#E5E5E2] dark:border-neutral-800 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] safe-area-inset-bottom">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#FFFFFF] dark:bg-[#111111] shadow-[0_-4px_24px_rgba(0,0,0,0.08)] safe-area-inset-bottom rounded-t-3xl">
         <div className="flex items-center justify-around px-2 py-2">
           {mobileNavItems.map((item) => {
             const isActive = pathname === item.href;

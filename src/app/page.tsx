@@ -13,7 +13,7 @@ export default function LandingPage() {
   const featuredHackathons = MOCK_HACKATHONS;
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] dark:bg-black flex flex-col font-inter">
+    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
       <PublicNavbar />
 
       {/* 1. Hero Section */}
@@ -42,11 +42,11 @@ export default function LandingPage() {
                   Explore Hackathons
                 </Link>
                 <Link
-                  href="/organizer/quantum-build-2026/overview"
+                  href="/auth/login?role=organizer"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#111111] dark:text-white text-sm font-geist font-light uppercase tracking-wider rounded-full transition-all border border-[#E5E5E2] dark:border-neutral-700"
                 >
                   <Cpu className="w-4 h-4 text-[#800000]" />
-                  Host a Hackathon
+                  Host a Hackathon (Admin)
                 </Link>
               </div>
             </div>

@@ -21,25 +21,29 @@ export default function OrganizerLeaderboardControlPage() {
   }, [hackathonId]);
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex font-sans">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <OrganizerSidebar hackathonId={hackathonId} />
 
       <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E5E2] pb-5">
+        
+        {/* Header — NO divided lines */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
           <div>
-            <div className="text-xs font-mono text-[#666666] uppercase tracking-widest">
+            <div className="text-xs font-mono text-[#800000] font-bold uppercase tracking-widest">
               COMPETITION ENGINE
             </div>
-            <h1 className="text-2xl font-bold text-[#111111] mt-0.5">Leaderboard Control Center</h1>
+            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white mt-0.5">
+              Leaderboard Control Center
+            </h1>
           </div>
 
-          <div className="flex items-center gap-3 font-mono text-xs">
+          <div className="flex items-center gap-3 text-xs font-inter font-bold">
             <button
               onClick={() => setIsLocked(!isLocked)}
-              className={`px-3 py-1.5 border rounded-xs font-bold transition-colors flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer ${
                 isLocked
-                  ? 'bg-[#C62828] text-white border-[#C62828]'
-                  : 'bg-[#FFFFFF] border-[#E5E5E2] text-[#111111]'
+                  ? 'bg-[#800000] text-white shadow-xs'
+                  : 'bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white hover:border-[#800000]'
               }`}
             >
               <Lock className="w-3.5 h-3.5" />
@@ -48,10 +52,10 @@ export default function OrganizerLeaderboardControlPage() {
 
             <button
               onClick={() => setIsPublished(!isPublished)}
-              className={`px-3.5 py-1.5 font-bold rounded-xs transition-colors flex items-center gap-1.5 ${
+              className={`px-4 py-2 rounded-full transition-colors flex items-center gap-1.5 cursor-pointer ${
                 isPublished
-                  ? 'bg-[#16803C] text-white'
-                  : 'bg-[#111111] text-white'
+                  ? 'bg-[#800000] text-white shadow-xs'
+                  : 'bg-[#111111] dark:bg-white text-white dark:text-[#111111]'
               }`}
             >
               <Globe className="w-3.5 h-3.5" />

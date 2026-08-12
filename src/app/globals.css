@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
+@variant dark (&:where(.dark, .dark *));
+
 :root {
-  --bg-zapsters: #F7F7F5;
+  --bg-zapsters: #FFFFFF;
   --surface-zapsters: #FFFFFF;
   --primary-zapsters: #111111;
   --secondary-zapsters: #800000;
@@ -14,7 +16,7 @@
   --font-geist: var(--font-geist), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
-  --color-zap-bg: #F7F7F5;
+  --color-zap-bg: #FFFFFF;
   --color-zap-surface: #FFFFFF;
   --color-zap-primary: #111111;
   --color-zap-red: #800000;
@@ -24,7 +26,7 @@
 }
 
 body {
-  background-color: #F7F7F5;
+  background-color: #FFFFFF;
   color: #111111;
   font-family: var(--font-inter), sans-serif;
   font-size: 0.875rem; /* 14px */
@@ -35,16 +37,11 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
-/* Enforce Thin/Light Geist Font for ALL Titles, Headings, Buttons, and Interactive Pill Links across the entire site */
+/* Enforce Thin Geist Font for ALL Titles, Headings, and Geist typography across the platform */
 h1, h2, h3, h4, h5, h6, .font-geist, button, [role="button"], a.inline-flex, a.px-4, a.px-5, a.px-6, a.px-8, nav a {
   font-family: var(--font-geist), sans-serif !important;
-  font-weight: 300 !important; /* Thin/Light Geist font */
+  font-weight: 300 !important; /* Thin Geist font */
   letter-spacing: -0.02em;
-}
-
-button, [role="button"] {
-  font-family: var(--font-geist), sans-serif !important;
-  font-weight: 300 !important;
 }
 
 .font-geist {
@@ -57,7 +54,7 @@ button, [role="button"] {
 }
 
 .font-mono {
-  font-family: var(--font-inter), sans-serif !important;
+  font-family: var(--font-inter), sans-serif;
 }
 
 /* Make all scrollbars invisible while preserving scroll functionality */
@@ -97,17 +94,6 @@ button, [role="button"] {
 /* ====================================================
    BLACK THEME OVERRIDES (Triggered when .dark class is on <html>)
    ==================================================== */
-
-/* Uniform Section & Navbar Background Rules */
-section {
-  background-color: transparent !important;
-}
-
-header,
-header.sticky {
-  background-color: #F7F7F5 !important;
-  border-color: #E5E5E2 !important;
-}
 
 html.dark,
 html.dark body,

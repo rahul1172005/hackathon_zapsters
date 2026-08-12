@@ -40,7 +40,7 @@ export const OrganizerSidebar: React.FC<OrganizerSidebarProps> = ({
     {
       title: 'HACKATHON',
       items: [
-        { label: 'Details & Tracks', href: `/hackathons/${hackathonId}`, icon: Layers },
+        { label: 'Details & Tracks', href: `${baseUrl}/details`, icon: Layers },
       ],
     },
     {
@@ -188,7 +188,7 @@ export const OrganizerSidebar: React.FC<OrganizerSidebarProps> = ({
       </aside>
 
       {/* ===================== MOBILE BOTTOM NAV BAR ===================== */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#FFFFFF] dark:bg-[#111111] border-t border-[#E5E5E2] dark:border-neutral-800 shadow-[0_-4px_24px_rgba(0,0,0,0.08)]">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#FFFFFF] dark:bg-[#111111] shadow-[0_-4px_24px_rgba(0,0,0,0.08)] rounded-t-3xl">
         <div className="flex items-center justify-around px-2 py-2">
           {mobileNavItems.map((item) => {
             const isActive = pathname === item.href;

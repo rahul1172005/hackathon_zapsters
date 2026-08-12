@@ -8,37 +8,38 @@ import { ArrowLeft } from 'lucide-react';
 
 export default function JudgeEvaluationHistoryPage() {
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex flex-col font-inter">
+    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
       <PublicNavbar />
 
-      <section className="bg-[#FFFFFF] border-b border-[#E5E5E2] py-8">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-3">
+      <section className="bg-white dark:bg-black py-8">
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-3 font-inter">
           <Link
             href="/organizer/quantum-build-2026/judging"
-            className="inline-flex items-center gap-1.5 text-xs text-[#777777] hover:text-[#111111] font-mono transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs text-[#777777] dark:text-neutral-400 hover:text-[#111111] dark:hover:text-white font-inter font-semibold transition-colors"
           >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back to Review Queue
+            <ArrowLeft className="w-3.5 h-3.5 text-[#800000]" /> Back to Review Queue
           </Link>
-          <h1 className="text-3xl font-geist font-bold text-[#111111]">
+          <h1 className="text-3xl font-geist font-bold text-[#111111] dark:text-white">
             Evaluation History
           </h1>
-          <p className="text-xs text-[#777777] font-mono">
+          <p className="text-xs text-[#777777] dark:text-neutral-400 font-inter">
             Audited evaluations locked by Dr. Aris Thorne.
           </p>
         </div>
       </section>
 
-      <section className="py-8 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 space-y-4">
+      <section className="py-6 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 space-y-4 font-inter">
         {MOCK_EVALUATIONS.map((ev) => (
-          <div key={ev.id} className="bg-[#FFFFFF] border border-[#E5E5E2] p-6 space-y-3 rounded-2xl font-inter text-xs">
-            <div className="flex justify-between items-center border-b border-[#E5E5E2] pb-3">
+          <div key={ev.id} className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 sm:p-7 space-y-3 rounded-3xl shadow-xs font-inter text-xs">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
-                <h2 className="text-base font-geist font-bold text-[#111111]">{ev.teamName}</h2>
-                <div className="text-mono text-[10px] text-[#777777]">EVALUATED AT {ev.updatedAt}</div>
+                <h2 className="text-lg font-geist font-bold text-[#111111] dark:text-white">{ev.teamName}</h2>
+                <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400">EVALUATED AT {ev.updatedAt}</div>
               </div>
-              <div className="font-mono text-lg font-bold text-[#800000]">{ev.totalScore} / 100 PTS</div>
+              <div className="font-geist text-xl font-bold text-[#800000]">{ev.totalScore} / 100 PTS</div>
             </div>
-            <p className="text-xs text-[#111111] leading-relaxed">{ev.notes}</p>
+
+            <p className="text-xs text-[#777777] dark:text-neutral-400 leading-relaxed pt-1">{ev.notes}</p>
           </div>
         ))}
       </section>

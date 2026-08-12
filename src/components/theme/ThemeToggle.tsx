@@ -7,8 +7,7 @@ export const ThemeToggle: React.FC = () => {
   const [isDark, setIsDark] = useState<boolean>(() => {
     if (typeof window === 'undefined') return false;
     const savedTheme = localStorage.getItem('zapsters_theme');
-    const isDarkActive = document.documentElement.classList.contains('dark');
-    return savedTheme === 'dark' || (!savedTheme && isDarkActive);
+    return savedTheme === 'dark';
   });
 
   useEffect(() => {

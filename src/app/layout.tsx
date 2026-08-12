@@ -39,7 +39,7 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/images/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/logo.png" />
       </head>
-      <body className="min-h-full flex flex-col bg-[#F7F7F5] text-[#111111] font-inter selection:bg-[#800000] selection:text-white">
+      <body className="min-h-full flex flex-col bg-white text-[#111111] font-inter selection:bg-[#800000] selection:text-white">
         {children}
       </body>
     </html>

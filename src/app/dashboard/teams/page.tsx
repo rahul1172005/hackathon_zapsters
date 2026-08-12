@@ -19,84 +19,86 @@ export default function MyTeamsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex font-sans">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-8 overflow-y-auto pb-24 lg:pb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E5E2] pb-5">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+        
+        {/* Header — NO divided lines */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
           <div>
-            <div className="text-xs font-mono text-[#666666] uppercase tracking-widest">
+            <div className="text-xs font-mono text-[#800000] font-bold uppercase tracking-widest">
               HACKER WORKSPACE
             </div>
-            <h1 className="text-2xl font-bold text-[#111111] mt-0.5">My Teams & Roster</h1>
+            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white mt-0.5">My Teams & Roster</h1>
           </div>
 
-          <div className="flex items-center gap-2">
-            <button className="px-3.5 py-2 bg-[#FFFFFF] border border-[#E5E5E2] hover:bg-[#F7F7F5] text-[#111111] text-xs font-mono font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5">
-              <UserPlus className="w-3.5 h-3.5" /> Join Team via Code
+          <div className="flex items-center gap-2 text-xs font-inter">
+            <button className="px-4 py-2 bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 hover:border-[#800000] text-[#111111] dark:text-white font-bold rounded-full transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs">
+              <UserPlus className="w-3.5 h-3.5 text-[#800000]" /> Join Team via Code
             </button>
-            <button className="px-3.5 py-2 bg-[#111111] hover:bg-[#222222] text-white text-xs font-mono font-bold uppercase rounded-xs transition-colors flex items-center gap-1.5">
+            <button className="px-4 py-2 bg-[#800000] hover:bg-[#660000] text-white font-bold rounded-full transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer">
               <Plus className="w-3.5 h-3.5" /> Create New Team
             </button>
           </div>
         </div>
 
-        {/* Joined Team Details */}
-        <div className="bg-[#FFFFFF] border border-[#E5E5E2] p-6 space-y-6">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E5E2] pb-4">
+        {/* Joined Team Details — Curved Corners rounded-3xl, NO divided lines */}
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 sm:p-8 rounded-3xl shadow-xs space-y-6 font-inter">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-xl font-bold text-[#111111]">{team.name}</h2>
+                <h2 className="text-2xl font-geist font-bold text-[#111111] dark:text-white">{team.name}</h2>
                 <TeamStatusBadge status={team.status} />
               </div>
-              <p className="text-xs font-mono text-[#666666] mt-0.5">
+              <p className="text-xs font-inter text-[#777777] dark:text-neutral-400 mt-0.5">
                 {team.hackathonTitle} • Track: {team.track}
               </p>
             </div>
 
             {/* Invite Code Box */}
-            <div className="flex items-center gap-2 bg-[#F7F7F5] border border-[#E5E5E2] px-3 py-1.5 rounded-xs font-mono text-xs">
-              <span className="text-[#666666]">INVITE CODE:</span>
-              <span className="font-bold text-[#111111]">{inviteCode}</span>
+            <div className="flex items-center gap-2 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 px-4 py-2 rounded-full font-mono text-xs">
+              <span className="text-[#777777] dark:text-neutral-400 font-bold">INVITE CODE:</span>
+              <span className="font-bold text-[#800000]">{inviteCode}</span>
               <button
                 onClick={handleCopyCode}
-                className="p-1 hover:bg-[#E5E5E2] text-[#111111] rounded-xs"
+                className="p-1 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#111111] dark:text-white rounded-full transition-colors cursor-pointer"
                 title="Copy Invite Code"
               >
-                {copied ? <Check className="w-3.5 h-3.5 text-[#16803C]" /> : <Copy className="w-3.5 h-3.5" />}
+                {copied ? <Check className="w-3.5 h-3.5 text-[#800000]" /> : <Copy className="w-3.5 h-3.5" />}
               </button>
             </div>
           </div>
 
-          {/* Members Table */}
-          <div className="space-y-3 font-sans">
-            <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-[#666666]">
+          {/* Members Table — Curved Corners rounded-3xl, NO divided lines */}
+          <div className="space-y-3 font-inter">
+            <h3 className="text-xs font-mono font-bold uppercase tracking-widest text-[#800000]">
               TEAM MEMBERS ROSTER ({team.members.length} / 4 MAX)
             </h3>
 
-            <div className="overflow-x-auto border border-[#E5E5E2]">
-              <table className="w-full text-left text-xs">
+            <div className="overflow-x-auto border border-[#E5E5E2] dark:border-neutral-800 rounded-3xl overflow-hidden shadow-xs">
+              <table className="w-full text-left text-xs font-inter">
                 <thead>
-                  <tr className="bg-[#F7F7F5] border-b border-[#E5E5E2] font-mono text-[10px] uppercase text-[#666666]">
-                    <th className="py-2.5 px-4">MEMBER</th>
-                    <th className="py-2.5 px-4">ASSIGNED ROLE</th>
-                    <th className="py-2.5 px-4">CONTRIBUTION SPLIT</th>
-                    <th className="py-2.5 px-4 text-right">ACTION</th>
+                  <tr className="bg-[#F7F7F5] dark:bg-neutral-900 font-mono text-[10px] uppercase text-[#777777] dark:text-neutral-400">
+                    <th className="py-3 px-5">MEMBER</th>
+                    <th className="py-3 px-5">ASSIGNED ROLE</th>
+                    <th className="py-3 px-5">CONTRIBUTION SPLIT</th>
+                    <th className="py-3 px-5 text-right">ACTION</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#E5E5E2]">
+                <tbody>
                   {team.members.map((m) => (
-                    <tr key={m.id} className="hover:bg-[#F7F7F5]">
-                      <td className="py-3 px-4 font-bold text-[#111111] flex items-center gap-2.5">
-                        <img src={m.avatar} alt={m.name} loading="lazy" decoding="async" className="w-7 h-7 rounded-full object-cover" />
+                    <tr key={m.id} className="hover:bg-[#F7F7F5] dark:hover:bg-neutral-900/50 transition-colors">
+                      <td className="py-3.5 px-5 font-bold text-[#111111] dark:text-white flex items-center gap-3">
+                        <img src={m.avatar} alt={m.name} loading="lazy" decoding="async" className="w-8 h-8 rounded-full object-cover shrink-0" />
                         <div>
                           <div>{m.name}</div>
-                          <div className="text-[10px] font-mono text-[#666666]">@{m.username}</div>
+                          <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400">@{m.username}</div>
                         </div>
                       </td>
-                      <td className="py-3 px-4 font-mono text-[#666666]">{m.role}</td>
-                      <td className="py-3 px-4 font-mono font-bold text-[#111111]">{m.contributionPercentage}%</td>
-                      <td className="py-3 px-4 text-right font-mono text-[10px] text-[#666666]">
+                      <td className="py-3.5 px-5 font-mono text-[#777777] dark:text-neutral-400">{m.role}</td>
+                      <td className="py-3.5 px-5 font-mono font-bold text-[#111111] dark:text-white">{m.contributionPercentage}%</td>
+                      <td className="py-3.5 px-5 text-right font-mono text-[10px] text-[#777777] dark:text-neutral-400">
                         {m.username === 'rahul_dev' ? 'TEAM LEAD' : 'MEMBER'}
                       </td>
                     </tr>
@@ -106,10 +108,10 @@ export default function MyTeamsPage() {
             </div>
           </div>
 
-          <div className="pt-4 border-t border-[#E5E5E2]">
+          <div className="pt-2 font-inter">
             <Link
               href="/team/cyberforge"
-              className="text-xs font-mono text-[#111111] hover:underline flex items-center gap-1"
+              className="text-xs font-bold text-[#800000] hover:underline flex items-center gap-1"
             >
               Go to Signature Team Public Profile →
             </Link>

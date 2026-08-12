@@ -1,10 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { Search, Cpu, Shield, LayoutDashboard } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Search, Shield, LayoutDashboard } from 'lucide-react';
+import { AuthRequiredModal } from '@/components/modals/AuthRequiredModal';
 
 export const PublicFooter: React.FC = () => {
+  const router = useRouter();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  const handleDashboardClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (typeof window !== 'undefined') {
+      const userAuth = localStorage.getItem('zapsters_auth');
+      if (userAuth === 'true') {
+        router.push('/dashboard');
+        return;
+      }
+    }
+    setShowAuthModal(true);
+  };
+
   return (
     <footer className="w-full bg-[#111111] text-white pt-12 pb-10 font-inter rounded-none mt-12">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 space-y-10">
@@ -13,10 +30,10 @@ export const PublicFooter: React.FC = () => {
         <div className="bg-[#1A1A1A] p-6 sm:p-8 rounded-3xl flex flex-col gap-5">
           <div className="space-y-1">
             <h2 className="text-xl sm:text-2xl font-geist font-bold text-white tracking-tight">
-              Ready to host or build your next hackathon?
+              Ready to build your next hackathon project?
             </h2>
             <p className="text-xs text-[#999999] max-w-xl">
-              Experience the competition infrastructure platform designed for organizers, hackers, and judges.
+              Experience the competition operating system designed for student hackers, engineering teams, and real-time project telemetry.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
@@ -27,10 +44,10 @@ export const PublicFooter: React.FC = () => {
               <Search className="w-3.5 h-3.5" /> Explore Competitions
             </Link>
             <Link
-              href="/organizer/quantum-build-2026/overview"
+              href="/auth/register"
               className="flex items-center justify-center gap-2 px-5 py-3 bg-white text-[#111111] hover:bg-neutral-100 text-xs font-inter font-bold uppercase tracking-wider rounded-full transition-all"
             >
-              <Cpu className="w-3.5 h-3.5 text-[#800000]" /> Organizer Command Center
+              <LayoutDashboard className="w-3.5 h-3.5 text-[#800000]" /> Create Student Account
             </Link>
           </div>
         </div>
@@ -54,7 +71,7 @@ export const PublicFooter: React.FC = () => {
               </span>
             </div>
             <p className="text-xs text-[#999999] max-w-md leading-relaxed">
-              Zapsters is the operating system for hackathons. We provide real-time competition infrastructure for event operations, team identity, live telemetry, and rubric judging.
+              Zapsters is the operating system for student hackathons. We provide real-time competition infrastructure for team identity, live telemetry, and project submission.
             </p>
           </div>
 
@@ -95,16 +112,19 @@ export const PublicFooter: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 2: Workspaces */}
+            {/* Column 2: Hacker Workspaces */}
             <div className="space-y-3">
               <h3 className="font-geist font-bold text-sm text-white tracking-wide uppercase">
-                Workspaces
+                Hacker Workspaces
               </h3>
               <ul className="space-y-2 text-[#999999]">
                 <li>
-                  <Link href="/dashboard" className="hover:text-white transition-colors flex items-center gap-1.5">
-                    <LayoutDashboard className="w-3.5 h-3.5 text-[#800000]" /> Hacker Workspace
-                  </Link>
+                  <button
+                    onClick={handleDashboardClick}
+                    className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer text-left"
+                  >
+                    <LayoutDashboard className="w-3.5 h-3.5 text-[#800000]" /> Student Workspace
+                  </button>
                 </li>
                 <li>
                   <Link href="/my-teams/team-003/overview" className="hover:text-white transition-colors">
@@ -117,57 +137,65 @@ export const PublicFooter: React.FC = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/organizer/quantum-build-2026/overview" className="hover:text-white transition-colors flex items-center gap-1.5">
-                    <Cpu className="w-3.5 h-3.5 text-[#800000]" /> Organizer Command Center
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/judge/dashboard" className="hover:text-white transition-colors flex items-center gap-1.5">
-                    <Shield className="w-3.5 h-3.5 text-[#800000]" /> Judge Portal
+                  <Link href="/auth/login" className="hover:text-white transition-colors flex items-center gap-1.5">
+                    <Shield className="w-3.5 h-3.5 text-[#800000]" /> Credential Sign In
                   </Link>
                 </li>
               </ul>
             </div>
 
-            {/* Column 3: System & Security */}
+            {/* Column 3: Legal & System */}
             <div className="space-y-3">
               <h3 className="font-geist font-bold text-sm text-white tracking-wide uppercase">
-                System & Security
+                Platform Rules
               </h3>
               <ul className="space-y-2 text-[#999999]">
                 <li>
-                  <span className="text-[#800000] font-bold">Status: Operational</span>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Code of Conduct
+                  </a>
                 </li>
                 <li>
-                  <span>API Architecture 1.0</span>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Judging Rubrics
+                  </a>
                 </li>
                 <li>
-                  <span>GitHub Real-time Sync</span>
+                  <a href="#" className="hover:text-white transition-colors">
+                    API Telemetry
+                  </a>
                 </li>
                 <li>
-                  <span>Rubric Audit Logs</span>
+                  <a href="#" className="hover:text-white transition-colors">
+                    Privacy Policy
+                  </a>
                 </li>
               </ul>
             </div>
 
           </div>
-
         </div>
 
-        {/* Bottom Copyright Block */}
-        <div className="pt-6 flex flex-col items-center sm:flex-row sm:justify-between gap-3 text-[11px] text-[#777777] text-center">
-          <div className="flex items-center gap-2">
-            <span className="font-geist font-bold text-white text-xs">ZAPSTERS</span>
-            <span>© 2026 Zapsters Platform Inc. All rights reserved.</span>
+        {/* Bottom copyright line — NO divided lines */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#777777]">
+          <div>
+            © {new Date().getFullYear()} Zapsters Platform Inc. All rights reserved.
           </div>
-          <div className="flex items-center gap-4">
-            <span className="hover:text-white cursor-pointer">Privacy Policy</span>
-            <span className="hover:text-white cursor-pointer">Terms of Service</span>
-            <span className="hover:text-white cursor-pointer">Compliance Audit</span>
+          <div className="flex items-center gap-6">
+            <span className="inline-flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Infrastructure Operational
+            </span>
           </div>
         </div>
 
       </div>
+
+      {/* Hyper-Aesthetic Auth Required Popup Modal */}
+      <AuthRequiredModal
+        isOpen={showAuthModal}
+        onClose={() => setShowAuthModal(false)}
+      />
     </footer>
   );
 };
