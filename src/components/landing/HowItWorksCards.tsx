@@ -66,7 +66,7 @@ export function HowItWorksCards() {
             </div>
 
             {/* Image placed directly in card with scale, X, and Y axis transform attributes */}
-            <div className="py-2 flex items-center justify-center">
+            <div className="py-2 flex items-center justify-center overflow-hidden rounded-xl">
               <img
                 src={card.imageSrc}
                 alt={card.title}

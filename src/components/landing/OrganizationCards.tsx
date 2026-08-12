@@ -64,7 +64,7 @@ export function OrganizationCards() {
         >
           <div className="space-y-4">
             {/* Image container aligned like other cards */}
-            <div className="py-4 flex items-center justify-center min-h-[180px]">
+            <div className="py-4 flex items-center justify-center min-h-[180px] overflow-hidden rounded-xl">
               {org.imageSrc ? (
                 <img
                   src={org.imageSrc}

@@ -26,11 +26,13 @@
 /* Prevent horizontal overflow/scroll globally — caused by transform: scale() on images */
 html {
   overflow-x: hidden;
+  max-width: 100%;
   width: 100%;
 }
 
 body {
   overflow-x: hidden;
+  max-width: 100%;
   background-color: #F7F7F5;
   color: #111111;
   font-family: var(--font-inter), sans-serif;
@@ -40,6 +42,23 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+/* Clamp all elements to viewport width — prevents transform overflow bleed */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Sections and page wrappers: never exceed 100vw */
+section,
+main,
+header,
+footer,
+nav,
+aside {
+  max-width: 100%;
 }
 
 /* Enforce Thin/Light Geist Font for ALL Titles, Headings, Buttons, and Interactive Pill Links across the entire site */
