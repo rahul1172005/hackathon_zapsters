@@ -18,7 +18,7 @@ const HERO_IMAGE_CONFIG: HeroImageConfig = {
 
 export function HeroImage() {
   return (
-    <div className="w-full flex items-center justify-center p-2 overflow-hidden rounded-2xl">
+    <div className="w-full flex items-center justify-center p-2 overflow-visible">
       <img
         src={HERO_IMAGE_CONFIG.imageSrc}
         alt="Zapsters Platform Hero Preview"

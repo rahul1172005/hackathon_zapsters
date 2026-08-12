@@ -82,7 +82,7 @@ export function InfrastructureCards() {
         >
           <div className="space-y-4">
             {/* Desktop image — hidden on mobile */}
-            <div className="hidden md:flex py-4 items-center justify-center min-h-[220px] overflow-hidden">
+            <div className="hidden md:flex py-4 items-center justify-center min-h-[220px]">
               <img
                 src={card.imageSrc}
                 alt={card.title}
@@ -96,7 +96,7 @@ export function InfrastructureCards() {
             </div>
 
             {/* Mobile image — hidden on md+ */}
-            <div className="flex md:hidden py-3 items-center justify-center min-h-[160px] overflow-hidden">
+            <div className="flex md:hidden py-3 items-center justify-center min-h-[160px]">
               <img
                 src={card.imageSrc}
                 alt={card.title}
