@@ -23,7 +23,14 @@
   --color-zap-border: #E5E5E2;
 }
 
+/* Prevent horizontal overflow/scroll globally — caused by transform: scale() on images */
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
 body {
+  overflow-x: hidden;
   background-color: #F7F7F5;
   color: #111111;
   font-family: var(--font-inter), sans-serif;
