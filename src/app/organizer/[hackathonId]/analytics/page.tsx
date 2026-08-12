@@ -43,7 +43,7 @@ export default function CompetitionAnalyticsPage() {
     <div className="min-h-screen bg-[#F7F7F5] flex font-sans">
       <OrganizerSidebar hackathonId={hackathonId} />
 
-      <main className="flex-1 p-6 md:p-8 space-y-8 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-8 overflow-y-auto pb-24 lg:pb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E5E5E2] pb-5">
           <div>
             <div className="text-xs font-mono text-[#666666] uppercase tracking-widest">

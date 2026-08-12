@@ -10,7 +10,7 @@ export const PublicFooter: React.FC = () => {
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 space-y-10">
 
         {/* Top CTA Banner inside Footer */}
-        <div className="bg-[#1A1A1A] p-6 sm:p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="bg-[#1A1A1A] p-6 sm:p-8 rounded-3xl flex flex-col gap-5">
           <div className="space-y-1">
             <h2 className="text-xl sm:text-2xl font-geist font-bold text-white tracking-tight">
               Ready to host or build your next hackathon?
@@ -19,16 +19,16 @@ export const PublicFooter: React.FC = () => {
               Experience the competition infrastructure platform designed for organizers, hackers, and judges.
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <Link
               href="/explore"
-              className="px-5 py-2.5 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase tracking-wider rounded-full transition-all shadow-md flex items-center gap-2"
+              className="flex items-center justify-center gap-2 px-5 py-3 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase tracking-wider rounded-full transition-all shadow-md"
             >
               <Search className="w-3.5 h-3.5" /> Explore Competitions
             </Link>
             <Link
               href="/organizer/quantum-build-2026/overview"
-              className="px-5 py-2.5 bg-white text-[#111111] hover:bg-neutral-100 text-xs font-inter font-bold uppercase tracking-wider rounded-full transition-all flex items-center gap-2"
+              className="flex items-center justify-center gap-2 px-5 py-3 bg-white text-[#111111] hover:bg-neutral-100 text-xs font-inter font-bold uppercase tracking-wider rounded-full transition-all"
             >
               <Cpu className="w-3.5 h-3.5 text-[#800000]" /> Organizer Command Center
             </Link>
@@ -36,7 +36,7 @@ export const PublicFooter: React.FC = () => {
         </div>
 
         {/* Multi-column Navigation */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-8">
 
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-3">
@@ -155,7 +155,7 @@ export const PublicFooter: React.FC = () => {
         </div>
 
         {/* Bottom Copyright Block */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#777777]">
+        <div className="pt-6 flex flex-col items-center sm:flex-row sm:justify-between gap-3 text-[11px] text-[#777777] text-center">
           <div className="flex items-center gap-2">
             <span className="font-geist font-bold text-white text-xs">ZAPSTERS</span>
             <span>© 2026 Zapsters Platform Inc. All rights reserved.</span>

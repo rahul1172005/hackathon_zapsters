@@ -14,10 +14,10 @@ export default function TeamOverviewPage() {
   const team = MOCK_TEAMS.find((t) => t.id === teamId || t.slug === teamId) || MOCK_TEAMS[2];
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
         <TeamWorkspaceHeader team={team} />
 
         {/* Team Overview Cards */}

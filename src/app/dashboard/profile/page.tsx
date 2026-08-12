@@ -38,19 +38,19 @@ export default function DashboardProfileWorkspacePage() {
       <ParticipantSidebar />
 
       {/* Main Profile View inside the Workspace */}
-      <main className="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
 
         {/* Header Profile Summary Card */}
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] p-8 space-y-6 rounded-3xl shadow-xs">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            <div className="flex items-start gap-5">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] p-5 sm:p-8 space-y-6 rounded-3xl shadow-xs">
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
 
               {/* Interactive Profile Photo Container with Edit Overlay */}
-              <div className="relative group">
+              <div className="relative group shrink-0">
                 <img
                   src={participant.avatar}
                   alt={participant.name}
-                  className="w-24 h-24 rounded-full object-cover shadow-sm transition-opacity group-hover:opacity-85"
+                  className="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover shadow-sm transition-opacity group-hover:opacity-85"
                 />
                 <button
                   onClick={() => setIsEditingPhoto(true)}
@@ -61,9 +61,9 @@ export default function DashboardProfileWorkspacePage() {
                 </button>
               </div>
 
-              <div className="space-y-1">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-3xl font-geist font-bold text-[#111111] dark:text-white">{participant.name}</h1>
+              <div className="space-y-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">{participant.name}</h1>
                   <span className="text-xs font-inter font-bold text-[#800000] dark:text-red-400 bg-[#800000]/10 px-3 py-1 rounded-full">
                     @{participant.githubHandle}
                   </span>
@@ -73,10 +73,10 @@ export default function DashboardProfileWorkspacePage() {
               </div>
             </div>
 
-            <div className="flex items-center gap-3 font-inter text-xs">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 font-inter text-xs">
               <button
                 onClick={() => setIsEditingPhoto(true)}
-                className="flex items-center gap-2 px-5 py-2.5 bg-[#800000] hover:bg-[#660000] text-white rounded-full font-bold transition-colors shadow-xs"
+                className="flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 bg-[#800000] hover:bg-[#660000] text-white rounded-full font-bold transition-colors shadow-xs"
               >
                 <Camera className="w-4 h-4" />
                 <span>Change Photo</span>
@@ -86,7 +86,7 @@ export default function DashboardProfileWorkspacePage() {
                 href={`https://github.com/${participant.githubHandle}`}
                 target="_blank"
                 rel="noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 bg-[#F7F7F5] dark:bg-[#1F1F1F] hover:bg-[#E5E5E2] dark:hover:bg-[#2B2B2B] text-[#111111] dark:text-white rounded-full font-bold transition-colors"
+                className="flex items-center justify-center gap-2 px-5 py-3 sm:py-2.5 bg-[#F7F7F5] dark:bg-[#1F1F1F] hover:bg-[#E5E5E2] dark:hover:bg-[#2B2B2B] text-[#111111] dark:text-white rounded-full font-bold transition-colors"
               >
                 <GithubIcon className="w-4 h-4" />
                 <span>@{participant.githubHandle}</span>

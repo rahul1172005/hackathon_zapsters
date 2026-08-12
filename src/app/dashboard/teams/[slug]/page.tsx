@@ -25,7 +25,7 @@ export default function DashboardTeamDetailsPage() {
 
   if (!team) {
     return (
-      <div className="min-h-screen bg-[#F7F7F5] flex font-inter">
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
         <ParticipantSidebar />
         <div className="flex-1 flex items-center justify-center p-12 text-xs font-inter text-[#777777]">
           Loading Team Details...
@@ -35,12 +35,12 @@ export default function DashboardTeamDetailsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       {/* Sidebar stays fixed/anchored on the left */}
       <ParticipantSidebar />
 
       {/* Main Content Area inside Dashboard */}
-      <main className="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
         
         {/* Back Link */}
         <div>

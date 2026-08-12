@@ -21,10 +21,10 @@ export default function OrganizerJudgingPage() {
   }, [hackathonId]);
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <OrganizerSidebar hackathonId={hackathonId} />
 
-      <main className="flex-1 p-6 md:p-8 space-y-8 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-8 overflow-y-auto pb-24 lg:pb-8">
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 border-b border-[#E5E5E2] pb-6">
           <div>

@@ -175,7 +175,7 @@ export default function DashboardRankingsPage() {
       <ParticipantSidebar />
 
       {/* Main Workspace Body */}
-      <main className="flex-1 p-6 md:p-8 space-y-8 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-8 overflow-y-auto pb-24 lg:pb-8">
         
         {/* Top Navigation Back Link */}
         <div>
@@ -188,27 +188,27 @@ export default function DashboardRankingsPage() {
         </div>
 
         {/* 1. Header Podium Banner Card */}
-        <div className="relative rounded-3xl bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-8 overflow-hidden shadow-xs">
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+        <div className="relative rounded-3xl bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 sm:p-8 overflow-hidden shadow-xs">
+          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 lg:gap-8">
             
             {/* Left User Profile Summary & Directly Embedded Score Progress */}
-            <div className="space-y-5 max-w-xl">
+            <div className="space-y-4 sm:space-y-5 max-w-xl">
               <div className="flex items-center gap-3">
                 <img
                   src={participant.avatar}
                   alt={participant.name}
                   loading="eager"
                   decoding="async"
-                  className="w-11 h-11 rounded-full object-cover border-2 border-[#800000] dark:border-red-500 shadow-xs"
+                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-[#800000] dark:border-red-500 shadow-xs"
                 />
                 <div>
-                  <div className="font-geist font-bold text-base text-[#111111] dark:text-white">{participant.name}</div>
+                  <div className="font-geist font-bold text-sm sm:text-base text-[#111111] dark:text-white">{participant.name}</div>
                   <div className="text-xs text-[#777777] dark:text-neutral-400 font-mono">@{participant.githubHandle}</div>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <h1 className="text-3xl md:text-4xl font-geist font-extrabold tracking-tight text-[#111111] dark:text-white flex items-center gap-3">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-geist font-extrabold tracking-tight text-[#111111] dark:text-white flex flex-wrap items-center gap-2">
                   Current Rank: <span className="text-[#800000] dark:text-red-400">Initiator</span>
                 </h1>
                 <p className="text-sm text-[#777777] dark:text-neutral-400 font-inter">
@@ -216,7 +216,7 @@ export default function DashboardRankingsPage() {
                 </p>
               </div>
 
-              {/* Directly Embedded Score & Progress Bar (No Separate Inner Card) */}
+              {/* Directly Embedded Score & Progress Bar */}
               <div className="space-y-2 pt-1 max-w-md">
                 <div className="flex items-center justify-between text-xs font-inter">
                   <span className="text-[#777777] dark:text-neutral-400 uppercase font-mono tracking-wider">Level Progress</span>
@@ -240,14 +240,14 @@ export default function DashboardRankingsPage() {
               </div>
             </div>
 
-            {/* Right Stage Display (Prominent Image of Current Active Rank with Natural Drop Shadow) */}
-            <div className="relative flex flex-col items-center justify-center">
+            {/* Right Stage Display — hidden on very small mobile to save space */}
+            <div className="hidden sm:flex relative flex-col items-center justify-center">
               <img
                 src={SHIELD_RANKS[0].image}
                 alt="Initiator - Current Active Rank"
                 loading="eager"
                 decoding="async"
-                className="w-52 h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.18)]"
+                className="w-36 h-36 sm:w-52 sm:h-52 md:w-60 md:h-60 object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.18)]"
                 style={{
                   transform: `scale(${SHIELD_RANKS[0].scale ?? 1}) translate(${SHIELD_RANKS[0].x ?? 0}px, ${SHIELD_RANKS[0].y ?? 0}px)`,
                 }}
@@ -258,7 +258,7 @@ export default function DashboardRankingsPage() {
         </div>
 
         {/* 2. Shield Cards Grid Layout (All 10 Rank Cards) */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-7">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-7">
           {SHIELD_RANKS.map((item) => {
             const isCurrent = item.level === 1; // Level 1 Initiator is active rank
             const isNextRank = item.level === 2; // Level 2 Oracle is next rank

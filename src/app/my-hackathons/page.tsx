@@ -8,10 +8,10 @@ import { Clock, ArrowRight } from 'lucide-react';
 
 export default function MyHackathonsListPage() {
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-6 md:p-8 space-y-6 overflow-y-auto">
+      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
           <div>
             <h1 className="text-3xl font-geist font-bold text-[#111111]">
