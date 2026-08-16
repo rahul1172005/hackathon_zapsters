@@ -24,7 +24,19 @@ export function isBackendDown(error: unknown): boolean {
   if (error instanceof TypeError) return true;
   if (error instanceof DOMException && error.name === 'AbortError') return true;
   if (error instanceof Error && (error.name === 'AbortError' || error.name === 'TimeoutError')) return true;
-  if (error instanceof AuthApiError && error.status >= 500) return true;
+  if (error instanceof AuthApiError) {
+    if (
+      error.status === 0 ||
+      error.status === 404 ||
+      error.status === 405 ||
+      error.status === 502 ||
+      error.status === 503 ||
+      error.status === 504 ||
+      error.status >= 500
+    ) {
+      return true;
+    }
+  }
   return false;
 }
 

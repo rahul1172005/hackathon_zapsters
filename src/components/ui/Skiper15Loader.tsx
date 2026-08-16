@@ -168,11 +168,6 @@ export const Skiper15Loader: React.FC<Skiper15LoaderProps> = ({
         className
       )}
     >
-      {/* Subtle Ambient Radial Glow */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#800000]/10 blur-3xl rounded-full" />
-      </div>
-
       {/* Main Container Stage */}
       <div className="relative z-10 w-full max-w-[820px] flex flex-col items-center justify-center my-auto py-6">
         
@@ -203,7 +198,7 @@ export const Skiper15Loader: React.FC<Skiper15LoaderProps> = ({
                     delay: isFlipped ? (index % totalBoxes) * 0.03 : 0,
                   }}
                   className={clsx(
-                    "relative h-9 w-9 sm:h-11 sm:w-11 rounded-xl flex items-center justify-center font-mono font-black text-sm sm:text-base border transition-all duration-300 transform-gpu shrink-0",
+                    "relative h-9 w-9 sm:h-11 sm:w-11 rounded-xl flex items-center justify-center font-mono font-light text-sm sm:text-base border transition-all duration-300 transform-gpu shrink-0",
                     isFlipped
                       ? getActiveBoxStyle()
                       : "bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-500 border-neutral-200 dark:border-neutral-700/60 shadow-inner"
@@ -232,10 +227,10 @@ export const Skiper15Loader: React.FC<Skiper15LoaderProps> = ({
 
           {/* Footer - Clean Status & Percentage, no divider line, no dots */}
           <div className="flex items-center justify-between pt-1">
-            <span className="text-[11px] font-mono tracking-wider text-neutral-600 dark:text-neutral-300 font-bold uppercase">
+            <span className="text-[11px] font-mono tracking-wider text-neutral-600 dark:text-neutral-300 font-light uppercase">
               {currentProgress === 100 ? "ZAPSTERS READY" : "ZAPSTERS SYNCING"}
             </span>
-            <span className="font-mono text-sm font-extrabold tracking-tight text-neutral-900 dark:text-white tabular-nums">
+            <span className="font-mono text-sm font-light tracking-tight text-neutral-900 dark:text-white tabular-nums">
               {currentProgress}%
             </span>
           </div>
@@ -253,7 +248,7 @@ export const Skiper15Loader: React.FC<Skiper15LoaderProps> = ({
               className="w-full sm:w-auto hover:rotate-0 transition-transform duration-300"
             >
               <div className="w-full sm:w-[210px] rounded-2xl bg-white/95 dark:bg-[#151518]/95 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_35px_rgba(0,0,0,0.5)] border border-neutral-200/80 dark:border-neutral-800 backdrop-blur-md">
-                <div className="font-mono text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-neutral-800 dark:text-neutral-200 leading-tight space-y-1">
+                <div className="font-mono text-[10px] sm:text-[11px] font-normal uppercase tracking-wider text-neutral-800 dark:text-neutral-200 leading-tight space-y-1">
                   {stickyNoteText.map((line, idx) => (
                     <div key={idx} className={line === "" ? "h-2" : ""}>
                       {line}
@@ -271,7 +266,7 @@ export const Skiper15Loader: React.FC<Skiper15LoaderProps> = ({
               className="w-full sm:w-auto hover:scale-[1.02] transition-transform duration-300"
             >
               <div className="w-full sm:w-[280px] rounded-2xl bg-white/95 dark:bg-[#151518]/95 p-4 sm:p-5 shadow-[0_10px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_15px_35px_rgba(0,0,0,0.5)] border border-neutral-200/80 dark:border-neutral-800 backdrop-blur-md space-y-1.5">
-                <div className="text-[11px] font-mono font-bold tracking-[0.2em] text-[#800000] dark:text-red-400 uppercase">
+                <div className="text-[11px] font-mono font-normal tracking-[0.2em] text-[#800000] dark:text-red-400 uppercase">
                   {infoTitle}
                 </div>
                 <p className="text-[11px] leading-relaxed text-neutral-600 dark:text-neutral-300 font-sans">

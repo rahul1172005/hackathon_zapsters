@@ -30,6 +30,7 @@ export default function RegisterPage() {
         password,
       });
       router.push('/auth/onboarding');
+      router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to create account. Please try again.');
       setSubmitting(false);

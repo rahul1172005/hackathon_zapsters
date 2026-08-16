@@ -40,11 +40,6 @@ export const ZapstersLoadingScreen: React.FC<ZapstersLoadingScreenProps> = ({
         fullScreen ? "fixed inset-0 z-[99999] min-h-screen" : "min-h-[500px] py-16"
       }`}
     >
-      {/* Ambient luxury background glow */}
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#800000]/15 blur-[160px] rounded-full" />
-      </div>
-
       {/* Main Big Stroke Text Container */}
       <div className="relative z-10 w-full max-w-[1400px] px-4 sm:px-8 flex flex-col items-center justify-center">
         <StrokeText
@@ -52,7 +47,7 @@ export const ZapstersLoadingScreen: React.FC<ZapstersLoadingScreenProps> = ({
           fontFamily="var(--font-geist), sans-serif"
           strokeColor="#ffffff"
           fillColor="#F8FAFC"
-          strokeWidth={fontSize > 100 ? 1.8 : 1.4}
+          strokeWidth={fontSize > 100 ? 0.8 : 0.6}
           drawDuration={1.6}
           fillDelay={0.2}
           stagger={0.05}
@@ -60,8 +55,8 @@ export const ZapstersLoadingScreen: React.FC<ZapstersLoadingScreenProps> = ({
           trigger="mount"
           fillMode="wipe"
           fontSize={fontSize}
-          fontWeight={900}
-          letterSpacing={fontSize > 100 ? -6 : -2}
+          fontWeight={200}
+          letterSpacing={fontSize > 100 ? 6 : 2}
           reverse={false}
           onComplete={onComplete}
         />

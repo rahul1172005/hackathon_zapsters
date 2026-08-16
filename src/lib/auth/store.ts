@@ -27,8 +27,10 @@ export function persistLegacy(user: AuthUser, role: AppRole): void {
   if (typeof window === 'undefined') return;
   localStorage.setItem(AUTH_FLAG_KEY, 'true');
   localStorage.setItem(LEGACY_USER_KEY, JSON.stringify(toLegacyUser(user, role)));
-  document.cookie = `${AUTH_FLAG_KEY}=true; path=/; max-age=604800; SameSite=Lax`;
-  document.cookie = `zapsters_refresh=demo-refresh; path=/; max-age=604800; SameSite=Lax`;
+  const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
+  const secureSuffix = isHttps ? '; Secure' : '';
+  document.cookie = `${AUTH_FLAG_KEY}=true; path=/; max-age=604800; SameSite=Lax${secureSuffix}`;
+  document.cookie = `zapsters_refresh=demo-refresh; path=/; max-age=604800; SameSite=Lax${secureSuffix}`;
   window.dispatchEvent(new Event('storage'));
 }
 
@@ -36,7 +38,9 @@ export function persistSession(session: Session): void {
   if (typeof window === 'undefined') return;
   localStorage.setItem(SESSION_KEY, JSON.stringify({ user: session.user, mode: session.mode }));
   persistLegacy(session.user, primaryRole(session.user));
-  document.cookie = `${SESSION_KEY}=${encodeURIComponent(JSON.stringify({ user: session.user, mode: session.mode }))}; path=/; max-age=604800; SameSite=Lax`;
+  const isHttps = typeof window !== 'undefined' && window.location.protocol === 'https:';
+  const secureSuffix = isHttps ? '; Secure' : '';
+  document.cookie = `${SESSION_KEY}=${encodeURIComponent(JSON.stringify({ user: session.user, mode: session.mode }))}; path=/; max-age=604800; SameSite=Lax${secureSuffix}`;
 }
 
 export function loadStoredSession(): Session | null {

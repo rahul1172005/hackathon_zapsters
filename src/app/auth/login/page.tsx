@@ -31,7 +31,13 @@ function LoginFormContent() {
     setSubmitting(true);
     try {
       const user = await login(email.trim(), password);
-      router.push(routeForRole(primaryRole(user)));
+      const nextParam = searchParams.get('next');
+      if (nextParam && nextParam.startsWith('/') && !nextParam.startsWith('/auth')) {
+        router.push(nextParam);
+      } else {
+        router.push(routeForRole(primaryRole(user)));
+      }
+      router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to sign in. Please try again.');
       setSubmitting(false);
