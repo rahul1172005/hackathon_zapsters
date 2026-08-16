@@ -50,10 +50,10 @@ export default function TeamTasksPage() {
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
         <TeamWorkspaceHeader team={team} />
 
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 rounded-3xl shadow-xs space-y-4 font-inter">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 sm:p-6 rounded-3xl shadow-xs space-y-4 font-inter">
           <div className="flex justify-between items-center">
             <h2 className="text-sm font-geist font-bold text-[#111111] dark:text-white">Team Execution Tasks</h2>
             <button

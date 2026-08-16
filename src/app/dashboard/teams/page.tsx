@@ -22,7 +22,7 @@ export default function MyTeamsPage() {
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
         
         {/* Header — NO divided lines */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
@@ -33,7 +33,7 @@ export default function MyTeamsPage() {
             <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white mt-0.5">My Teams & Roster</h1>
           </div>
 
-          <div className="flex items-center gap-2 text-xs font-inter">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-inter">
             <button className="px-4 py-2 bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 hover:border-[#800000] text-[#111111] dark:text-white font-bold rounded-full transition-colors flex items-center gap-1.5 cursor-pointer shadow-2xs">
               <UserPlus className="w-3.5 h-3.5 text-[#800000]" /> Join Team via Code
             </button>
@@ -44,7 +44,7 @@ export default function MyTeamsPage() {
         </div>
 
         {/* Joined Team Details — Curved Corners rounded-3xl, NO divided lines */}
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 sm:p-8 rounded-3xl shadow-xs space-y-6 font-inter">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 sm:p-8 rounded-3xl shadow-xs space-y-6 font-inter">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">

@@ -23,11 +23,11 @@ export const TeamWorkspaceHeader: React.FC<TeamWorkspaceHeaderProps> = ({ team }
   ];
 
   return (
-    <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 rounded-3xl font-inter shadow-xs space-y-6">
+    <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-4 sm:p-6 rounded-3xl font-inter shadow-xs space-y-4 sm:space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-geist font-bold text-[#111111] dark:text-white">{team.name}</h1>
+          <div className="flex items-center gap-2.5 sm:gap-3">
+            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">{team.name}</h1>
             <TeamStatusBadge status={team.status} />
           </div>
           <p className="text-xs font-inter text-[#777777] dark:text-neutral-400 mt-1">
@@ -35,7 +35,7 @@ export const TeamWorkspaceHeader: React.FC<TeamWorkspaceHeaderProps> = ({ team }
           </p>
         </div>
 
-        <div className="flex items-center gap-4 font-inter text-xs bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 px-5 py-2.5 rounded-full shadow-xs">
+        <div className="flex items-center gap-4 font-inter text-xs bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full shadow-xs self-start sm:self-auto">
           <div>
             <span className="text-[#777777] dark:text-neutral-400">RANK: </span>
             <span className="font-bold text-[#800000] dark:text-red-400">#{team.rank}</span>
@@ -47,15 +47,15 @@ export const TeamWorkspaceHeader: React.FC<TeamWorkspaceHeaderProps> = ({ team }
         </div>
       </div>
 
-      {/* Grouped Navigation Tabs — NO divider line */}
-      <div className="flex items-center gap-2 text-xs font-inter overflow-x-auto pt-2">
+      {/* Grouped Navigation Tabs — Horizontal scroll on mobile */}
+      <div className="flex items-center gap-1.5 sm:gap-2 text-xs font-inter overflow-x-auto no-scrollbar pt-1 sm:pt-2">
         {navItems.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
               key={item.label}
               href={item.href}
-              className={`px-5 py-2 rounded-full transition-all ${
+              className={`px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full whitespace-nowrap transition-all text-xs shrink-0 ${
                 isActive
                   ? 'bg-[#800000] text-white font-bold shadow-xs'
                   : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400 hover:text-[#111111] dark:hover:text-white hover:bg-[#E5E5E2] dark:hover:bg-neutral-800'

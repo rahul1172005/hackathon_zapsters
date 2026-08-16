@@ -34,7 +34,7 @@ export default function ParticipantHackathonWorkspacePage() {
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
         
         {/* Workspace Header — NO divided lines */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
@@ -42,16 +42,16 @@ export default function ParticipantHackathonWorkspacePage() {
             <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">{hackathon.title} Workspace</h1>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
             <Link
               href="/my-teams/team-003/overview"
-              className="px-4 py-2 bg-[#111111] dark:bg-white text-white dark:text-[#111111] text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center gap-1.5 shadow-2xs"
+              className="px-4 py-2 bg-[#111111] dark:bg-white text-white dark:text-[#111111] text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center justify-center gap-1.5 shadow-2xs w-full sm:w-auto"
             >
               <Users className="w-3.5 h-3.5" /> Team Workspace
             </Link>
             <Link
               href="/my-teams/team-003/submission"
-              className="px-4 py-2 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center justify-center gap-1.5 shadow-xs w-full sm:w-auto"
             >
               <Send className="w-3.5 h-3.5" /> Submission Flow
             </Link>

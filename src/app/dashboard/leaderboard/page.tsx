@@ -12,13 +12,13 @@ export default function DashboardLeaderboardWorkspacePage() {
       <ParticipantSidebar />
 
       {/* Main Leaderboard View inside the Workspace */}
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
           <div>
-            <h1 className="text-3xl font-geist font-bold text-[#111111]">
+            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">
               Live Leaderboard Standings
             </h1>
-            <p className="text-xs text-[#777777] font-inter mt-1">
+            <p className="text-xs text-[#777777] dark:text-neutral-400 font-inter mt-1">
               Dynamic rankings updated live via judge rubric scores and code activity.
             </p>
           </div>

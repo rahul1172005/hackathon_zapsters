@@ -104,6 +104,28 @@ export const OrganizerSidebar: React.FC<OrganizerSidebarProps> = ({
 
   return (
     <>
+      {/* ===================== MOBILE TOP HEADER BAR ===================== */}
+      <header className="lg:hidden sticky top-0 z-40 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-md px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between font-inter transition-colors">
+        <Link href="/" className="flex items-center gap-2">
+          <img
+            src="/images (4)/navbar.png"
+            alt="Zapsters"
+            className="h-7 w-auto object-contain"
+            style={{ transform: 'scale(2.2) translate(6px, -1px)' }}
+          />
+          <span className="text-[10px] font-mono font-bold text-[#800000] dark:text-red-400 bg-[#800000]/10 px-2 py-0.5 rounded-full ml-4">
+            ORGANIZER
+          </span>
+        </Link>
+
+        <div className="flex items-center gap-2.5">
+          <ThemeToggle />
+          <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 shadow-xs">
+            {hackathonInitial}
+          </div>
+        </div>
+      </header>
+
       {/* ===================== DESKTOP SIDEBAR ===================== */}
       <aside
         className={`hidden lg:flex sticky top-0 h-screen bg-transparent flex-col select-none font-inter shrink-0 transition-all duration-300 z-40 ${
@@ -232,8 +254,8 @@ export const OrganizerSidebar: React.FC<OrganizerSidebarProps> = ({
       </aside>
 
       {/* ===================== MOBILE BOTTOM NAV BAR ===================== */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#FFFFFF] dark:bg-[#111111] shadow-[0_-4px_24px_rgba(0,0,0,0.08)] rounded-t-3xl">
-        <div className="flex items-center justify-around px-2 py-2">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-xl border-t border-neutral-200 dark:border-neutral-800 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] pb-1 pt-1.5 safe-area-inset-bottom">
+        <div className="flex items-center justify-around px-2">
           {mobileNavItems.map((item) => {
             const isActive = pathname === item.href;
             const Icon = item.icon;
@@ -241,17 +263,18 @@ export const OrganizerSidebar: React.FC<OrganizerSidebarProps> = ({
               <Link
                 key={item.label}
                 href={item.href}
-                className={`flex flex-col items-center gap-1 px-3 py-2 rounded-xl transition-all min-w-[52px] ${
+                className={`flex flex-col items-center gap-1 px-3 py-1.5 rounded-2xl transition-all min-w-[56px] ${
                   isActive
-                    ? 'text-[#800000]'
-                    : 'text-[#999999] dark:text-neutral-500 hover:text-[#111111] dark:hover:text-white'
+                    ? 'text-[#800000] dark:text-red-400 font-bold'
+                    : 'text-[#777777] dark:text-neutral-400 hover:text-[#111111] dark:hover:text-white'
                 }`}
               >
-                <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-[#800000]' : ''}`} />
-                <span className={`text-[9px] font-inter font-semibold leading-none ${isActive ? 'text-[#800000]' : ''}`}>
+                <div className={`p-1 rounded-xl transition-colors ${isActive ? 'bg-[#800000]/10 dark:bg-red-500/10' : ''}`}>
+                  <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-[#800000] dark:text-red-400' : 'text-[#777777] dark:text-neutral-400'}`} />
+                </div>
+                <span className={`text-[10px] font-inter leading-none ${isActive ? 'font-bold text-[#800000] dark:text-red-400' : 'font-medium'}`}>
                   {item.label}
                 </span>
-                {isActive && <span className="w-1 h-1 rounded-full bg-[#800000] mt-0.5" />}
               </Link>
             );
           })}

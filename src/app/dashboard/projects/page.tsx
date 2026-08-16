@@ -14,7 +14,7 @@ export default function MyProjectsPage() {
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
         
         {/* Header — NO divided lines */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
@@ -34,7 +34,7 @@ export default function MyProjectsPage() {
         </div>
 
         {/* Project Details Box — Curved Corners rounded-3xl, NO divided lines */}
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 sm:p-8 space-y-6 rounded-3xl shadow-xs font-inter">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 sm:p-8 space-y-6 rounded-3xl shadow-xs font-inter">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
               <div className="flex items-center gap-2">

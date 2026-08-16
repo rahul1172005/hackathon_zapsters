@@ -39,21 +39,21 @@ export default function DedicatedSubmissionFlowPage() {
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
         <TeamWorkspaceHeader team={team} />
 
         {/* Step Indicator */}
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 flex flex-wrap justify-between items-center font-inter text-xs rounded-3xl shadow-xs gap-3">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className={`px-4 py-1.5 rounded-full font-bold transition-colors ${step === 1 ? 'bg-[#800000] text-white' : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400'}`}>
-              01 Overview & Specs
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-4 sm:p-5 flex flex-col sm:flex-row justify-between items-start sm:items-center font-inter text-xs rounded-3xl shadow-xs gap-3">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar w-full sm:w-auto">
+            <span className={`px-3.5 sm:px-4 py-1.5 rounded-full font-bold transition-colors whitespace-nowrap text-xs shrink-0 ${step === 1 ? 'bg-[#800000] text-white' : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400'}`}>
+              01 Specs
             </span>
-            <span className="text-neutral-400">→</span>
-            <span className={`px-4 py-1.5 rounded-full font-bold transition-colors ${step === 2 ? 'bg-[#800000] text-white' : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400'}`}>
-              02 Preview & Deliverables
+            <span className="text-neutral-400 shrink-0">→</span>
+            <span className={`px-3.5 sm:px-4 py-1.5 rounded-full font-bold transition-colors whitespace-nowrap text-xs shrink-0 ${step === 2 ? 'bg-[#800000] text-white' : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400'}`}>
+              02 Deliverables
             </span>
-            <span className="text-neutral-400">→</span>
-            <span className={`px-4 py-1.5 rounded-full font-bold transition-colors ${step === 3 || isLocked ? 'bg-[#800000] text-white' : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400'}`}>
+            <span className="text-neutral-400 shrink-0">→</span>
+            <span className={`px-3.5 sm:px-4 py-1.5 rounded-full font-bold transition-colors whitespace-nowrap text-xs shrink-0 ${step === 3 || isLocked ? 'bg-[#800000] text-white' : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400'}`}>
               03 Lock & Submit
             </span>
           </div>

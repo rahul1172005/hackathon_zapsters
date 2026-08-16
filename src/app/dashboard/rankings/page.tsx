@@ -175,7 +175,7 @@ export default function DashboardRankingsPage() {
       <ParticipantSidebar />
 
       {/* Main Workspace Body */}
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-8 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8 overflow-y-auto pb-28 lg:pb-8">
         
         {/* Top Navigation Back Link */}
         <div>

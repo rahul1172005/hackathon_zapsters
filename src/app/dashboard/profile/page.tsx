@@ -64,10 +64,10 @@ export default function DashboardProfileWorkspacePage() {
       <ParticipantSidebar />
 
       {/* Main Profile View inside the Workspace */}
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
 
         {/* Header Profile Summary Card */}
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] p-5 sm:p-8 space-y-6 rounded-3xl shadow-xs">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] p-5 sm:p-8 space-y-6 rounded-3xl shadow-xs border border-transparent dark:border-neutral-800">
           <div className="flex flex-col gap-5">
             <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5">
 
@@ -142,7 +142,7 @@ export default function DashboardProfileWorkspacePage() {
         </div>
 
         {/* Personal Rank & Level Progress Card (Border-free) */}
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] p-10 md:p-12 space-y-8 rounded-3xl shadow-xs font-inter min-h-[270px] flex flex-col justify-between">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-transparent dark:border-neutral-800 p-5 sm:p-8 md:p-10 space-y-6 sm:space-y-8 rounded-3xl shadow-xs font-inter min-h-[240px] flex flex-col justify-between">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
             <div className="flex items-center gap-6">
               {/* Direct Rank Image */}

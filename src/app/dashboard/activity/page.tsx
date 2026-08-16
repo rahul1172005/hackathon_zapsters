@@ -37,7 +37,7 @@ export default function HackerActivityPage() {
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
         
         {/* Header — NO divided lines */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 font-inter">
@@ -55,7 +55,7 @@ export default function HackerActivityPage() {
         </div>
 
         {/* Activity Container — Curved Corners rounded-3xl, NO divided lines */}
-        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 sm:p-8 space-y-4 font-inter rounded-3xl shadow-xs">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 sm:p-8 space-y-4 font-inter rounded-3xl shadow-xs">
           <div className="flex justify-between items-center">
             <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-[#800000]">
               CHRONOLOGICAL EVENT LOG (CYBERFORGE)

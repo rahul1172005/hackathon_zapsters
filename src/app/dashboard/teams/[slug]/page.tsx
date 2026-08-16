@@ -40,23 +40,23 @@ export default function DashboardTeamDetailsPage() {
       <ParticipantSidebar />
 
       {/* Main Content Area inside Dashboard */}
-      <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
         
         {/* Back Link */}
         <div>
           <button
             onClick={() => router.back()}
-            className="inline-flex items-center gap-2 text-xs font-inter font-bold text-[#777777] hover:text-[#111111] transition-colors"
+            className="inline-flex items-center gap-2 text-xs font-inter font-bold text-[#777777] dark:text-neutral-400 hover:text-[#111111] dark:hover:text-white transition-colors cursor-pointer"
           >
-            <ArrowLeft className="w-4 h-4 text-[#800000]" /> Back to Workspace
+            <ArrowLeft className="w-4 h-4 text-[#800000] dark:text-red-400" /> Back to Workspace
           </button>
         </div>
 
         {/* Team Header Card — NO border lines */}
-        <div className="bg-[#FFFFFF] p-8 space-y-6 rounded-3xl shadow-xs">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-transparent dark:border-neutral-800 p-5 sm:p-8 space-y-6 rounded-3xl shadow-xs">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-center gap-4">
-              <div className="w-14 h-14 bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xl rounded-full shadow-xs">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-lg sm:text-xl rounded-full shadow-xs shrink-0">
                 #{String(team.rank).padStart(2, '0')}
               </div>
               <div>
