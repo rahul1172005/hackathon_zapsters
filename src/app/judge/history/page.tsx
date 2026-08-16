@@ -8,10 +8,10 @@ import { ArrowLeft } from 'lucide-react';
 
 export default function JudgeEvaluationHistoryPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
+    <div className="min-h-screen bg-[#F9F9F8] dark:bg-black text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
       <PublicNavbar />
 
-      <section className="bg-white dark:bg-black py-8">
+      <section className="bg-transparent py-8">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-3 font-inter">
           <Link
             href="/organizer/quantum-build-2026/judging"

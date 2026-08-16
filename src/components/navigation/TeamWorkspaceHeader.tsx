@@ -23,26 +23,26 @@ export const TeamWorkspaceHeader: React.FC<TeamWorkspaceHeaderProps> = ({ team }
   ];
 
   return (
-    <div className="bg-[#FFFFFF] p-6 rounded-3xl font-inter shadow-xs space-y-6">
+    <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 rounded-3xl font-inter shadow-xs space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-geist font-bold text-[#111111]">{team.name}</h1>
+            <h1 className="text-3xl font-geist font-bold text-[#111111] dark:text-white">{team.name}</h1>
             <TeamStatusBadge status={team.status} />
           </div>
-          <p className="text-xs font-inter text-[#777777] mt-1">
+          <p className="text-xs font-inter text-[#777777] dark:text-neutral-400 mt-1">
             {team.hackathonTitle} • Track: {team.track}
           </p>
         </div>
 
-        <div className="flex items-center gap-4 font-inter text-xs bg-[#F7F7F5] px-5 py-2.5 rounded-full shadow-xs">
+        <div className="flex items-center gap-4 font-inter text-xs bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 px-5 py-2.5 rounded-full shadow-xs">
           <div>
-            <span className="text-[#777777]">RANK: </span>
-            <span className="font-bold text-[#800000]">#{team.rank}</span>
+            <span className="text-[#777777] dark:text-neutral-400">RANK: </span>
+            <span className="font-bold text-[#800000] dark:text-red-400">#{team.rank}</span>
           </div>
           <div>
-            <span className="text-[#777777]">SCORE: </span>
-            <span className="font-bold text-[#111111]">{team.score.toFixed(1)}</span>
+            <span className="text-[#777777] dark:text-neutral-400">SCORE: </span>
+            <span className="font-bold text-[#111111] dark:text-white">{team.score.toFixed(1)}</span>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@ export const TeamWorkspaceHeader: React.FC<TeamWorkspaceHeaderProps> = ({ team }
               className={`px-5 py-2 rounded-full transition-all ${
                 isActive
                   ? 'bg-[#800000] text-white font-bold shadow-xs'
-                  : 'bg-[#F7F7F5] text-[#777777] hover:text-[#111111] hover:bg-[#E5E5E2]'
+                  : 'bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] dark:text-neutral-400 hover:text-[#111111] dark:hover:text-white hover:bg-[#E5E5E2] dark:hover:bg-neutral-800'
               }`}
             >
               {item.label}

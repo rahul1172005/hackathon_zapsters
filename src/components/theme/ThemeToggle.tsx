@@ -8,21 +8,34 @@ export const ThemeToggle: React.FC = () => {
   const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true);
+    const syncTheme = () => {
       if (typeof window !== 'undefined') {
         const savedTheme = localStorage.getItem('zapsters_theme');
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialDark = savedTheme ? savedTheme === 'dark' : prefersDark;
-        setIsDark(initialDark);
-        if (initialDark) {
+        const currentDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+        setIsDark(currentDark);
+        if (currentDark) {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
         }
       }
-    }, 0);
-    return () => clearTimeout(timer);
+    };
+
+    setMounted(true);
+    syncTheme();
+
+    const handleThemeChange = () => {
+      syncTheme();
+    };
+
+    window.addEventListener('theme-change', handleThemeChange);
+    window.addEventListener('storage', handleThemeChange);
+
+    return () => {
+      window.removeEventListener('theme-change', handleThemeChange);
+      window.removeEventListener('storage', handleThemeChange);
+    };
   }, []);
 
   const toggleTheme = () => {
@@ -35,6 +48,7 @@ export const ThemeToggle: React.FC = () => {
       document.documentElement.classList.remove('dark');
       localStorage.setItem('zapsters_theme', 'light');
     }
+    window.dispatchEvent(new CustomEvent('theme-change', { detail: { isDark: nextDark } }));
   };
 
   if (!mounted) {

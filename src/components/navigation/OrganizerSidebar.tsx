@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { SignOutModal } from '@/components/modals/SignOutModal';
+import { ThemeToggle } from '@/components/theme/ThemeToggle';
 import {
   LayoutDashboard,
   Users,
@@ -199,8 +200,12 @@ export const OrganizerSidebar: React.FC<OrganizerSidebarProps> = ({
         {!isCollapsed ? (
           <div className="p-3 bg-[#FFFFFF] dark:bg-[#141414] rounded-2xl m-3 text-xs font-inter text-[#777777] dark:text-neutral-400 shadow-xs dark:border dark:border-neutral-800 space-y-2">
             <div className="flex justify-between items-center">
+              <span>THEME:</span>
+              <ThemeToggle />
+            </div>
+            <div className="flex justify-between items-center pt-1">
               <span>STATUS:</span>
-              <span className="text-[#800000] font-bold">OPERATIONAL</span>
+              <span className="text-[#800000] dark:text-red-400 font-bold">OPERATIONAL</span>
             </div>
             <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800">
               <button

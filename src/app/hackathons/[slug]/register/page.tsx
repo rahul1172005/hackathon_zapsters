@@ -146,9 +146,9 @@ export default function HackathonRegistrationPage() {
 
   if (loading || !hackathon) {
     return (
-      <div className="min-h-screen bg-[#050505] text-white flex flex-col font-inter">
+      <div className="min-h-screen bg-[#F9F9F8] dark:bg-[#050505] text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
         <PublicNavbar />
-        <div className="flex-1 flex items-center justify-center p-12 text-sm text-neutral-400">
+        <div className="flex-1 flex items-center justify-center p-12 text-sm text-[#777777] dark:text-neutral-400">
           Loading Hackathon Registration...
         </div>
       </div>
@@ -156,7 +156,7 @@ export default function HackathonRegistrationPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white flex flex-col font-inter">
+    <div className="min-h-screen bg-[#F9F9F8] dark:bg-[#050505] text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
       {/* Public Header Navbar */}
       <PublicNavbar />
 

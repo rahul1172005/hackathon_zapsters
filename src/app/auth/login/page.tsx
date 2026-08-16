@@ -115,10 +115,10 @@ function LoginFormContent() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col font-inter">
+    <div className="min-h-screen bg-[#F9F9F8] dark:bg-black text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
       <PublicNavbar />
       <main className="flex-1 flex items-center justify-center p-6">
-        <Suspense fallback={<div className="text-xs text-[#777777]">Loading Portal Access...</div>}>
+        <Suspense fallback={<div className="text-xs text-[#777777] dark:text-neutral-400">Loading Portal Access...</div>}>
           <LoginFormContent />
         </Suspense>
       </main>
