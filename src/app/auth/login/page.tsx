@@ -4,7 +4,7 @@ import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { PublicNavbar } from '@/components/navigation/PublicNavbar';
-import { ArrowRight, Lock, Mail, KeyRound } from 'lucide-react';
+import { ArrowRight, Lock, Mail } from 'lucide-react';
 import { useAuth, primaryRole, routeForRole } from '@/lib/auth';
 
 function LoginFormContent() {
@@ -12,15 +12,7 @@ function LoginFormContent() {
   const router = useRouter();
   const { login } = useAuth();
 
-  const roleParam = searchParams.get('role');
-  const defaultEmail =
-    roleParam === 'organizer'
-      ? 'admin@zapsters.dev'
-      : roleParam === 'judge'
-      ? 'judge@zapsters.dev'
-      : 'student@zapsters.dev';
-
-  const [email, setEmail] = useState(defaultEmail);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
@@ -44,19 +36,6 @@ function LoginFormContent() {
     }
   };
 
-  const fillQuickCredentials = (type: 'admin' | 'judge' | 'student') => {
-    if (type === 'admin') {
-      setEmail('admin@zapsters.dev');
-      setPassword('admin123');
-    } else if (type === 'judge') {
-      setEmail('judge@zapsters.dev');
-      setPassword('judge123');
-    } else {
-      setEmail('student@zapsters.dev');
-      setPassword('hacker123');
-    }
-  };
-
   return (
     <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-8 max-w-md w-full space-y-6 rounded-3xl shadow-xs font-inter">
       <div className="space-y-1">
@@ -66,59 +45,6 @@ function LoginFormContent() {
         <p className="text-xs text-[#777777] dark:text-neutral-400 font-inter">
           Enter your credentials to access your workspace.
         </p>
-      </div>
-
-      {/* Demo Credentials Box */}
-      <div className="p-4 rounded-2xl bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 space-y-3 font-inter">
-        <div className="text-[10px] font-mono font-bold text-[#777777] uppercase tracking-wider flex items-center justify-between">
-          <span className="flex items-center gap-1.5 text-[#800000]">
-            <KeyRound className="w-3.5 h-3.5" /> PLATFORM ACCREDITATION CREDENTIALS
-          </span>
-        </div>
-
-        <div className="space-y-1.5 text-xs">
-          <button
-            type="button"
-            onClick={() => fillQuickCredentials('admin')}
-            className="w-full text-left p-2.5 rounded-xl bg-white dark:bg-black border border-[#E5E5E2] dark:border-neutral-800 hover:border-[#800000] transition-colors flex items-center justify-between group cursor-pointer"
-          >
-            <div>
-              <div className="font-bold text-[#800000] text-[11px]">Admin / Organizer Portal</div>
-              <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400">
-                admin@zapsters.dev • admin123
-              </div>
-            </div>
-            <span className="text-[10px] text-[#800000] font-bold group-hover:underline">Auto-fill →</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => fillQuickCredentials('judge')}
-            className="w-full text-left p-2.5 rounded-xl bg-white dark:bg-black border border-[#E5E5E2] dark:border-neutral-800 hover:border-[#111111] transition-colors flex items-center justify-between group cursor-pointer"
-          >
-            <div>
-              <div className="font-bold text-[#111111] dark:text-white text-[11px]">Judge Portal</div>
-              <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400">
-                judge@zapsters.dev • judge123
-              </div>
-            </div>
-            <span className="text-[10px] text-[#111111] dark:text-white font-bold group-hover:underline">Auto-fill →</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => fillQuickCredentials('student')}
-            className="w-full text-left p-2.5 rounded-xl bg-white dark:bg-black border border-[#E5E5E2] dark:border-neutral-800 hover:border-[#111111] transition-colors flex items-center justify-between group cursor-pointer"
-          >
-            <div>
-              <div className="font-bold text-[#111111] dark:text-white text-[11px]">Student Hacker Workspace</div>
-              <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400">
-                student@zapsters.dev • hacker123
-              </div>
-            </div>
-            <span className="text-[10px] text-[#111111] dark:text-white font-bold group-hover:underline">Auto-fill →</span>
-          </button>
-        </div>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4 text-xs font-inter">
@@ -131,7 +57,7 @@ function LoginFormContent() {
             <input
               type="email"
               required
-              placeholder="student@zapsters.dev"
+              placeholder="name@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors dark:text-white"
