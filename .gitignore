@@ -35,6 +35,8 @@ yarn-error.log*
 # === SECURITY: Env & Secrets ===
 .env
 .env.*
+!.env.example
+!.env.example.*
 .env.local
 .env.development.local
 .env.test.local
@@ -99,3 +101,37 @@ next-env.d.ts
 # Turbopack / Build Artifacts
 .turbo/
 .swc/
+
+# === Python / Backend artifacts ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+ENV/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+*.coverage
+.tox/
+.nox/
+build/
+eggs/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+*.db
+*.sqlite
+*.sqlite3
+storage/
+backend/storage/

@@ -1,11 +1,37 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ParticipantSidebar } from '@/components/navigation/ParticipantSidebar';
-import { MOCK_TEAMS } from '@/lib/mockData';
+import * as api from '@/lib/api';
+import { Team } from '@/types';
 
 export default function HackerActivityPage() {
-  const activityLog = MOCK_TEAMS[2].activityLog;
+  const [team, setTeam] = useState<Team | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const t = await api.getTeamBySlug('cyberforge');
+      if (cancelled) return;
+      setTeam(t);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!team) {
+    return (
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
+        <ParticipantSidebar />
+        <main className="flex-1 p-12 flex items-center justify-center text-xs font-inter text-[#777777]">
+          Loading Activity...
+        </main>
+      </div>
+    );
+  }
+
+  const activityLog = team.activityLog;
 
   return (
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">

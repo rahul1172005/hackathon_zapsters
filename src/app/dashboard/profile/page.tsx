@@ -1,18 +1,44 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ParticipantSidebar } from '@/components/navigation/ParticipantSidebar';
-import { MOCK_PARTICIPANT } from '@/lib/mockData';
+import * as api from '@/lib/api';
 import { GithubIcon } from '@/components/ui/Icons';
 import { ExternalLink, Edit3, Check, Camera, X } from 'lucide-react';
+import { Participant } from '@/types';
 
 export default function DashboardProfileWorkspacePage() {
-  const [participant, setParticipant] = useState(MOCK_PARTICIPANT);
+  const [participant, setParticipant] = useState<Participant | null>(null);
   const [isEditingBio, setIsEditingBio] = useState(false);
   const [isEditingPhoto, setIsEditingPhoto] = useState(false);
-  const [bio, setBio] = useState(participant.bio);
-  const [photoUrl, setPhotoUrl] = useState(participant.avatar);
+  const [bio, setBio] = useState('');
+  const [photoUrl, setPhotoUrl] = useState('');
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const p = await api.getParticipant();
+      if (cancelled || !p) return;
+      setParticipant(p);
+      setBio(p.bio ?? '');
+      setPhotoUrl(p.avatar ?? '');
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!participant) {
+    return (
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-white flex font-inter">
+        <ParticipantSidebar />
+        <main className="flex-1 p-12 flex items-center justify-center text-xs font-inter text-[#777777]">
+          Loading Profile...
+        </main>
+      </div>
+    );
+  }
 
   const sampleAvatars = [
     'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { PublicNavbar } from '@/components/navigation/PublicNavbar';
 import { PublicFooter } from '@/components/navigation/PublicFooter';
 import { HowItWorksCards } from '@/components/landing/HowItWorksCards';
@@ -7,13 +8,58 @@ import { InfrastructureCards } from '@/components/landing/InfrastructureCards';
 import { OrganizationCards } from '@/components/landing/OrganizationCards';
 import { HeroImage } from '@/components/landing/HeroImage';
 import { MOCK_HACKATHONS } from '@/lib/mockData';
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from './seo';
 import { Search, Cpu, ArrowRight } from 'lucide-react';
+
+export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
+  title: 'ZAPSTERS — The Operating System For Hackathons',
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    title: 'ZAPSTERS — The Operating System For Hackathons',
+    description: SITE_DESCRIPTION,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ZAPSTERS — The Operating System For Hackathons',
+    description: SITE_DESCRIPTION,
+  },
+};
 
 export default function LandingPage() {
   const featuredHackathons = MOCK_HACKATHONS;
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
+    <div className="min-h-screen bg-[#F9F9F8] dark:bg-black text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@graph': [
+              {
+                '@type': 'Organization',
+                name: SITE_NAME,
+                url: SITE_URL,
+                logo: `${SITE_URL}/images/logo.png`,
+                description: SITE_DESCRIPTION,
+              },
+              {
+                '@type': 'WebSite',
+                name: 'ZAPSTERS — The Operating System For Hackathons',
+                url: SITE_URL,
+                description: SITE_DESCRIPTION,
+              },
+            ],
+          }),
+        }}
+      />
       <PublicNavbar />
 
       {/* 1. Hero Section */}

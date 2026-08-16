@@ -11,7 +11,6 @@ import {
   Calendar,
   MapPin,
   Clock,
-  CheckCircle2,
   Users,
   ChevronRight,
 } from 'lucide-react';
@@ -22,8 +21,6 @@ export default function HackathonDetailPage() {
 
   const [hackathon, setHackathon] = useState<Hackathon | null>(null);
   const [activeTab, setActiveTab] = useState<'Overview' | 'Tracks' | 'Timeline' | 'Prizes' | 'Sponsors' | 'Rules' | 'FAQ'>('Overview');
-  const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
-  const [registered, setRegistered] = useState(false);
 
   useEffect(() => {
     getHackathonBySlug(slug).then((res) => {
@@ -33,9 +30,9 @@ export default function HackathonDetailPage() {
 
   if (!hackathon) {
     return (
-      <div className="min-h-screen bg-[#F7F7F5] flex flex-col font-inter">
+      <div className="min-h-screen bg-[#F9F9F8] dark:bg-black text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
         <PublicNavbar />
-        <div className="flex-1 flex items-center justify-center p-12 text-sm font-inter text-[#777777]">
+        <div className="flex-1 flex items-center justify-center p-12 text-sm font-inter text-neutral-400">
           Loading Hackathon Specifications...
         </div>
       </div>
@@ -43,11 +40,34 @@ export default function HackathonDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] flex flex-col font-inter">
+    <div className="min-h-screen bg-[#F9F9F8] dark:bg-black text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
       <PublicNavbar />
 
-      {/* Main Hackathon Header Section — NO divider lines */}
-      <section className="bg-[#FFFFFF] py-12 shadow-xs">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'HackathonEvent',
+            name: hackathon.title,
+            description: hackathon.description,
+            startDate: hackathon.startDate,
+            endDate: hackathon.endDate,
+            location: {
+              '@type': 'Place',
+              name: hackathon.location,
+            },
+            organizer: {
+              '@type': 'Organization',
+              name: hackathon.organization,
+            },
+            eventStatus: hackathon.status === 'UPCOMING' ? 'https://schema.org/EventScheduled' : 'https://schema.org/EventActive',
+          }),
+        }}
+      />
+
+      {/* Main Hackathon Header Section */}
+      <section className="bg-white dark:bg-[#0D0D0D] py-12 shadow-xs border-b border-neutral-200 dark:border-neutral-800">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           
           <div className="flex items-center gap-2 font-inter text-xs text-[#777777]">
@@ -73,23 +93,12 @@ export default function HackathonDetailPage() {
                 <span className="text-2xl font-bold font-geist text-[#800000]">{hackathon.prizePool}</span>
               </div>
               
-              <button
-                onClick={() => setIsRegisterModalOpen(true)}
-                disabled={registered}
-                className={`w-full py-3 px-6 text-xs font-inter font-bold uppercase tracking-wider rounded-full transition-all shadow-xs flex items-center justify-center gap-2 ${
-                  registered
-                    ? 'bg-[#111111] text-white cursor-default'
-                    : 'bg-[#800000] hover:bg-[#660000] text-white'
-                }`}
+              <Link
+                href={`/hackathons/${slug}/register`}
+                className="w-full py-3.5 px-6 text-xs font-inter font-bold uppercase tracking-wider rounded-full transition-all shadow-xs flex items-center justify-center gap-2 bg-[#800000] hover:bg-[#660000] text-white cursor-pointer"
               >
-                {registered ? (
-                  <>
-                    <CheckCircle2 className="w-4 h-4" /> Registered as Hacker
-                  </>
-                ) : (
-                  <>Register for Competition</>
-                )}
-              </button>
+                Register for Competition <ChevronRight className="w-4 h-4" />
+              </Link>
 
               <div className="text-xs font-inter text-center text-[#777777]">
                 {hackathon.participantsCount} Hackers Registered • {hackathon.teamsCount} Teams Formed
@@ -297,56 +306,6 @@ export default function HackathonDetailPage() {
 
       {/* Modern Footer */}
       <PublicFooter />
-
-      {/* Registration Modal Simulation */}
-      {isRegisterModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-[#FFFFFF] max-w-md w-full p-8 space-y-6 font-inter shadow-2xl rounded-3xl">
-            <div className="flex justify-between items-center">
-              <h2 className="text-xl font-geist font-bold text-[#111111]">
-                HACKER REGISTRATION
-              </h2>
-              <button onClick={() => setIsRegisterModalOpen(false)} className="text-sm text-[#999999] hover:text-[#111111]">
-                ✕
-              </button>
-            </div>
-
-            <div className="space-y-4 text-xs">
-              <div className="space-y-1">
-                <label className="font-inter text-xs text-[#777777] font-bold block">PARTICIPANT NAME</label>
-                <input type="text" defaultValue="Rahul Sharma" className="w-full p-3 bg-[#F7F7F5] border-none text-xs rounded-full font-inter" readOnly />
-              </div>
-              <div className="space-y-1">
-                <label className="font-inter text-xs text-[#777777] font-bold block">PREFERRED TRACK</label>
-                <select className="w-full p-3 bg-[#F7F7F5] border-none text-xs rounded-full font-inter">
-                  {hackathon.tracks.map((t) => (
-                    <option key={t.id}>{t.name}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="pt-4 flex justify-end gap-3 font-inter text-xs">
-              <button
-                onClick={() => setIsRegisterModalOpen(false)}
-                className="px-5 py-2.5 bg-[#F7F7F5] text-[#777777] rounded-full"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={() => {
-                  setRegistered(true);
-                  setIsRegisterModalOpen(false);
-                }}
-                className="px-6 py-2.5 bg-[#800000] hover:bg-[#660000] text-white font-bold rounded-full shadow-xs"
-              >
-                Confirm Registration
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
     </div>
   );
 }

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Inter } from "next/font/google";
+import { AuthProvider } from "@/lib/auth";
+import { GlobalLoadingProvider } from "@/components/providers/GlobalLoadingProvider";
 import "./globals.css";
 
 const geist = Geist({
@@ -28,7 +30,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${geist.variable} ${inter.variable} h-full antialiased`}>
+    <html
+      lang="en"
+      suppressHydrationWarning
+      className={`${geist.variable} ${inter.variable} h-full antialiased`}
+    >
       <head>
         <link
           rel="icon"
@@ -39,8 +45,13 @@ export default function RootLayout({
         <link rel="shortcut icon" href="/images/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/logo.png" />
       </head>
-      <body className="min-h-full flex flex-col bg-white text-[#111111] font-inter selection:bg-[#800000] selection:text-white">
-        {children}
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-black text-white font-inter selection:bg-[#800000] selection:text-white"
+      >
+        <AuthProvider>
+          <GlobalLoadingProvider>{children}</GlobalLoadingProvider>
+        </AuthProvider>
       </body>
     </html>
   );

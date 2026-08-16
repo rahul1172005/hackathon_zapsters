@@ -5,10 +5,12 @@ import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { PublicNavbar } from '@/components/navigation/PublicNavbar';
 import { ArrowRight, Lock, Mail, KeyRound } from 'lucide-react';
+import { useAuth, primaryRole, routeForRole } from '@/lib/auth';
 
 function LoginFormContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const { login } = useAuth();
 
   const roleParam = searchParams.get('role');
   const defaultEmail =
@@ -20,19 +22,19 @@ function LoginFormContent() {
 
   const [email, setEmail] = useState(defaultEmail);
   const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('zapsters_auth', 'true');
-    }
-    const cleanEmail = email.toLowerCase().trim();
-    if (cleanEmail.includes('admin') || roleParam === 'organizer') {
-      router.push('/organizer/quantum-build-2026/overview');
-    } else if (cleanEmail.includes('judge') || roleParam === 'judge') {
-      router.push('/judge/dashboard');
-    } else {
-      router.push('/dashboard');
+    setError(null);
+    setSubmitting(true);
+    try {
+      const user = await login(email.trim(), password);
+      router.push(routeForRole(primaryRole(user)));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to sign in. Please try again.');
+      setSubmitting(false);
     }
   };
 
@@ -155,10 +157,18 @@ function LoginFormContent() {
 
         <button
           type="submit"
-          className="w-full py-3.5 bg-[#800000] hover:bg-[#660000] text-white text-xs font-bold uppercase tracking-wider rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+          disabled={submitting}
+          className="w-full py-3.5 bg-[#800000] hover:bg-[#660000] disabled:opacity-60 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
         >
-          Sign In to Workspace <ArrowRight className="w-4 h-4" />
+          {submitting ? 'Signing In…' : 'Sign In to Workspace'}
+          {!submitting && <ArrowRight className="w-4 h-4" />}
         </button>
+
+        {error && (
+          <p className="text-[11px] text-red-500 dark:text-red-400 font-medium text-center">
+            {error}
+          </p>
+        )}
       </form>
 
       <div className="pt-2 text-center text-xs text-[#777777] dark:text-neutral-400 font-inter">
@@ -173,7 +183,7 @@ function LoginFormContent() {
 
 export default function LoginPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
+    <div className="min-h-screen bg-black text-white flex flex-col font-inter">
       <PublicNavbar />
       <main className="flex-1 flex items-center justify-center p-6">
         <Suspense fallback={<div className="text-xs text-[#777777]">Loading Portal Access...</div>}>

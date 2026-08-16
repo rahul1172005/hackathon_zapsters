@@ -16,8 +16,8 @@ import {
   RubricScores,
 } from '@/types';
 
-// Helper to simulate asynchronous latency (API-ready architecture)
-const delay = (ms: number = 80) => new Promise((res) => setTimeout(res, ms));
+// Instant response for maximum performance and lightning speed
+const delay = (ms: number = 0) => (ms > 0 ? new Promise((res) => setTimeout(res, ms)) : Promise.resolve());
 
 export async function getHackathons(): Promise<Hackathon[]> {
   await delay();
@@ -105,7 +105,7 @@ export async function saveEvaluation(
   notes: string,
   status: 'DRAFT' | 'SAVED' | 'SUBMITTED'
 ): Promise<{ success: boolean; totalScore: number; updatedAt: string }> {
-  await delay(120);
+  await delay(0);
   const totalScore = scores.innovation + scores.technical + scores.impact + scores.ux + scores.presentation;
   const updatedAt = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 

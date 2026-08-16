@@ -3,12 +3,12 @@
 @variant dark (&:where(.dark, .dark *));
 
 :root {
-  --bg-zapsters: #FFFFFF;
+  --bg-zapsters: #F9F9F8;
   --surface-zapsters: #FFFFFF;
   --primary-zapsters: #111111;
   --secondary-zapsters: #800000;
   --secondary-hover: #660000;
-  --muted-zapsters: #777777;
+  --muted-zapsters: #666666;
   --border-zapsters: #E5E5E2;
 }
 
@@ -16,17 +16,18 @@
   --font-geist: var(--font-geist), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
   --font-sans: var(--font-inter), sans-serif;
-  --color-zap-bg: #FFFFFF;
+  --color-zap-bg: #F9F9F8;
   --color-zap-surface: #FFFFFF;
   --color-zap-primary: #111111;
   --color-zap-red: #800000;
   --color-zap-red-dark: #660000;
-  --color-zap-muted: #777777;
+  --color-zap-muted: #666666;
   --color-zap-border: #E5E5E2;
 }
 
+/* Light Mode Base Styles */
 body {
-  background-color: #FFFFFF;
+  background-color: #F9F9F8;
   color: #111111;
   font-family: var(--font-inter), sans-serif;
   font-size: 0.875rem; /* 14px */
@@ -35,6 +36,21 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Dark Mode Base Styles */
+html.dark {
+  --bg-zapsters: #000000;
+  --surface-zapsters: #0D0D0E;
+  --primary-zapsters: #FFFFFF;
+  --muted-zapsters: #A1A1AA;
+  --border-zapsters: #27272A;
+}
+
+html.dark body {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
 }
 
 /* Enforce Thin Geist Font for ALL Titles, Headings, and Geist typography across the platform */
@@ -100,26 +116,30 @@ html.dark body,
 html.dark section,
 html.dark header,
 html.dark header.sticky {
-  background-color: #09090B !important;
+  background-color: #000000 !important;
   color: #FAFAFA !important;
   border-color: #27272A !important;
 }
 
 /* Card & Surface Backgrounds */
-html.dark .bg-\[\#FFFFFF\],
 html.dark .bg-white {
-  background-color: #121215 !important;
+  background-color: #0D0D0E !important;
+  color: #FAFAFA !important;
+}
+
+html.dark .bg-\[\#FFFFFF\] {
+  background-color: #0D0D0E !important;
   color: #FAFAFA !important;
 }
 
 html.dark .bg-\[\#F7F7F5\],
 html.dark .bg-\[\#F9F9F8\] {
-  background-color: #09090B !important;
+  background-color: #000000 !important;
   color: #FAFAFA !important;
 }
 
 html.dark .bg-neutral-900 {
-  background-color: #18181B !important;
+  background-color: #141415 !important;
 }
 
 html.dark .bg-neutral-200 {
@@ -159,13 +179,13 @@ html.dark header,
 html.dark nav,
 html.dark aside,
 html.dark footer {
-  background-color: #121215 !important;
+  background-color: #000000 !important;
   border-color: #27272A !important;
 }
 
 /* Coordinate Grid Canvas in Black Theme */
 html.dark svg rect[fill="url(#grid)"] {
-  fill: #09090B !important;
+  fill: #000000 !important;
 }
 
 html.dark pattern#grid path {
@@ -178,9 +198,9 @@ html.dark input[type="password"],
 html.dark input[type="email"],
 html.dark textarea,
 html.dark select {
-  background-color: #18181B !important;
+  background-color: #141415 !important;
   color: #FFFFFF !important;
-  border-color: #3F3F46 !important;
+  border-color: #27272A !important;
 }
 
 html.dark input[type="range"] {
@@ -189,110 +209,11 @@ html.dark input[type="range"] {
 
 /* Table Rows in Dark Mode */
 html.dark tr.bg-\[\#F7F7F5\] {
-  background-color: #18181B !important;
+  background-color: #141415 !important;
 }
-
-/* ====================================================
-   DARK MODE HOVER VISIBILITY & CONTRAST ENHANCEMENTS
-   ==================================================== */
 
 /* Ensure all interactive links and buttons stay bright and crystal clear on hover */
 html.dark a:hover,
-html.dark button:hover,
-html.dark [role="button"]:hover {
-  color: #FFFFFF !important;
+html.dark button:hover {
+  opacity: 0.95;
 }
-
-/* Dark mode text hover overrides */
-html.dark .hover\:text-\[\#111111\]:hover,
-html.dark .hover\:text-neutral-900:hover {
-  color: #FFFFFF !important;
-}
-
-html.dark .hover\:text-\[\#777777\]:hover,
-html.dark .hover\:text-\[\#666666\]:hover {
-  color: #E4E4E7 !important;
-}
-
-html.dark .hover\:text-\[\#800000\]:hover {
-  color: #FF4D4D !important;
-}
-
-/* Background hover overrides for cards, buttons, badges, and pill nav items */
-html.dark .hover\:bg-\[\#F7F7F5\]:hover,
-html.dark .hover\:bg-\[\#E5E5E2\]:hover,
-html.dark .hover\:bg-\[\#FFFFFF\]:hover,
-html.dark .hover\:bg-white:hover,
-html.dark .hover\:bg-neutral-200\/60:hover,
-html.dark .hover\:bg-neutral-200:hover,
-html.dark .hover\:bg-neutral-100:hover {
-  background-color: #27272A !important;
-  color: #FFFFFF !important;
-}
-
-/* Dark mode hover for black/dark buttons */
-html.dark .hover\:bg-\[\#111111\]:hover,
-html.dark .hover\:bg-\[\#222222\]:hover,
-html.dark .hover\:bg-neutral-900:hover {
-  background-color: #3F3F46 !important;
-  color: #FFFFFF !important;
-}
-
-/* Dark mode hover for maroon buttons */
-html.dark .hover\:bg-\[\#660000\]:hover,
-html.dark .hover\:bg-\[\#800000\]:hover {
-  background-color: #A00000 !important;
-  color: #FFFFFF !important;
-}
-
-/* Table rows hover visibility in dark mode */
-html.dark tr:hover,
-html.dark tr.hover\:bg-\[\#F7F7F5\]:hover,
-html.dark tr.hover\:bg-neutral-200\/60:hover {
-  background-color: #1F1F23 !important;
-  color: #FFFFFF !important;
-}
-
-html.dark tr:hover td,
-html.dark tr:hover td span,
-html.dark tr:hover td div {
-  color: #FFFFFF !important;
-}
-
-/* Card hover glow and border illumination */
-html.dark .hover\:shadow-md:hover,
-html.dark .hover\:shadow-lg:hover,
-html.dark .hover\:shadow-xl:hover {
-  border-color: #3F3F46 !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6), 0 8px 10px -6px rgba(0, 0, 0, 0.6) !important;
-}
-
-/* Ensure SVG icons inside hovered elements illuminate cleanly */
-html.dark a:hover svg,
-html.dark button:hover svg {
-  color: #FFFFFF !important;
-  stroke: #FFFFFF !important;
-}
-
-/* Special accent icon hover color overrides */
-html.dark a:hover svg.text-\[\#800000\],
-html.dark button:hover svg.text-\[\#800000\] {
-  color: #FF4D4D !important;
-  stroke: #FF4D4D !important;
-}
-
-/* ====================================================
-   IMAGE COLOR FILTER ADAPTATION FOR LIGHT & DARK MODE
-   ==================================================== */
-.card-image {
-  transition: filter 0.3s ease, transform 0.3s ease;
-}
-
-html:not(.dark) .card-image {
-  filter: brightness(1) contrast(1) saturate(1) drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08)) !important;
-}
-
-html.dark .card-image {
-  filter: brightness(1.25) contrast(1.15) saturate(1.2) drop-shadow(0 6px 24px rgba(255, 255, 255, 0.18)) !important;
-}
-

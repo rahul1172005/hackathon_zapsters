@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { ParticipantSidebar } from '@/components/navigation/ParticipantSidebar';
 import { LiveLeaderboardTable } from '@/components/shared/LiveLeaderboardTable';
-import { MOCK_TEAMS, MOCK_HACKATHONS } from '@/lib/mockData';
+import * as api from '@/lib/api';
 import { TeamStatusBadge } from '@/components/shared/TeamStatusBadge';
 import { ActivityIndicator } from '@/components/shared/ActivityIndicator';
 import {
@@ -15,10 +15,37 @@ import {
   CheckCircle2,
   AlertTriangle,
 } from 'lucide-react';
+import { Hackathon, Team } from '@/types';
 
 export default function HackerDashboardPage() {
-  const activeHackathon = MOCK_HACKATHONS[0];
-  const myTeam = MOCK_TEAMS[2]; // CyberForge
+  const [activeHackathon, setActiveHackathon] = useState<Hackathon | null>(null);
+  const [myTeam, setMyTeam] = useState<Team | null>(null);
+  const [leaderboardTeams, setLeaderboardTeams] = useState<Team[]>([]);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const [hackathons, teams] = await Promise.all([api.getHackathons(), api.getLeaderboard()]);
+      if (cancelled) return;
+      setActiveHackathon(hackathons[0] ?? null);
+      setMyTeam(teams.find((t) => t.slug === 'cyberforge' || t.id === 'team-003') ?? teams[2] ?? null);
+      setLeaderboardTeams(teams);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (!activeHackathon || !myTeam || leaderboardTeams.length === 0) {
+    return (
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+        <ParticipantSidebar />
+        <div className="flex-1 flex items-center justify-center p-12 text-xs font-inter text-[#777777]">
+          Loading Dashboard...
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
@@ -165,7 +192,7 @@ export default function HackerDashboardPage() {
             <p className="text-xs text-[#777777] font-inter mt-0.5">Dynamic rankings updated live via judge rubric scores and code activity.</p>
           </div>
 
-          <LiveLeaderboardTable teams={MOCK_TEAMS} isCompact={false} />
+          <LiveLeaderboardTable teams={leaderboardTeams} isCompact={false} />
         </div>
 
       </main>

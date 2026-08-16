@@ -4,19 +4,26 @@ import React, { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
 export const ThemeToggle: React.FC = () => {
-  const [isDark, setIsDark] = useState<boolean>(() => {
-    if (typeof window === 'undefined') return false;
-    const savedTheme = localStorage.getItem('zapsters_theme');
-    return savedTheme === 'dark';
-  });
+  const [mounted, setMounted] = useState(false);
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    if (isDark) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDark]);
+    const timer = setTimeout(() => {
+      setMounted(true);
+      if (typeof window !== 'undefined') {
+        const savedTheme = localStorage.getItem('zapsters_theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialDark = savedTheme ? savedTheme === 'dark' : prefersDark;
+        setIsDark(initialDark);
+        if (initialDark) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, []);
 
   const toggleTheme = () => {
     const nextDark = !isDark;
@@ -30,13 +37,19 @@ export const ThemeToggle: React.FC = () => {
     }
   };
 
+  if (!mounted) {
+    return (
+      <div className="w-16 h-8 rounded-full bg-[#F0F0EE] dark:bg-[#181818] border border-neutral-200 dark:border-neutral-800 shrink-0" />
+    );
+  }
+
   return (
     <button
       onClick={toggleTheme}
       type="button"
       aria-label="Toggle Light and Dark Mode"
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      className={`relative w-16 h-8 rounded-full p-1 flex items-center justify-between cursor-pointer transition-all duration-300 select-none group ${
+      className={`relative w-16 h-8 rounded-full p-1 flex items-center justify-between cursor-pointer transition-all duration-300 select-none group shrink-0 ${
         isDark
           ? 'bg-[#181818] shadow-[inset_3px_3px_6px_#0d0d0d,inset_-3px_-3px_6px_#232323] border border-neutral-800'
           : 'bg-white shadow-[inset_2px_2px_5px_rgba(0,0,0,0.08),inset_-2px_-2px_5px_rgba(255,255,255,1)] border border-neutral-200'
@@ -58,7 +71,7 @@ export const ThemeToggle: React.FC = () => {
         <Moon className="w-3.5 h-3.5" />
       </span>
 
-      {/* Sliding Tactile Neumorphic Knob (WHITE in Light Mode) */}
+      {/* Sliding Tactile Neumorphic Knob */}
       <span
         className={`absolute top-1 left-1 w-6 h-6 rounded-full flex items-center justify-center transition-all duration-300 ease-spring ${
           isDark

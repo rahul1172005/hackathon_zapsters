@@ -2,8 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
+import { SignOutModal } from '@/components/modals/SignOutModal';
 import {
   LayoutDashboard,
   Trophy,
@@ -15,11 +16,15 @@ import {
   ChevronLeft,
   ChevronRight,
   Layers,
+  Settings,
+  LogOut,
 } from 'lucide-react';
 
 export const ParticipantSidebar: React.FC = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const [showSignOutModal, setShowSignOutModal] = useState(false);
 
   const teamIdMatch = pathname ? pathname.match(/\/my-teams\/([^/]+)/) : null;
   const activeTeamId = teamIdMatch ? teamIdMatch[1] : 'team-003';
@@ -32,6 +37,7 @@ export const ParticipantSidebar: React.FC = () => {
     { label: 'Team Activity', href: `/my-teams/${activeTeamId}/activity`, icon: Activity },
     { label: 'Submit Project', href: `/my-teams/${activeTeamId}/submission`, icon: Send },
     { label: 'Public Profile', href: '/dashboard/profile', icon: User },
+    { label: 'Settings', href: '/dashboard/settings', icon: Settings },
   ];
 
   // Mobile bottom nav items (subset — most important 5)
@@ -39,9 +45,19 @@ export const ParticipantSidebar: React.FC = () => {
     { label: 'Home', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Teams', href: '/my-teams', icon: Users },
     { label: 'Leaderboard', href: '/dashboard/leaderboard', icon: Trophy },
-    { label: 'Submit', href: `/my-teams/${activeTeamId}/submission`, icon: Send },
+    { label: 'Settings', href: '/dashboard/settings', icon: Settings },
     { label: 'Profile', href: '/dashboard/profile', icon: User },
   ];
+
+  const handleConfirmSignOut = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('zapsters_auth');
+      localStorage.removeItem('zapsters_user');
+      window.dispatchEvent(new Event('storage'));
+    }
+    setShowSignOutModal(false);
+    router.push('/');
+  };
 
   return (
     <>
@@ -66,7 +82,7 @@ export const ParticipantSidebar: React.FC = () => {
               <button
                 onClick={() => setIsCollapsed(true)}
                 title="Minimize Sidebar"
-                className="w-7 h-7 bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#111111] rounded-full flex items-center justify-center transition-colors shrink-0"
+                className="w-7 h-7 bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#111111] rounded-full flex items-center justify-center transition-colors shrink-0 cursor-pointer"
               >
                 <ChevronLeft className="w-4 h-4 text-[#800000]" />
               </button>
@@ -79,7 +95,7 @@ export const ParticipantSidebar: React.FC = () => {
               <button
                 onClick={() => setIsCollapsed(false)}
                 title="Maximize Sidebar"
-                className="w-7 h-7 bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#111111] rounded-full flex items-center justify-center transition-colors shrink-0"
+                className="w-7 h-7 bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#111111] rounded-full flex items-center justify-center transition-colors shrink-0 cursor-pointer"
               >
                 <ChevronRight className="w-4 h-4 text-[#800000]" />
               </button>
@@ -123,8 +139,8 @@ export const ParticipantSidebar: React.FC = () => {
           })}
         </nav>
 
-        {/* Footer Info & Theme Toggle */}
-        {!isCollapsed && (
+        {/* Footer Info & Sign Out */}
+        {!isCollapsed ? (
           <div className="p-3 bg-[#FFFFFF] dark:bg-[#141414] rounded-2xl m-3 font-inter text-[11px] text-[#777777] dark:text-neutral-400 space-y-2 shadow-xs border border-transparent dark:border-neutral-800">
             <div className="flex justify-between items-center">
               <span>THEME:</span>
@@ -134,10 +150,26 @@ export const ParticipantSidebar: React.FC = () => {
               <span>TEAM:</span>
               <span className="font-bold text-[#111111] dark:text-white">CyberForge</span>
             </div>
-            <div className="flex justify-between">
-              <span>RANK:</span>
-              <span className="font-bold text-[#800000] dark:text-red-400">#03</span>
+            <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800">
+              <button
+                type="button"
+                onClick={() => setShowSignOutModal(true)}
+                className="w-full flex items-center justify-center gap-2 py-2 px-3 bg-red-500/10 hover:bg-red-500/20 text-[#800000] dark:text-red-400 rounded-xl font-bold transition-colors cursor-pointer text-xs"
+              >
+                <LogOut className="w-3.5 h-3.5" /> Sign Out
+              </button>
             </div>
+          </div>
+        ) : (
+          <div className="p-2 flex flex-col items-center gap-2 mb-3">
+            <button
+              type="button"
+              onClick={() => setShowSignOutModal(true)}
+              title="Sign Out"
+              className="w-10 h-10 rounded-full bg-red-500/10 hover:bg-red-500/20 text-[#800000] dark:text-red-400 flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <LogOut className="w-4 h-4" />
+            </button>
           </div>
         )}
       </aside>
@@ -170,6 +202,13 @@ export const ParticipantSidebar: React.FC = () => {
           })}
         </div>
       </nav>
+
+      {/* Sign Out Confirmation Pop-up Modal */}
+      <SignOutModal
+        isOpen={showSignOutModal}
+        onClose={() => setShowSignOutModal(false)}
+        onConfirm={handleConfirmSignOut}
+      />
     </>
   );
 };

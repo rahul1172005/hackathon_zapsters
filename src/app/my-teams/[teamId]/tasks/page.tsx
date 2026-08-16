@@ -53,12 +53,12 @@ export default function TeamTasksPage() {
       <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
         <TeamWorkspaceHeader team={team} />
 
-        <div className="bg-[#FFFFFF] p-6 rounded-3xl shadow-xs space-y-4">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 rounded-3xl shadow-xs space-y-4 font-inter">
           <div className="flex justify-between items-center">
-            <h2 className="text-sm font-geist font-bold text-[#111111]">Team Execution Tasks</h2>
+            <h2 className="text-sm font-geist font-bold text-[#111111] dark:text-white">Team Execution Tasks</h2>
             <button
               onClick={() => setIsAdding(!isAdding)}
-              className="px-4 py-2 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center gap-1.5 shadow-xs"
+              className="px-4 py-2 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center gap-1.5 shadow-xs cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" /> {isAdding ? 'Cancel' : 'Add Task'}
             </button>
@@ -71,12 +71,12 @@ export default function TeamTasksPage() {
                 placeholder="Enter new task title..."
                 value={newTaskTitle}
                 onChange={(e) => setNewTaskTitle(e.target.value)}
-                className="flex-1 p-3 bg-[#F7F7F5] border border-[#E5E5E2] rounded-full outline-none focus:border-[#800000]"
+                className="flex-1 p-3 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white rounded-full outline-none focus:border-[#800000]"
                 autoFocus
               />
               <button
                 type="submit"
-                className="px-5 py-2.5 bg-[#111111] text-white font-bold rounded-full hover:bg-[#222222]"
+                className="px-5 py-2.5 bg-[#111111] dark:bg-white text-white dark:text-black font-bold rounded-full hover:bg-[#222222] dark:hover:bg-neutral-200 transition-colors cursor-pointer"
               >
                 Save
               </button>
@@ -84,10 +84,10 @@ export default function TeamTasksPage() {
           )}
         </div>
 
-        <div className="bg-[#FFFFFF] p-6 rounded-3xl shadow-xs overflow-x-auto">
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 rounded-3xl shadow-xs overflow-x-auto font-inter">
           <table className="w-full text-left font-inter text-xs border-separate border-spacing-y-2">
             <thead>
-              <tr className="font-inter text-xs uppercase text-[#777777]">
+              <tr className="font-inter text-xs uppercase text-[#777777] dark:text-neutral-400">
                 <th className="py-3 px-5">TASK DESCRIPTION</th>
                 <th className="py-3 px-5">ASSIGNEE</th>
                 <th className="py-3 px-5 text-right">STATUS</th>
@@ -95,14 +95,14 @@ export default function TeamTasksPage() {
             </thead>
             <tbody className="font-inter">
               {tasks.map((t: TeamTask) => (
-                <tr key={t.id} className="bg-[#F7F7F5] hover:bg-neutral-200/60 rounded-2xl transition-all">
-                  <td className="py-3.5 px-5 font-bold text-[#111111] rounded-l-2xl">{t.title}</td>
-                  <td className="py-3.5 px-5 font-inter text-[#777777]">{t.assignee}</td>
+                <tr key={t.id} className="bg-[#F7F7F5] dark:bg-neutral-900/70 hover:bg-neutral-200/60 dark:hover:bg-neutral-800/80 rounded-2xl transition-all">
+                  <td className="py-3.5 px-5 font-bold text-[#111111] dark:text-white rounded-l-2xl">{t.title}</td>
+                  <td className="py-3.5 px-5 font-inter text-[#777777] dark:text-neutral-400">{t.assignee}</td>
                   <td className="py-3.5 px-5 text-right rounded-r-2xl">
                     <button
                       onClick={() => toggleTaskStatus(t.id)}
                       className={`font-inter text-xs font-bold px-3 py-1 rounded-full cursor-pointer transition-colors ${
-                        t.status === 'DONE' ? 'bg-[#800000] text-white' : 'bg-neutral-200 text-neutral-800 hover:bg-neutral-300'
+                        t.status === 'DONE' ? 'bg-[#800000] text-white' : 'bg-neutral-200 dark:bg-neutral-800 text-neutral-800 dark:text-neutral-200 hover:bg-neutral-300 dark:hover:bg-neutral-700'
                       }`}
                     >
                       {t.status}

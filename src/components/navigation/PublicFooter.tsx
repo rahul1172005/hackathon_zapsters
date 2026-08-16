@@ -23,16 +23,16 @@ export const PublicFooter: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-[#111111] text-white pt-12 pb-10 font-inter rounded-none mt-12">
+    <footer className="w-full bg-white dark:bg-black text-[#111111] dark:text-white pt-12 pb-10 font-inter rounded-none border-t border-neutral-200 dark:border-neutral-800 mt-12 transition-colors">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 space-y-10">
 
         {/* Top CTA Banner inside Footer */}
-        <div className="bg-[#1A1A1A] p-6 sm:p-8 rounded-3xl flex flex-col gap-5">
+        <div className="bg-[#F7F7F5] dark:bg-[#0D0D0D] border border-neutral-200 dark:border-neutral-800 p-6 sm:p-8 rounded-3xl flex flex-col gap-5 shadow-xs">
           <div className="space-y-1">
-            <h2 className="text-xl sm:text-2xl font-geist font-bold text-white tracking-tight">
+            <h2 className="text-xl sm:text-2xl font-geist font-bold text-[#111111] dark:text-white tracking-tight">
               Ready to build your next hackathon project?
             </h2>
-            <p className="text-xs text-[#999999] max-w-xl">
+            <p className="text-xs text-neutral-600 dark:text-[#999999] max-w-xl">
               Experience the competition operating system designed for student hackers, engineering teams, and real-time project telemetry.
             </p>
           </div>
@@ -57,21 +57,20 @@ export const PublicFooter: React.FC = () => {
 
           {/* Brand Column */}
           <div className="md:col-span-5 space-y-3">
-            <div className="flex items-center gap-2.5">
-              <img
-                src="/images (4)/navbar.png"
-                alt="Zapsters"
-                loading="lazy"
-                decoding="async"
-                style={{ transform: 'scale(3.5) translate(10px, -2px)' }}
-                className="h-8 w-auto object-contain transition-transform"
-              />
-              <span className="font-geist font-extrabold text-xl tracking-wider text-white">
-
-              </span>
+            <div className="flex items-center">
+              <Link href="/" className="flex items-center group">
+                <img
+                  src="/images (4)/navbar.png"
+                  alt="Logo"
+                  loading="lazy"
+                  decoding="async"
+                  style={{ transform: 'scale(3.5) translate(10px, -2px)' }}
+                  className="h-8 w-auto object-contain transition-transform"
+                />
+              </Link>
             </div>
             <p className="text-xs text-[#999999] max-w-md leading-relaxed">
-              Zapsters is the operating system for student hackathons. We provide real-time competition infrastructure for team identity, live telemetry, and project submission.
+              The operating system for student hackathons. Providing real-time competition infrastructure for team identity, live telemetry, and project submission.
             </p>
           </div>
 
@@ -151,24 +150,24 @@ export const PublicFooter: React.FC = () => {
               </h3>
               <ul className="space-y-2 text-[#999999]">
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/hackathons/quantum-build-2026" className="hover:text-white transition-colors">
                     Code of Conduct
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/organizer/quantum-build-2026/judging" className="hover:text-white transition-colors">
                     Judging Rubrics
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/hackathons" className="hover:text-white transition-colors">
                     API Telemetry
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-white transition-colors">
+                  <Link href="/auth/register" className="hover:text-white transition-colors">
                     Privacy Policy
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -179,7 +178,7 @@ export const PublicFooter: React.FC = () => {
         {/* Bottom copyright line — NO divided lines */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#777777]">
           <div>
-            © {new Date().getFullYear()} Zapsters Platform Inc. All rights reserved.
+            © {new Date().getFullYear()} Platform Inc. All rights reserved.
           </div>
           <div className="flex items-center gap-6">
             <span className="inline-flex items-center gap-2">

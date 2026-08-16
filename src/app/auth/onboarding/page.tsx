@@ -1,22 +1,59 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { PublicNavbar } from '@/components/navigation/PublicNavbar';
 import { GithubIcon } from '@/components/ui/Icons';
 import { User, Cpu, Shield, ArrowRight } from 'lucide-react';
+import { useAuth, routeForRole } from '@/lib/auth';
 
 type RoleType = 'Participant' | 'Organizer' | 'Judge';
 
 export default function OnboardingPage() {
+  const router = useRouter();
+  const { user, updateProfile, selectRole } = useAuth();
+
   const [role, setRole] = useState<RoleType>('Participant');
+  const [github, setGithub] = useState(user?.github_handle ?? '');
+  const [skills, setSkills] = useState(user?.skills?.join(', ') ?? '');
+  const [error, setError] = useState<string | null>(null);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError(null);
+    setSubmitting(true);
+    try {
+      selectRole(role);
+
+      if (user) {
+        try {
+          await updateProfile({
+            github_handle: github.trim() || undefined,
+            skills: skills
+              .split(',')
+              .map((skill) => skill.trim())
+              .filter(Boolean),
+          });
+        } catch {
+          // Profile sync is best-effort; routing still proceeds.
+        }
+      }
+
+      router.push(routeForRole(role));
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Unable to complete setup. Please try again.');
+      setSubmitting(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black flex flex-col font-inter">
+    <div className="min-h-screen bg-black text-white flex flex-col font-inter">
       <PublicNavbar />
 
       <main className="flex-1 flex items-center justify-center p-6">
         <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-8 max-w-xl w-full space-y-6 rounded-3xl shadow-xs font-inter">
-          
+
           <div className="space-y-1">
             <h1 className="text-3xl font-geist font-bold text-[#111111] dark:text-white">
               Setup Your Zapsters Profile
@@ -56,7 +93,7 @@ export default function OnboardingPage() {
             })}
           </div>
 
-          <form action="/dashboard" className="space-y-4 text-xs font-inter">
+          <form onSubmit={handleSubmit} className="space-y-4 text-xs font-inter">
             <div className="space-y-1">
               <label className="font-mono text-[10px] font-bold text-[#777777] block">CONNECT GITHUB USERNAME</label>
               <div className="relative">
@@ -64,6 +101,8 @@ export default function OnboardingPage() {
                 <input
                   type="text"
                   placeholder="rahul-ai-dev"
+                  value={github}
+                  onChange={(e) => setGithub(e.target.value)}
                   className="w-full bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] pl-9 pr-4 py-2.5 text-xs rounded-full outline-none transition-colors font-mono dark:text-white"
                 />
               </div>
@@ -74,16 +113,26 @@ export default function OnboardingPage() {
               <input
                 type="text"
                 placeholder="Python, PyTorch, TypeScript, Next.js, FastAPI"
+                value={skills}
+                onChange={(e) => setSkills(e.target.value)}
                 className="w-full bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] px-4 py-2.5 text-xs rounded-full outline-none transition-colors dark:text-white"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-3.5 bg-[#800000] hover:bg-[#660000] text-white text-xs font-bold uppercase tracking-wider rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+              disabled={submitting}
+              className="w-full py-3.5 bg-[#800000] hover:bg-[#660000] disabled:opacity-60 text-white text-xs font-bold uppercase tracking-wider rounded-full transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer"
             >
-              Complete Setup & Open Workspace <ArrowRight className="w-4 h-4" />
+              {submitting ? 'Setting Up…' : 'Complete Setup & Open Workspace'}
+              {!submitting && <ArrowRight className="w-4 h-4" />}
             </button>
+
+            {error && (
+              <p className="text-[11px] text-red-500 dark:text-red-400 font-medium text-center">
+                {error}
+              </p>
+            )}
           </form>
 
         </div>

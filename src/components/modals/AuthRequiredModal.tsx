@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Link from 'next/link';
 import { Lock, ArrowRight, X } from 'lucide-react';
 
@@ -10,46 +11,51 @@ interface AuthRequiredModalProps {
 }
 
 export const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+  const [mounted, setMounted] = useState(false);
 
-  return (
-    <div className="fixed inset-0 z-[100] bg-black/75 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!isOpen || !mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-md flex items-center justify-center p-4 sm:p-6 animate-in fade-in duration-200">
       
       {/* Modal Card Container */}
-      <div className="relative w-full max-w-md bg-white dark:bg-[#121212] border border-[#E5E5E2] dark:border-neutral-800 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_-15px_rgba(128,0,0,0.25)] overflow-hidden font-inter transition-all transform animate-in zoom-in-95 duration-200 text-[#111111] dark:text-white">
+      <div className="relative w-full max-w-md bg-white dark:bg-[#121212] border border-[#E5E5E2] dark:border-neutral-800 rounded-3xl p-6 sm:p-8 shadow-[0_25px_60px_-15px_rgba(128,0,0,0.4)] overflow-hidden font-inter transition-all transform animate-in zoom-in-95 duration-200 text-[#111111] dark:text-white my-auto mx-auto">
         
         {/* Ambient Glowing Background Accents */}
-        <div className="absolute -top-20 -right-20 w-56 h-56 bg-[#800000]/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-[#800000]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-20 -right-20 w-56 h-56 bg-[#800000]/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-56 h-56 bg-[#800000]/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Top-Right Close Button */}
         <button
           onClick={onClose}
           aria-label="Close dialog"
-          className="absolute top-6 right-6 w-9 h-9 rounded-full bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#777777] hover:text-[#111111] dark:hover:text-white flex items-center justify-center transition-all hover:rotate-90 cursor-pointer z-10"
+          className="absolute top-5 right-5 w-9 h-9 rounded-full bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 text-[#777777] hover:text-[#111111] dark:hover:text-white flex items-center justify-center transition-all hover:rotate-90 cursor-pointer z-10"
         >
           <X className="w-4.5 h-4.5" />
         </button>
 
-        <div className="relative z-10 space-y-6">
+        <div className="relative z-10 space-y-6 flex flex-col items-center text-center pt-2">
           
           {/* Header Section */}
-          <div className="flex items-start gap-4 pt-1">
-            <div className="w-13 h-13 shrink-0 bg-gradient-to-br from-[#800000]/15 to-[#800000]/5 border border-[#800000]/20 rounded-2xl flex items-center justify-center text-[#800000] shadow-xs">
-              <Lock className="w-6 h-6" />
-            </div>
-            <div className="space-y-1">
-              <h2 className="text-2xl sm:text-3xl font-geist font-light tracking-tight text-[#111111] dark:text-white leading-tight">
-                Sign In to Workspace
-              </h2>
-              <p className="text-xs text-[#777777] dark:text-neutral-400 leading-relaxed font-inter">
-                Access your student hacker workspace, manage team rosters, and track live competition telemetry.
-              </p>
-            </div>
+          <div className="w-14 h-14 shrink-0 bg-gradient-to-br from-[#800000]/20 to-[#800000]/5 border border-[#800000]/30 rounded-2xl flex items-center justify-center text-[#800000] dark:text-red-400 shadow-md">
+            <Lock className="w-7 h-7" />
+          </div>
+
+          <div className="space-y-2 max-w-sm">
+            <h2 className="text-2xl sm:text-3xl font-geist font-bold tracking-tight text-[#111111] dark:text-white leading-tight">
+              Sign In to Workspace
+            </h2>
+            <p className="text-xs text-[#777777] dark:text-neutral-400 leading-relaxed font-inter">
+              Access your student hacker workspace, manage team rosters, and track live competition telemetry.
+            </p>
           </div>
 
           {/* Action CTA Buttons */}
-          <div className="space-y-3 pt-2">
+          <div className="w-full space-y-3 pt-2">
             <Link
               href="/auth/login"
               onClick={onClose}
@@ -69,6 +75,8 @@ export const AuthRequiredModal: React.FC<AuthRequiredModalProps> = ({ isOpen, on
 
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
+

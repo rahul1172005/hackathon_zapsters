@@ -38,8 +38,8 @@ export default function OrganizerOverviewConnectedPage() {
       <main className="flex-1 p-4 md:p-6 lg:p-8 space-y-6 overflow-y-auto pb-24 lg:pb-8">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111]">{hackathon.title} Command Center</h1>
-            <p className="text-xs text-[#777777] font-inter mt-0.5">Real-time competition operations and critical alerts.</p>
+            <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">{hackathon.title} Command Center</h1>
+            <p className="text-xs text-[#777777] dark:text-neutral-400 font-inter mt-0.5">Real-time competition operations and critical alerts.</p>
           </div>
 
           <Link
@@ -50,55 +50,55 @@ export default function OrganizerOverviewConnectedPage() {
           </Link>
         </div>
 
-        {/* 4 Core KPI Stat Cards — NO border lines */}
+        {/* 4 Core KPI Stat Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 font-inter">
-          <div className="bg-[#FFFFFF] p-5 space-y-1.5 rounded-2xl shadow-xs">
-            <div className="text-xs text-[#777777] uppercase flex justify-between font-bold">
+          <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 space-y-1.5 rounded-2xl shadow-xs">
+            <div className="text-xs text-[#777777] dark:text-neutral-400 uppercase flex justify-between font-bold">
               <span>PARTICIPANTS</span>
               <Users className="w-4 h-4 text-[#800000]" />
             </div>
-            <div className="text-2xl font-bold font-geist text-[#111111]">{hackathon.participantsCount}</div>
-            <div className="text-[11px] text-[#800000] font-bold">VERIFIED HACKERS</div>
+            <div className="text-2xl font-bold font-geist text-[#111111] dark:text-white">{hackathon.participantsCount}</div>
+            <div className="text-[11px] text-[#800000] dark:text-red-400 font-bold">VERIFIED HACKERS</div>
           </div>
 
-          <div className="bg-[#FFFFFF] p-5 space-y-1.5 rounded-2xl shadow-xs">
-            <div className="text-xs text-[#777777] uppercase flex justify-between font-bold">
+          <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 space-y-1.5 rounded-2xl shadow-xs">
+            <div className="text-xs text-[#777777] dark:text-neutral-400 uppercase flex justify-between font-bold">
               <span>TEAMS</span>
               <Briefcase className="w-4 h-4 text-[#800000]" />
             </div>
-            <div className="text-2xl font-bold font-geist text-[#111111]">{teams.length > 0 ? teams.length : hackathon.teamsCount}</div>
-            <div className="text-[11px] text-[#800000] font-bold">141 ACTIVE TEAMS</div>
+            <div className="text-2xl font-bold font-geist text-[#111111] dark:text-white">{teams.length > 0 ? teams.length : hackathon.teamsCount}</div>
+            <div className="text-[11px] text-[#800000] dark:text-red-400 font-bold">141 ACTIVE TEAMS</div>
           </div>
 
-          <div className="bg-[#FFFFFF] p-5 space-y-1.5 rounded-2xl shadow-xs">
-            <div className="text-xs text-[#777777] uppercase flex justify-between font-bold">
+          <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 space-y-1.5 rounded-2xl shadow-xs">
+            <div className="text-xs text-[#777777] dark:text-neutral-400 uppercase flex justify-between font-bold">
               <span>SUBMISSIONS</span>
               <FileCheck2 className="w-4 h-4 text-[#800000]" />
             </div>
-            <div className="text-2xl font-bold font-geist text-[#800000]">163 / 186</div>
-            <div className="text-[11px] text-[#800000] font-bold">87% SUBMISSION RATE</div>
+            <div className="text-2xl font-bold font-geist text-[#800000] dark:text-red-400">163 / 186</div>
+            <div className="text-[11px] text-[#800000] dark:text-red-400 font-bold">87% SUBMISSION RATE</div>
           </div>
 
-          <div className="bg-[#FFFFFF] p-5 space-y-1.5 rounded-2xl shadow-xs">
-            <div className="text-xs text-[#777777] uppercase flex justify-between font-bold">
+          <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-5 space-y-1.5 rounded-2xl shadow-xs">
+            <div className="text-xs text-[#777777] dark:text-neutral-400 uppercase flex justify-between font-bold">
               <span>JUDGING</span>
               <UserCheck className="w-4 h-4 text-[#800000]" />
             </div>
-            <div className="text-2xl font-bold font-geist text-[#111111]">63%</div>
-            <div className="text-[11px] text-[#777777] font-bold">EVALUATIONS COMPLETE</div>
+            <div className="text-2xl font-bold font-geist text-[#111111] dark:text-white">63%</div>
+            <div className="text-[11px] text-[#777777] dark:text-neutral-400 font-bold">EVALUATIONS COMPLETE</div>
           </div>
         </div>
 
-        {/* Critical Alert Box — NO border lines */}
-        <div className="bg-[#FFFFFF] p-6 space-y-4 rounded-3xl shadow-xs">
+        {/* Critical Alert Box */}
+        <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 space-y-4 rounded-3xl shadow-xs">
           <div className="flex justify-between items-center pb-2">
-            <h2 className="text-sm font-geist font-bold text-[#800000] flex items-center gap-2">
-              <AlertTriangle className="w-4.5 h-4.5 text-[#800000]" /> ATTENTION REQUIRED
+            <h2 className="text-sm font-geist font-bold text-[#800000] dark:text-red-400 flex items-center gap-2">
+              <AlertTriangle className="w-4.5 h-4.5 text-[#800000] dark:text-red-400" /> ATTENTION REQUIRED
             </h2>
-            <span className="font-inter text-xs text-[#777777]">23 TEAMS PENDING</span>
+            <span className="font-inter text-xs text-[#777777] dark:text-neutral-400">23 TEAMS PENDING</span>
           </div>
 
-          <p className="text-xs text-[#111111] leading-relaxed font-inter">
+          <p className="text-xs text-[#111111] dark:text-neutral-200 leading-relaxed font-inter">
             23 active teams have not submitted deliverables prior to the upcoming deadline window.
           </p>
 

@@ -1,0 +1,53 @@
+[project]
+name = "app"
+version = "0.1.0"
+description = "Zapsters Hackathon Platform backend API"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi[standard]>=0.115",
+  "uvicorn[standard]>=0.30",
+  "pydantic>=2.7",
+  "pydantic-settings>=2.4",
+  "sqlalchemy[asyncio]>=2.0",
+  "asyncpg>=0.29",
+  "alembic>=1.13",
+  "redis[hiredis]>=5.0",
+  "pwdlib[argon2]>=0.2",
+  "PyJWT>=2.9",
+  "structlog>=24.1",
+  "email-validator>=2.1",
+  "cryptography>=50.0.0",
+]
+
+[dependency-groups]
+dev = [
+  "httpx>=0.27",
+  "pytest>=8",
+  "pytest-asyncio>=0.24",
+  "pytest-timeout>=2.3",
+  "fakeredis>=2.26",
+  "pytest-cov>=5",
+  "ruff>=0.6",
+  "mypy>=1.11",
+  "bandit>=1.7",
+  "pip-audit>=2.7",
+  "coverage>=7.6",
+]
+
+[tool.uv]
+package = false
+
+[tool.ruff]
+line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "SIM", "UP", "T20", "S"]
+ignore = ["S101", "S105", "S106"]  # S101: allow assert in tests (bandit handles separately); S105/S106: false positives on non-credential constants and test fixture literals
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"
+pythonpath = ["."]
+timeout = 60
