@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { ThemeToggle } from '@/components/theme/ThemeToggle';
@@ -25,6 +25,35 @@ export const ParticipantSidebar: React.FC = () => {
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showSignOutModal, setShowSignOutModal] = useState(false);
+  const [userName, setUserName] = useState('Rahul Sharma');
+  const [userAvatar, setUserAvatar] = useState<string>('');
+
+  useEffect(() => {
+    const syncUser = () => {
+      if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('zapsters_user');
+        if (storedUser) {
+          try {
+            const parsed = JSON.parse(storedUser);
+            if (parsed.name) setUserName(parsed.name);
+            if (typeof parsed.avatar === 'string') {
+              const av = parsed.avatar;
+              if (av.includes('photo-1534528741775-53994a69daeb') || av.includes('unsplash.com/photo-1507003211169') || av.includes('unsplash.com/photo-1494790108377') || av.includes('unsplash.com/photo-1500648767791')) {
+                setUserAvatar('');
+              } else {
+                setUserAvatar(av);
+              }
+            }
+          } catch {}
+        }
+      }
+    };
+    syncUser();
+    window.addEventListener('storage', syncUser);
+    return () => window.removeEventListener('storage', syncUser);
+  }, []);
+
+  const firstLetter = userName ? userName.trim().charAt(0).toUpperCase() : 'R';
 
   const teamIdMatch = pathname ? pathname.match(/\/my-teams\/([^/]+)/) : null;
   const activeTeamId = teamIdMatch ? teamIdMatch[1] : 'team-003';
@@ -63,15 +92,12 @@ export const ParticipantSidebar: React.FC = () => {
     <>
       {/* ===================== MOBILE TOP HEADER BAR ===================== */}
       <header className="lg:hidden sticky top-0 z-40 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-md px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between font-inter transition-colors">
-        <Link href="/" className="flex items-center gap-2">
-          <img
-            src="/images (4)/navbar.png"
-            alt="Zapsters"
-            className="h-7 w-auto object-contain"
-            style={{ transform: 'scale(2.2) translate(6px, -1px)' }}
-          />
-          <span className="text-[10px] font-mono font-bold text-[#800000] dark:text-red-400 bg-[#800000]/10 px-2 py-0.5 rounded-full ml-4">
-            WORKSPACE
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shadow-xs">
+            Z
+          </div>
+          <span className="font-geist font-bold text-sm text-[#111111] dark:text-white tracking-tight">
+            Dashboard
           </span>
         </Link>
 
@@ -79,9 +105,13 @@ export const ParticipantSidebar: React.FC = () => {
           <ThemeToggle />
           <Link
             href="/dashboard/profile"
-            className="w-8 h-8 rounded-full bg-[#111111] dark:bg-neutral-800 text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 shadow-xs border border-neutral-200 dark:border-neutral-700"
+            className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 shadow-xs overflow-hidden"
           >
-            RS
+            {userAvatar ? (
+              <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+            ) : (
+              firstLetter
+            )}
           </Link>
         </div>
       </header>
@@ -97,11 +127,15 @@ export const ParticipantSidebar: React.FC = () => {
           {!isCollapsed ? (
             <>
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-full bg-[#111111] dark:bg-neutral-800 text-white flex items-center justify-center font-geist font-bold text-xs shrink-0">
-                  RS
+                <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 overflow-hidden shadow-xs">
+                  {userAvatar ? (
+                    <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+                  ) : (
+                    firstLetter
+                  )}
                 </div>
                 <div className="min-w-0">
-                  <h2 className="text-xs font-geist font-bold text-[#111111] dark:text-white truncate">Rahul Sharma</h2>
+                  <h2 className="text-xs font-geist font-bold text-[#111111] dark:text-white truncate">{userName}</h2>
                 </div>
               </div>
               <button
@@ -114,8 +148,12 @@ export const ParticipantSidebar: React.FC = () => {
             </>
           ) : (
             <div className="flex flex-col items-center gap-2.5 w-full">
-              <div className="w-8 h-8 rounded-full bg-[#111111] dark:bg-neutral-800 text-white flex items-center justify-center font-geist font-bold text-xs shrink-0">
-                RS
+              <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 overflow-hidden shadow-xs">
+                {userAvatar ? (
+                  <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+                ) : (
+                  firstLetter
+                )}
               </div>
               <button
                 onClick={() => setIsCollapsed(false)}
@@ -175,7 +213,7 @@ export const ParticipantSidebar: React.FC = () => {
               <span>TEAM:</span>
               <span className="font-bold text-[#111111] dark:text-white">CyberForge</span>
             </div>
-            <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800">
+            <div className="pt-2">
               <button
                 type="button"
                 onClick={() => setShowSignOutModal(true)}

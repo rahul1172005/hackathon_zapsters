@@ -144,7 +144,7 @@ export const MOCK_PARTICIPANT: Participant = {
   username: 'rahul_dev',
   name: 'Rahul Sharma',
   title: 'AI / ML · Full Stack · Computer Vision',
-  avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',
+  avatar: '',
   bio: 'Building autonomous computer vision pipelines and distributed real-time AI systems. Veteran of 8 hackathons, passionate about high-performance edge compute.',
   roles: ['AI/ML Engineer', 'Full Stack Developer', 'Team Lead'],
   skills: ['Python', 'PyTorch', 'TypeScript', 'Next.js', 'FastAPI', 'OpenCV', 'CUDA', 'Docker'],
@@ -297,7 +297,7 @@ export const MOCK_TEAMS: Team[] = [
     activityLevel: 'HIGH',
     scoreTrend: '—',
     members: [
-      { id: 'm8', name: 'Rahul Sharma', username: 'rahul_dev', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80', role: 'AI / ML Lead', contributionPercentage: 34 },
+      { id: 'm8', name: 'Rahul Sharma', username: 'rahul_dev', avatar: '', role: 'AI / ML Lead', contributionPercentage: 34 },
       { id: 'm9', name: 'Arun Kumar', username: 'arunk', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80', role: 'Backend Engineer', contributionPercentage: 27 },
       { id: 'm10', name: 'Vishnu Vardhan', username: 'vishnu_v', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80', role: 'Frontend Architect', contributionPercentage: 23 },
       { id: 'm11', name: 'Adithya Nair', username: 'adithya_n', avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80', role: 'Security & QA', contributionPercentage: 16 },

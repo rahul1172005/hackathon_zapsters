@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ParticipantSidebar } from '@/components/navigation/ParticipantSidebar';
 import { MOCK_TEAMS } from '@/lib/mockData';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import { TeamStatusBadge } from '@/components/shared/TeamStatusBadge';
 import { Plus, ArrowRight } from 'lucide-react';
 
@@ -53,15 +54,24 @@ export default function MyTeamsListPage() {
 
           {/* Team Member Badges — NO divider lines */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 font-inter text-xs pt-2">
-            {team.members.map((m) => (
-              <div key={m.id} className="p-4 bg-[#F7F7F5] rounded-2xl flex items-center gap-3">
-                <img src={m.avatar} alt={m.name} loading="lazy" decoding="async" className="w-9 h-9 rounded-full object-cover shadow-xs" />
-                <div>
-                  <div className="font-bold text-[#111111] text-xs font-geist">{m.name}</div>
-                  <div className="text-[11px] text-[#777777] font-inter">{m.role}</div>
+            {team.members.map((m) => {
+              const initial = m.name ? m.name.trim().charAt(0).toUpperCase() : 'U';
+              return (
+                <div key={m.id} className="p-4 bg-[#F7F7F5] dark:bg-neutral-900 rounded-2xl flex items-center gap-3">
+                  {m.avatar ? (
+                    <img src={m.avatar} alt={m.name || 'Member'} loading="lazy" decoding="async" className="w-9 h-9 rounded-full object-cover shadow-xs shrink-0" />
+                  ) : (
+                    <div className="w-9 h-9 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 select-none shadow-xs">
+                      {initial}
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <div className="font-bold text-[#111111] dark:text-white text-xs font-geist truncate">{m.name}</div>
+                    <div className="text-[11px] text-[#777777] dark:text-neutral-400 font-inter truncate">{m.role}</div>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </main>

@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ParticipantSidebar } from '@/components/navigation/ParticipantSidebar';
 import { MOCK_PARTICIPANT } from '@/lib/mockData';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import {
   ArrowLeft,
   CheckCircle2,
@@ -194,13 +195,19 @@ export default function DashboardRankingsPage() {
             {/* Left User Profile Summary & Directly Embedded Score Progress */}
             <div className="space-y-4 sm:space-y-5 max-w-xl">
               <div className="flex items-center gap-3">
-                <img
-                  src={participant.avatar}
-                  alt={participant.name}
-                  loading="eager"
-                  decoding="async"
-                  className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-[#800000] dark:border-red-500 shadow-xs"
-                />
+                {participant.avatar ? (
+                  <img
+                    src={participant.avatar}
+                    alt={participant.name || 'User'}
+                    loading="eager"
+                    decoding="async"
+                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-full object-cover border-2 border-[#800000] dark:border-red-500 shadow-xs shrink-0"
+                  />
+                ) : (
+                  <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-sm sm:text-base border-2 border-[#800000] dark:border-red-500 shadow-xs shrink-0 select-none">
+                    {participant.name ? participant.name.trim().charAt(0).toUpperCase() : 'U'}
+                  </div>
+                )}
                 <div>
                   <div className="font-geist font-bold text-sm sm:text-base text-[#111111] dark:text-white">{participant.name}</div>
                   <div className="text-xs text-[#777777] dark:text-neutral-400 font-mono">@{participant.githubHandle}</div>

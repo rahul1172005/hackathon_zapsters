@@ -23,7 +23,7 @@ export const PublicFooter: React.FC = () => {
   };
 
   return (
-    <footer className="w-full bg-white dark:bg-black text-[#111111] dark:text-white pt-12 pb-10 font-inter rounded-none border-t border-neutral-200 dark:border-neutral-800 mt-12 transition-colors">
+    <footer className="w-full bg-white dark:bg-black text-[#111111] dark:text-white pt-12 pb-10 font-inter rounded-none mt-12 transition-colors">
       <div className="max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 space-y-10">
 
         {/* Top CTA Banner inside Footer */}
@@ -182,7 +182,7 @@ export const PublicFooter: React.FC = () => {
           </div>
           <div className="flex items-center gap-6">
             <span className="inline-flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-[#800000] dark:bg-red-500 animate-pulse" />
               Infrastructure Operational
             </span>
           </div>

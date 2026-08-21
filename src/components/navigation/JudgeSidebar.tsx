@@ -146,7 +146,7 @@ export const JudgeSidebar: React.FC = () => {
               <span>STATUS:</span>
               <span className="text-[#800000] font-bold">OPERATIONAL</span>
             </div>
-            <div className="pt-2 border-t border-neutral-100 dark:border-neutral-800">
+            <div className="pt-2">
               <button
                 type="button"
                 onClick={() => setShowSignOutModal(true)}

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import { OrganizerSidebar } from '@/components/navigation/OrganizerSidebar';
 import { getJudges } from '@/lib/mockApi';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import { Judge } from '@/types';
 import { Plus } from 'lucide-react';
 
@@ -74,7 +75,13 @@ export default function JudgesManagementPage() {
                   return (
                     <tr key={j.id} className="hover:bg-[#F7F7F5] dark:hover:bg-neutral-900/50 transition-colors">
                       <td className="py-3.5 px-5 font-bold text-[#111111] dark:text-white flex items-center gap-3">
-                        <img src={j.avatar} alt={j.name} loading="lazy" decoding="async" className="w-8 h-8 rounded-full object-cover shrink-0" />
+                        {j.avatar ? (
+                          <img src={j.avatar} alt={j.name || 'Judge'} loading="lazy" decoding="async" className="w-8 h-8 rounded-full object-cover shrink-0" />
+                        ) : (
+                          <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 select-none shadow-xs">
+                            {j.name ? j.name.trim().charAt(0).toUpperCase() : 'J'}
+                          </div>
+                        )}
                         <div>
                           <div>{j.name}</div>
                           <div className="text-[10px] font-mono text-[#777777] dark:text-neutral-400">{j.email}</div>

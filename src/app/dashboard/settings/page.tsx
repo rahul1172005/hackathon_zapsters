@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { ParticipantSidebar } from '@/components/navigation/ParticipantSidebar';
 import { SignOutModal } from '@/components/modals/SignOutModal';
 import * as api from '@/lib/api';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import { GithubIcon } from '@/components/ui/Icons';
 import {
   Settings,
@@ -36,11 +37,11 @@ export default function DashboardSettingsPage() {
     avatar: string;
     handle: string;
   }>({
-    name: '',
+    name: 'Rahul Sharma',
     email: 'student@zapsters.dev',
     role: 'Participant',
-    avatar: '',
-    handle: '',
+    avatar: DEFAULT_AVATAR,
+    handle: 'rahul-ai-dev',
   });
 
   const [emailAlerts, setEmailAlerts] = useState(true);
@@ -55,7 +56,14 @@ export default function DashboardSettingsPage() {
         const storedUser = localStorage.getItem('zapsters_user');
         if (storedUser) {
           try {
-            setUser((prev) => ({ ...prev, ...JSON.parse(storedUser) }));
+            const parsed = JSON.parse(storedUser);
+            const av = typeof parsed.avatar === 'string' ? parsed.avatar : '';
+            const cleanAv = (av.includes('photo-1534528741775-53994a69daeb') || av.includes('unsplash.com/photo-1507003211169') || av.includes('unsplash.com/photo-1494790108377') || av.includes('unsplash.com/photo-1500648767791')) ? '' : av;
+            setUser((prev) => ({
+              ...prev,
+              ...parsed,
+              avatar: cleanAv,
+            }));
           } catch {
             // fallback to defaults
           }
@@ -63,13 +71,27 @@ export default function DashboardSettingsPage() {
       }
     }, 0);
     (async () => {
+      let savedAvatar: string | null = null;
+      if (typeof window !== 'undefined') {
+        const storedUser = localStorage.getItem('zapsters_user');
+        if (storedUser) {
+          try {
+            const parsed = JSON.parse(storedUser);
+            if (typeof parsed.avatar === 'string') {
+              const av = parsed.avatar;
+              savedAvatar = (av.includes('photo-1534528741775-53994a69daeb') || av.includes('unsplash.com/photo-1507003211169') || av.includes('unsplash.com/photo-1494790108377') || av.includes('unsplash.com/photo-1500648767791')) ? '' : av;
+            }
+          } catch {}
+        }
+      }
       const participant = await api.getParticipant();
       if (cancelled || !participant) return;
       setTitle(participant.title ?? '');
+      const apiAv = (participant.avatar && !participant.avatar.includes('photo-1534528741775-53994a69daeb')) ? participant.avatar : '';
       setUser((prev) => ({
         ...prev,
-        name: participant.name,
-        avatar: participant.avatar ?? prev.avatar,
+        name: participant.name || prev.name,
+        avatar: savedAvatar !== null ? savedAvatar : apiAv,
         handle: participant.githubHandle ?? prev.handle,
       }));
     })();
@@ -137,7 +159,7 @@ export default function DashboardSettingsPage() {
 
             {/* Section 1: Account Profile Summary */}
             <div className="bg-[#FFFFFF] dark:bg-[#141414] p-6 sm:p-8 space-y-6 rounded-3xl shadow-xs border border-[#E5E5E2] dark:border-neutral-800">
-              <div className="flex justify-between items-center pb-2 border-b border-neutral-100 dark:border-neutral-800">
+              <div className="flex justify-between items-center pb-1">
                 <h2 className="text-base font-geist font-bold text-[#111111] dark:text-white flex items-center gap-2">
                   <User className="w-4 h-4 text-[#800000]" /> Profile Accreditation
                 </h2>
@@ -150,18 +172,24 @@ export default function DashboardSettingsPage() {
               </div>
 
               <div className="flex flex-col sm:flex-row items-center gap-5 p-5 bg-[#F7F7F5] dark:bg-neutral-900/60 rounded-2xl border border-neutral-200 dark:border-neutral-800">
-                <img
-                  src={user.avatar}
-                  alt={user.name}
-                  className="w-16 h-16 rounded-full object-cover border-2 border-[#800000]/30 shadow-xs shrink-0"
-                />
+                {user.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name || 'User'}
+                    className="w-16 h-16 rounded-full object-cover border-2 border-[#800000]/30 shadow-xs shrink-0"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-[#800000] text-white font-geist font-bold text-2xl flex items-center justify-center shadow-xs border-2 border-[#800000]/30 shrink-0 select-none">
+                    {user.name?.trim().charAt(0)?.toUpperCase() || 'U'}
+                  </div>
+                )}
                 <div className="space-y-1 text-center sm:text-left min-w-0 flex-1">
                   <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2">
                     <h3 className="text-lg font-geist font-bold text-[#111111] dark:text-white">
                       {user.name}
                     </h3>
-                    <span className="text-[10px] font-mono font-bold text-[#800000] dark:text-red-400 bg-[#800000]/10 px-2.5 py-0.5 rounded-full uppercase">
-                      {user.role}
+                    <span className="text-[11px] font-mono font-bold text-[#800000] dark:text-red-400 uppercase">
+                      • {user.role}
                     </span>
                   </div>
                   <p className="text-xs text-[#777777] dark:text-neutral-400 font-mono">
@@ -176,7 +204,7 @@ export default function DashboardSettingsPage() {
 
             {/* Section 2: Security & Session Controls */}
             <div className="bg-[#FFFFFF] dark:bg-[#141414] p-6 sm:p-8 space-y-6 rounded-3xl shadow-xs border border-[#E5E5E2] dark:border-neutral-800">
-              <div className="pb-2 border-b border-neutral-100 dark:border-neutral-800">
+              <div className="pb-1">
                 <h2 className="text-base font-geist font-bold text-[#111111] dark:text-white flex items-center gap-2">
                   <Shield className="w-4 h-4 text-[#800000]" /> Active Session & Authentication
                 </h2>
@@ -186,13 +214,13 @@ export default function DashboardSettingsPage() {
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-4 bg-[#F7F7F5] dark:bg-neutral-900/60 rounded-2xl border border-neutral-200 dark:border-neutral-800">
                   <div className="space-y-0.5">
                     <div className="font-bold text-[#111111] dark:text-white flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Persistent Session Active
+                      <span className="w-2 h-2 rounded-full bg-[#800000] dark:bg-red-500 animate-pulse" /> Persistent Session Active
                     </div>
                     <div className="text-[#777777] dark:text-neutral-400 text-[11px]">
                       Your authentication state (`zapsters_auth`) stays signed in across app reloads.
                     </div>
                   </div>
-                  <span className="text-[10px] font-mono font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full uppercase self-start sm:self-center">
+                  <span className="text-[11px] font-mono font-bold text-[#800000] dark:text-red-400 uppercase self-start sm:self-center">
                     PERSISTENT SIGN-IN ACTIVE
                   </span>
                 </div>
@@ -224,7 +252,7 @@ export default function DashboardSettingsPage() {
                     <div className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-black rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs font-bold">
                       <GithubIcon className="w-4 h-4 text-[#111111] dark:text-white" />
                       <span>GitHub (@{user.handle})</span>
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 ml-1" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[#800000] dark:text-red-400 ml-1" />
                     </div>
                     <div className="flex items-center gap-2 px-3 py-2 bg-white dark:bg-black rounded-xl border border-neutral-200 dark:border-neutral-800 text-xs font-bold opacity-60">
                       <Shield className="w-4 h-4 text-blue-500" />
@@ -237,7 +265,7 @@ export default function DashboardSettingsPage() {
 
             {/* Section 3: Notification Toggles */}
             <div className="bg-[#FFFFFF] dark:bg-[#141414] p-6 sm:p-8 space-y-6 rounded-3xl shadow-xs border border-[#E5E5E2] dark:border-neutral-800">
-              <div className="pb-2 border-b border-neutral-100 dark:border-neutral-800">
+              <div className="pb-1">
                 <h2 className="text-base font-geist font-bold text-[#111111] dark:text-white flex items-center gap-2">
                   <Bell className="w-4 h-4 text-[#800000]" /> Communication & Alert Preferences
                 </h2>
@@ -289,7 +317,7 @@ export default function DashboardSettingsPage() {
                     onClick={handleSavePreferences}
                     className="px-6 py-2.5 bg-[#800000] hover:bg-[#660000] text-white text-xs font-bold rounded-full transition-colors shadow-xs flex items-center gap-1.5 cursor-pointer"
                   >
-                    {savedSuccess ? <Check className="w-4 h-4 text-emerald-400" /> : null}
+                    {savedSuccess ? <Check className="w-4 h-4 text-white" /> : null}
                     {savedSuccess ? 'Preferences Saved!' : 'Save Notification Rules'}
                   </button>
                 </div>
@@ -298,7 +326,7 @@ export default function DashboardSettingsPage() {
 
             {/* Section 4: Account Actions & Danger Zone */}
             <div className="bg-[#FFFFFF] dark:bg-[#141414] p-6 sm:p-8 space-y-6 rounded-3xl shadow-xs border border-red-500/20">
-              <div className="pb-2 border-b border-red-500/20">
+              <div className="pb-1">
                 <h2 className="text-base font-geist font-bold text-[#800000] dark:text-red-400 flex items-center gap-2">
                   <LogOut className="w-4 h-4" /> Account Session Actions
                 </h2>
@@ -332,7 +360,7 @@ export default function DashboardSettingsPage() {
 
             {/* Account Quick Status Card */}
             <div className="bg-[#FFFFFF] dark:bg-[#141414] p-6 space-y-5 rounded-3xl shadow-xs border border-[#E5E5E2] dark:border-neutral-800">
-              <div className="flex items-center gap-3 pb-3 border-b border-neutral-100 dark:border-neutral-800">
+              <div className="flex items-center gap-3 pb-1">
                 <div className="w-10 h-10 rounded-2xl bg-[#800000]/10 text-[#800000] flex items-center justify-center font-bold">
                   <Trophy className="w-5 h-5" />
                 </div>
@@ -362,7 +390,7 @@ export default function DashboardSettingsPage() {
 
             {/* Security Audit & Activity Log */}
             <div className="bg-[#FFFFFF] dark:bg-[#141414] p-6 space-y-5 rounded-3xl shadow-xs border border-[#E5E5E2] dark:border-neutral-800">
-              <div className="flex items-center gap-3 pb-3 border-b border-neutral-100 dark:border-neutral-800">
+              <div className="flex items-center gap-3 pb-1">
                 <div className="w-10 h-10 rounded-2xl bg-[#800000]/10 text-[#800000] flex items-center justify-center font-bold">
                   <Activity className="w-5 h-5" />
                 </div>
@@ -378,7 +406,7 @@ export default function DashboardSettingsPage() {
                     <span className="flex items-center gap-1.5">
                       <Smartphone className="w-3.5 h-3.5 text-[#800000]" /> Windows Web Desktop
                     </span>
-                    <span className="text-[10px] text-emerald-500 font-mono">Current</span>
+                    <span className="text-[10px] text-[#800000] dark:text-red-400 font-mono font-bold">Current</span>
                   </div>
                   <div className="text-[10px] text-[#777777] dark:text-neutral-400 font-mono">
                     IP: 127.0.0.1 • Session Token: `zapsters_auth`
@@ -405,32 +433,32 @@ export default function DashboardSettingsPage() {
               <div className="space-y-2 text-xs font-inter">
                 <Link
                   href="/dashboard/profile"
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#F7F7F5] dark:bg-neutral-900/60 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 transition-colors font-semibold"
+                  className="group flex items-center justify-between p-3 rounded-xl bg-[#F7F7F5] dark:bg-neutral-900/60 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 transition-colors font-semibold"
                 >
                   <span className="flex items-center gap-2">
                     <User className="w-4 h-4 text-[#800000]" /> Hacker Profile
                   </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#777777]" />
+                  <ExternalLink className="w-3.5 h-3.5 text-[#777777] dark:text-neutral-400 group-hover:text-[#111111] dark:group-hover:text-white transition-colors" />
                 </Link>
 
                 <Link
                   href="/my-teams"
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#F7F7F5] dark:bg-neutral-900/60 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 transition-colors font-semibold"
+                  className="group flex items-center justify-between p-3 rounded-xl bg-[#F7F7F5] dark:bg-neutral-900/60 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 transition-colors font-semibold"
                 >
                   <span className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-[#800000]" /> My Teams
                   </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#777777]" />
+                  <ExternalLink className="w-3.5 h-3.5 text-[#777777] dark:text-neutral-400 group-hover:text-[#111111] dark:group-hover:text-white transition-colors" />
                 </Link>
 
                 <Link
                   href="/dashboard/leaderboard"
-                  className="flex items-center justify-between p-3 rounded-xl bg-[#F7F7F5] dark:bg-neutral-900/60 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 transition-colors font-semibold"
+                  className="group flex items-center justify-between p-3 rounded-xl bg-[#F7F7F5] dark:bg-neutral-900/60 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 transition-colors font-semibold"
                 >
                   <span className="flex items-center gap-2">
                     <Trophy className="w-4 h-4 text-[#800000]" /> Global Leaderboard
                   </span>
-                  <ExternalLink className="w-3.5 h-3.5 text-[#777777]" />
+                  <ExternalLink className="w-3.5 h-3.5 text-[#777777] dark:text-neutral-400 group-hover:text-[#111111] dark:group-hover:text-white transition-colors" />
                 </Link>
               </div>
             </div>

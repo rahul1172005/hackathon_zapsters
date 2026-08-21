@@ -279,7 +279,7 @@ const MOCK_POOL: MockPoolMember[] = [
       username: 'dkim',
       name: 'David Kim',
       title: 'DevOps / Infra',
-      bio: 'CI/CD pipelines, edge deployments and keeping everything green. Cloud certifications collector.',
+      bio: 'CI/CD pipelines, edge deployments and automated reliability. Cloud certifications collector.',
       avatar: `${AV}1500648767791-00dcc994a43e?auto=format&fit=crop&w=250&q=80`,
       github_handle: 'david-kim',
       linkedin_url: 'https://linkedin.com/in/davidkim',

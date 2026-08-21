@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { PublicNavbar } from '@/components/navigation/PublicNavbar';
 import { PublicFooter } from '@/components/navigation/PublicFooter';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import { Search, Filter, ExternalLink } from 'lucide-react';
 
 const Github = ({ className = 'w-4 h-4' }: { className?: string }) => (
@@ -272,13 +273,19 @@ export default function BestProjectsExplorePage() {
                 </div>
 
                 {/* Footer: Author Profile & Links */}
-                <div className="pt-4 flex items-center justify-between border-t border-neutral-100 dark:border-neutral-800/80">
+                <div className="pt-3 flex items-center justify-between">
                   <div className="flex items-center gap-2.5">
-                    <img
-                      src={proj.authorAvatar}
-                      alt={proj.authorName}
-                      className="w-8 h-8 rounded-full object-cover border border-neutral-300 dark:border-neutral-700"
-                    />
+                    {proj.authorAvatar ? (
+                      <img
+                        src={proj.authorAvatar}
+                        alt={proj.authorName || 'Author'}
+                        className="w-8 h-8 rounded-full object-cover border border-neutral-300 dark:border-neutral-700 shrink-0"
+                      />
+                    ) : (
+                      <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 select-none shadow-xs">
+                        {proj.authorName ? proj.authorName.trim().charAt(0).toUpperCase() : 'U'}
+                      </div>
+                    )}
                     <div>
                       <div className="text-xs font-bold text-[#111111] dark:text-white leading-tight">{proj.authorName}</div>
                       <div className="text-[10px] text-neutral-500 dark:text-neutral-400 font-mono">{proj.authorHandle}</div>

@@ -17,13 +17,19 @@ export function MatchCard({ profile }: MatchCardProps) {
     <div className="bg-white dark:bg-[#141414] border border-neutral-200 dark:border-neutral-800 p-6 rounded-3xl shadow-xs flex flex-col gap-4 hover:border-[#800000]/50 dark:hover:border-[#800000]/50 transition-colors">
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3 min-w-0">
-          <img
-            src={user.avatar ?? DEFAULT_AVATAR}
-            alt={user.name}
-            loading="lazy"
-            decoding="async"
-            className="w-12 h-12 rounded-full object-cover border border-neutral-200 dark:border-neutral-700 shadow-xs shrink-0"
-          />
+          {user.avatar ? (
+            <img
+              src={user.avatar}
+              alt={user.name || 'User'}
+              loading="lazy"
+              decoding="async"
+              className="w-12 h-12 rounded-full object-cover border border-neutral-200 dark:border-neutral-700 shadow-xs shrink-0"
+            />
+          ) : (
+            <div className="w-12 h-12 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-lg shrink-0 select-none shadow-xs">
+              {user.name ? user.name.trim().charAt(0).toUpperCase() : 'U'}
+            </div>
+          )}
           <div className="min-w-0">
             <Link
               href={`/users/${user.username}`}
@@ -79,7 +85,7 @@ export function MatchCard({ profile }: MatchCardProps) {
         </div>
       )}
 
-      <div className="pt-3 flex items-center justify-between gap-2 border-t border-neutral-100 dark:border-neutral-800/80">
+      <div className="pt-2 flex items-center justify-between gap-2">
         <Link
           href={`/users/${user.username}`}
           className="text-xs text-[#800000] dark:text-red-400 font-bold hover:underline flex items-center gap-1"

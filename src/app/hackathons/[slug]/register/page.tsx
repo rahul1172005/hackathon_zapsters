@@ -177,7 +177,7 @@ export default function HackathonRegistrationPage() {
         {/* Success View Screen */}
         {isSuccess ? (
           <div className="bg-[#0D0D0E] border border-neutral-800/80 p-8 sm:p-12 rounded-3xl space-y-8 text-center max-w-2xl mx-auto shadow-xl animate-in fade-in duration-300">
-            <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mx-auto">
+            <div className="w-20 h-20 bg-[#800000]/20 text-[#800000] dark:text-red-400 rounded-full flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-12 h-12" />
             </div>
 
@@ -192,21 +192,21 @@ export default function HackathonRegistrationPage() {
 
             {/* Registration Receipt Specs */}
             <div className="bg-[#131315] border border-neutral-800 p-6 rounded-2xl text-left space-y-3 text-xs font-inter">
-              <div className="flex justify-between items-center pb-2">
+              <div className="flex justify-between items-center pb-1">
                 <span className="text-neutral-400">Team Leader</span>
                 <span className="font-bold text-white">{leaderName} ({leaderEmail})</span>
               </div>
-              <div className="flex justify-between items-center pb-2">
+              <div className="flex justify-between items-center pb-1">
                 <span className="text-neutral-400">Selected Track</span>
                 <span className="font-bold text-red-400">{selectedTrack || 'General Track'}</span>
               </div>
-              <div className="flex justify-between items-center pb-2">
+              <div className="flex justify-between items-center pb-1">
                 <span className="text-neutral-400">Team Roster</span>
                 <span className="font-bold text-white">{teamSize} Members Registered</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-neutral-400">Fee Status</span>
-                <span className="font-bold text-emerald-400 uppercase">
+                <span className="font-bold text-[#800000] dark:text-red-400 uppercase">
                   {finalTotal === 0 ? 'FREE / WAIVED' : `$${finalTotal}.00 PAID`}
                 </span>
               </div>
@@ -640,7 +640,7 @@ export default function HackathonRegistrationPage() {
 
                       {/* Discount feedback messages */}
                       {discountMessage && (
-                        <div className="mt-2 text-xs font-bold text-emerald-400 flex items-center gap-1.5">
+                        <div className="mt-2 text-xs font-bold text-[#800000] dark:text-red-400 flex items-center gap-1.5">
                           <Check className="w-4 h-4" /> {discountMessage}
                         </div>
                       )}
@@ -654,7 +654,7 @@ export default function HackathonRegistrationPage() {
                     {/* Final Calculations */}
                     <div className="pt-3 space-y-2 text-xs font-inter">
                       {discountApplied && (
-                        <div className="flex justify-between items-center text-emerald-400 font-bold">
+                        <div className="flex justify-between items-center text-[#800000] dark:text-red-400 font-bold">
                           <span>Discount Applied</span>
                           <span>-${discountAmount}.00 USD</span>
                         </div>
@@ -671,7 +671,7 @@ export default function HackathonRegistrationPage() {
 
                   {/* Payment Method Selector & Inputs (Hidden if Total is FREE) */}
                   {finalTotal === 0 ? (
-                    <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-400 text-xs font-bold flex items-center gap-3">
+                    <div className="p-4 bg-[#800000]/10 border border-[#800000]/30 rounded-2xl text-red-400 text-xs font-bold flex items-center gap-3">
                       <CheckCircle2 className="w-5 h-5 shrink-0" />
                       <span>Registration is 100% Free - No payment or credit card required.</span>
                     </div>

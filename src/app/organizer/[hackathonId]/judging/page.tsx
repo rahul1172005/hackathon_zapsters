@@ -5,6 +5,7 @@ import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { OrganizerSidebar } from '@/components/navigation/OrganizerSidebar';
 import { getTeams, getJudges } from '@/lib/mockApi';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import { Team, Judge } from '@/types';
 import { Shield } from 'lucide-react';
 
@@ -45,7 +46,13 @@ export default function OrganizerJudgingPage() {
 
           {judge && (
             <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-4 rounded-2xl flex items-center gap-3.5 text-xs shadow-xs self-start sm:self-auto">
-              <img src={judge.avatar} alt={judge.name} loading="lazy" decoding="async" className="w-10 h-10 rounded-full object-cover shrink-0" />
+              {judge.avatar ? (
+                <img src={judge.avatar} alt={judge.name || 'Judge'} loading="lazy" decoding="async" className="w-10 h-10 rounded-full object-cover shrink-0" />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-sm shrink-0 select-none shadow-xs">
+                  {judge.name ? judge.name.trim().charAt(0).toUpperCase() : 'J'}
+                </div>
+              )}
               <div>
                 <div className="font-bold text-[#111111] dark:text-white font-geist text-sm">{judge.name}</div>
                 <div className="text-xs text-[#777777] dark:text-neutral-400 font-inter">{judge.organization} • {judge.role}</div>

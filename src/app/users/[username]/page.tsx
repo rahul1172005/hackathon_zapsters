@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { PublicNavbar } from '@/components/navigation/PublicNavbar';
 import { PublicFooter } from '@/components/navigation/PublicFooter';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import { MOCK_PARTICIPANT } from '@/lib/mockData';
 import { GithubIcon, LinkedinIcon } from '@/components/ui/Icons';
 import { ExternalLink } from 'lucide-react';
@@ -16,17 +17,23 @@ export default function UserPublicProfilePage() {
       <PublicNavbar />
 
       {/* Header — NO divider lines */}
-      <section className="bg-[#FFFFFF] dark:bg-[#141414] py-12 shadow-xs border-b border-transparent dark:border-neutral-800">
+      <section className="bg-[#FFFFFF] dark:bg-[#141414] py-12 shadow-xs">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div className="flex items-start gap-5">
-              <img
-                src={p.avatar}
-                alt={p.name}
-                loading="eager"
-                decoding="async"
-                className="w-20 h-20 rounded-full object-cover shadow-sm border border-[#800000]/20"
-              />
+              {p.avatar ? (
+                <img
+                  src={p.avatar}
+                  alt={p.name}
+                  loading="eager"
+                  decoding="async"
+                  className="w-20 h-20 rounded-full object-cover shadow-sm border border-[#800000]/20 shrink-0"
+                />
+              ) : (
+                <div className="w-20 h-20 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-3xl shrink-0 select-none shadow-sm border border-[#800000]/20">
+                  {p.name ? p.name.trim().charAt(0).toUpperCase() : 'U'}
+                </div>
+              )}
               <div className="space-y-1">
                 <h1 className="text-4xl font-geist font-bold text-[#111111] dark:text-white">{p.name}</h1>
                 <p className="font-inter text-sm text-[#777777] dark:text-neutral-400 font-semibold">{p.title}</p>

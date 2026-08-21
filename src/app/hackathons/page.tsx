@@ -362,26 +362,18 @@ export default function PublicHackathonsPage() {
               {/* User Avatars stack preview */}
               <div className="flex items-center gap-3 pt-4">
                 <div className="flex -space-x-2">
-                  <img
-                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"
-                    alt="User"
-                    className="w-8 h-8 rounded-full border-2 border-white dark:border-black object-cover"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"
-                    alt="User"
-                    className="w-8 h-8 rounded-full border-2 border-white dark:border-black object-cover"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80"
-                    alt="User"
-                    className="w-8 h-8 rounded-full border-2 border-white dark:border-black object-cover"
-                  />
-                  <img
-                    src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"
-                    alt="User"
-                    className="w-8 h-8 rounded-full border-2 border-white dark:border-black object-cover"
-                  />
+                  <div className="w-8 h-8 rounded-full border-2 border-white dark:border-black bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shadow-xs">
+                    R
+                  </div>
+                  <div className="w-8 h-8 rounded-full border-2 border-white dark:border-black bg-neutral-800 text-white flex items-center justify-center font-geist font-bold text-xs shadow-xs">
+                    A
+                  </div>
+                  <div className="w-8 h-8 rounded-full border-2 border-white dark:border-black bg-[#660000] text-white flex items-center justify-center font-geist font-bold text-xs shadow-xs">
+                    S
+                  </div>
+                  <div className="w-8 h-8 rounded-full border-2 border-white dark:border-black bg-neutral-900 text-white flex items-center justify-center font-geist font-bold text-xs shadow-xs">
+                    K
+                  </div>
                 </div>
                 <span className="text-xs text-[#777777] dark:text-neutral-400 font-bold font-inter">
                   + 49,990 Registered Hackers

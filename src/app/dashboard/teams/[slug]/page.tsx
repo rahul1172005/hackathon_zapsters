@@ -6,6 +6,7 @@ import { ParticipantSidebar } from '@/components/navigation/ParticipantSidebar';
 import { TeamStatusBadge } from '@/components/shared/TeamStatusBadge';
 import { ActivityIndicator } from '@/components/shared/ActivityIndicator';
 import { getTeamBySlug } from '@/lib/mockApi';
+import { DEFAULT_AVATAR } from '@/lib/auth/roles';
 import { Team } from '@/types';
 import { GithubIcon } from '@/components/ui/Icons';
 import { Globe, ArrowLeft, Users, TrendingUp } from 'lucide-react';
@@ -143,10 +144,16 @@ export default function DashboardTeamDetailsPage() {
             {team.members.map((m) => (
               <div key={m.id} className="p-5 bg-[#F7F7F5] rounded-2xl space-y-2">
                 <div className="flex items-center gap-3">
-                  <img src={m.avatar} alt={m.name} loading="lazy" decoding="async" className="w-10 h-10 rounded-full object-cover shadow-xs" />
-                  <div>
-                    <div className="font-bold text-[#111111] text-xs font-geist">{m.name}</div>
-                    <div className="text-[11px] text-[#777777]">{m.role}</div>
+                  {m.avatar ? (
+                    <img src={m.avatar} alt={m.name || 'Member'} loading="lazy" decoding="async" className="w-10 h-10 rounded-full object-cover shadow-xs shrink-0" />
+                  ) : (
+                    <div className="w-10 h-10 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-sm shrink-0 select-none shadow-xs">
+                      {m.name ? m.name.trim().charAt(0).toUpperCase() : 'U'}
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <div className="font-bold text-[#111111] text-xs font-geist truncate">{m.name}</div>
+                    <div className="text-[11px] text-[#777777] truncate">{m.role}</div>
                   </div>
                 </div>
               </div>

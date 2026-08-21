@@ -192,7 +192,7 @@ export const LiveLeaderboardTable: React.FC<LiveLeaderboardTableProps> = ({
                   </td>
 
                   {/* Arrow Link */}
-                  <td className="py-4 px-5 text-center text-[#999999] group-hover:text-[#111111] rounded-r-2xl">
+                  <td className="py-4 px-5 text-center text-[#999999] dark:text-neutral-500 group-hover:text-[#111111] dark:group-hover:text-white transition-colors rounded-r-2xl">
                     <ExternalLink className="w-4 h-4" />
                   </td>
                 </tr>

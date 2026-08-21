@@ -84,26 +84,33 @@ export default function DedicatedSubmissionFlowPage() {
         ) : (
           <div className="bg-[#FFFFFF] dark:bg-[#141414] border border-[#E5E5E2] dark:border-neutral-800 p-6 space-y-6 rounded-3xl shadow-xs font-inter">
             {step === 1 && (
-              <div className="space-y-4 text-xs font-inter">
+              <div className="space-y-6 text-xs font-inter">
                 <h2 className="text-lg font-geist font-bold text-[#111111] dark:text-white">Project Specifications</h2>
-                <div className="space-y-1.5">
-                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400">PROJECT TITLE</label>
+                
+                <div className="space-y-2">
+                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400 uppercase tracking-wider block mb-2">
+                    PROJECT TITLE
+                  </label>
                   <input
                     type="text"
                     value={projectName}
                     onChange={(e) => setProjectName(e.target.value)}
-                    className="w-full p-3 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-full outline-none font-inter focus:border-[#800000]"
+                    className="w-full p-3.5 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-full outline-none font-inter focus:border-[#800000]"
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400">DESCRIPTION</label>
+
+                <div className="space-y-2 pt-1">
+                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400 uppercase tracking-wider block mb-2.5">
+                    DESCRIPTION
+                  </label>
                   <textarea
                     rows={4}
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
-                    className="w-full p-3 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-2xl outline-none font-inter focus:border-[#800000]"
+                    className="w-full p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-2xl outline-none font-inter focus:border-[#800000] leading-relaxed"
                   />
                 </div>
+
                 <button
                   onClick={() => setStep(2)}
                   className="px-6 py-2.5 bg-[#800000] hover:bg-[#660000] text-white text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center gap-2 shadow-xs cursor-pointer"
@@ -114,24 +121,30 @@ export default function DedicatedSubmissionFlowPage() {
             )}
 
             {step === 2 && (
-              <div className="space-y-4 text-xs font-inter">
+              <div className="space-y-6 text-xs font-inter">
                 <h2 className="text-lg font-geist font-bold text-[#111111] dark:text-white">Deliverable Links</h2>
-                <div className="space-y-1.5">
-                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400">GITHUB REPOSITORY URL</label>
+                
+                <div className="space-y-2">
+                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400 uppercase tracking-wider block mb-2">
+                    GITHUB REPOSITORY URL
+                  </label>
                   <input
                     type="url"
                     value={repoUrl}
                     onChange={(e) => setRepoUrl(e.target.value)}
-                    className="w-full p-3 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-full outline-none font-inter focus:border-[#800000]"
+                    className="w-full p-3.5 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-full outline-none font-inter focus:border-[#800000]"
                   />
                 </div>
-                <div className="space-y-1.5">
-                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400">LIVE DEMO URL</label>
+
+                <div className="space-y-2 pt-1">
+                  <label className="font-inter text-xs font-bold text-[#777777] dark:text-neutral-400 uppercase tracking-wider block mb-2">
+                    LIVE DEMO URL
+                  </label>
                   <input
                     type="url"
                     value={demoUrl}
                     onChange={(e) => setDemoUrl(e.target.value)}
-                    className="w-full p-3 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-full outline-none font-inter focus:border-[#800000]"
+                    className="w-full p-3.5 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 text-[#111111] dark:text-white text-xs rounded-full outline-none font-inter focus:border-[#800000]"
                   />
                 </div>
                 {errorMsg && (

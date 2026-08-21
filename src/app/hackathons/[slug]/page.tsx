@@ -67,7 +67,7 @@ export default function HackathonDetailPage() {
       />
 
       {/* Main Hackathon Header Section */}
-      <section className="bg-white dark:bg-[#0D0D0D] py-12 shadow-xs border-b border-neutral-200 dark:border-neutral-800">
+      <section className="bg-white dark:bg-[#0D0D0D] py-12 shadow-xs">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
           
           <div className="flex items-center gap-2 font-inter text-xs text-[#777777]">

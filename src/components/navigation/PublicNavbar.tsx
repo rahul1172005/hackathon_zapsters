@@ -34,13 +34,18 @@ export const PublicNavbar: React.FC = () => {
         const storedUser = localStorage.getItem('zapsters_user');
         if (storedUser) {
           try {
-            setUser(JSON.parse(storedUser));
+            const parsed = JSON.parse(storedUser);
+            if (parsed.avatar && (parsed.avatar.includes('photo-1534528741775-53994a69daeb') || parsed.avatar.includes('unsplash.com/photo-1507003211169') || parsed.avatar.includes('unsplash.com/photo-1494790108377') || parsed.avatar.includes('unsplash.com/photo-1500648767791'))) {
+              parsed.avatar = '';
+              localStorage.setItem('zapsters_user', JSON.stringify(parsed));
+            }
+            setUser(parsed);
           } catch {
             setUser({
               name: 'Rahul Sharma',
               email: 'student@zapsters.dev',
               role: 'Participant',
-              avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',
+              avatar: '',
             });
           }
         } else {
@@ -48,7 +53,7 @@ export const PublicNavbar: React.FC = () => {
             name: 'Rahul Sharma',
             email: 'student@zapsters.dev',
             role: 'Participant',
-            avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80',
+            avatar: '',
           });
         }
       } else {
@@ -109,7 +114,7 @@ export const PublicNavbar: React.FC = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-black/90 backdrop-blur-md font-inter border-b border-neutral-200 dark:border-neutral-800 transition-colors">
+    <header className="sticky top-0 z-50 w-full bg-[#F9F9F8] dark:bg-black font-inter transition-colors">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between relative">
 
         {/* Left: Brand Logo */}
@@ -151,11 +156,17 @@ export const PublicNavbar: React.FC = () => {
                 onClick={() => setShowUserDropdown(!showUserDropdown)}
                 className="flex items-center gap-2.5 bg-[#F7F7F5] dark:bg-neutral-900 hover:bg-[#E5E5E2] dark:hover:bg-neutral-800 border border-neutral-200 dark:border-neutral-800 px-3 py-1.5 rounded-full transition-colors cursor-pointer"
               >
-                <img
-                  src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80'}
-                  alt={user?.name || 'User Profile'}
-                  className="w-7 h-7 rounded-full object-cover border border-[#800000]/20"
-                />
+                {user?.avatar ? (
+                  <img
+                    src={user.avatar}
+                    alt={user.name || 'User Profile'}
+                    className="w-7 h-7 rounded-full object-cover border border-[#800000]/20"
+                  />
+                ) : (
+                  <div className="w-7 h-7 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shrink-0 select-none">
+                    {user?.name ? user.name.trim().charAt(0).toUpperCase() : 'R'}
+                  </div>
+                )}
                 <span className="hidden sm:inline text-xs font-bold text-[#111111] dark:text-white truncate max-w-[120px]">
                   {user?.name || 'Rahul Sharma'}
                 </span>
@@ -167,11 +178,17 @@ export const PublicNavbar: React.FC = () => {
                 <div className="absolute right-0 mt-2 w-64 bg-white dark:bg-[#141414] border border-neutral-200 dark:border-neutral-800 rounded-3xl shadow-xl py-3 px-3 space-y-2 z-50 font-inter animate-in fade-in duration-150">
                   {/* User Profile Header */}
                   <div className="p-3 bg-[#F7F7F5] dark:bg-neutral-900/80 rounded-2xl flex items-center gap-3">
-                    <img
-                      src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80'}
-                      alt={user?.name || 'User'}
-                      className="w-10 h-10 rounded-full object-cover border border-[#800000]/30 shrink-0"
-                    />
+                    {user?.avatar ? (
+                      <img
+                        src={user.avatar}
+                        alt={user.name || 'User'}
+                        className="w-10 h-10 rounded-full object-cover border border-[#800000]/30 shrink-0"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-base shrink-0 select-none">
+                        {user?.name ? user.name.trim().charAt(0).toUpperCase() : 'R'}
+                      </div>
+                    )}
                     <div className="min-w-0 flex-1">
                       <div className="font-geist font-bold text-xs text-[#111111] dark:text-white truncate">
                         {user?.name || 'Rahul Sharma'}
@@ -179,8 +196,8 @@ export const PublicNavbar: React.FC = () => {
                       <div className="text-[10px] text-[#777777] dark:text-neutral-400 truncate">
                         {user?.email || 'student@zapsters.dev'}
                       </div>
-                      <span className="inline-block mt-1 text-[9px] font-bold text-[#800000] dark:text-red-400 bg-[#800000]/10 px-2 py-0.5 rounded-full uppercase">
-                        {user?.role || 'Participant'}
+                      <span className="inline-block mt-0.5 text-[10px] font-mono font-bold text-[#800000] dark:text-red-400 uppercase">
+                        • {user?.role || 'Participant'}
                       </span>
                     </div>
                   </div>
@@ -271,14 +288,20 @@ export const PublicNavbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="md:hidden absolute top-16 left-0 right-0 z-50 bg-white dark:bg-black shadow-xl px-4 py-5 space-y-3 font-inter rounded-b-3xl border-b border-neutral-200 dark:border-neutral-800">
+        <div className="md:hidden absolute top-16 left-0 right-0 z-50 bg-[#F9F9F8] dark:bg-black shadow-xl px-4 py-5 space-y-3 font-inter rounded-b-3xl border-b border-neutral-200 dark:border-neutral-800">
           {isLoggedIn && (
             <div className="p-3 bg-[#F7F7F5] dark:bg-neutral-900 rounded-2xl flex items-center gap-3 mb-2">
-              <img
-                src={user?.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=250&q=80'}
-                alt={user?.name || 'User'}
-                className="w-10 h-10 rounded-full object-cover border border-[#800000]/30 shrink-0"
-              />
+              {user?.avatar ? (
+                <img
+                  src={user.avatar}
+                  alt={user.name || 'User'}
+                  className="w-10 h-10 rounded-full object-cover border border-[#800000]/30 shrink-0"
+                />
+              ) : (
+                <div className="w-10 h-10 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-base shrink-0 select-none">
+                  {user?.name ? user.name.trim().charAt(0).toUpperCase() : 'R'}
+                </div>
+              )}
               <div className="min-w-0 flex-1">
                 <div className="font-geist font-bold text-xs text-[#111111] dark:text-white truncate">
                   {user?.name || 'Rahul Sharma'}

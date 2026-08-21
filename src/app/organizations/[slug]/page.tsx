@@ -13,7 +13,7 @@ export default function OrganizationProfilePage() {
     <div className="min-h-screen bg-[#F7F7F5] dark:bg-black text-[#111111] dark:text-white flex flex-col font-inter transition-colors duration-200">
       <PublicNavbar />
 
-      <section className="bg-[#FFFFFF] dark:bg-[#141414] py-10 shadow-xs border-b border-transparent dark:border-neutral-800">
+      <section className="bg-[#FFFFFF] dark:bg-[#141414] py-10 shadow-xs">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-base rounded-full shadow-xs">

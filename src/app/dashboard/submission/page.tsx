@@ -78,83 +78,89 @@ export default function ProjectSubmissionPage() {
               </h2>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-xs font-inter">
-              <div className="space-y-1.5">
-                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 uppercase block">PROJECT NAME</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs font-inter">
+              <div className="space-y-2">
+                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 uppercase block mb-2">
+                  PROJECT NAME
+                </label>
                 <input
                   type="text"
                   value={projectName}
                   onChange={(e) => setProjectName(e.target.value)}
-                  className="w-full py-2.5 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] text-xs rounded-full outline-none text-[#111111] dark:text-white font-medium"
+                  className="w-full py-3 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] text-xs rounded-full outline-none text-[#111111] dark:text-white font-medium"
                   required
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 uppercase block">TAGLINE</label>
+              <div className="space-y-2">
+                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 uppercase block mb-2">
+                  TAGLINE
+                </label>
                 <input
                   type="text"
                   value={tagline}
                   onChange={(e) => setTagline(e.target.value)}
-                  className="w-full py-2.5 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] text-xs rounded-full outline-none text-[#111111] dark:text-white font-medium"
+                  className="w-full py-3 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] text-xs rounded-full outline-none text-[#111111] dark:text-white font-medium"
                   required
                 />
               </div>
 
-              <div className="md:col-span-2 space-y-1.5">
-                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 uppercase block">FULL PROJECT DESCRIPTION</label>
+              <div className="md:col-span-2 space-y-2 pt-1">
+                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 uppercase block mb-2.5">
+                  FULL PROJECT DESCRIPTION
+                </label>
                 <textarea
                   rows={4}
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] text-xs rounded-2xl outline-none text-[#111111] dark:text-white"
+                  className="w-full p-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] text-xs rounded-2xl outline-none text-[#111111] dark:text-white leading-relaxed"
                   required
                 />
               </div>
             </div>
 
             {/* Step 2 Header — NO divided lines */}
-            <div className="pt-2">
+            <div className="pt-3">
               <h2 className="text-xs font-mono font-bold uppercase tracking-widest text-[#800000]">
                 STEP 2: DELIVERABLES & REPOSITORY LINKS
               </h2>
             </div>
 
-            <div className="space-y-4 text-xs font-inter">
-              <div className="space-y-1.5">
-                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 flex items-center gap-1.5">
+            <div className="space-y-5 text-xs font-inter">
+              <div className="space-y-2">
+                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 flex items-center gap-1.5 mb-2">
                   <GithubIcon className="w-3.5 h-3.5 text-[#800000]" /> GITHUB REPOSITORY URL (REQUIRED)
                 </label>
                 <input
                   type="url"
                   value={repoUrl}
                   onChange={(e) => setRepoUrl(e.target.value)}
-                  className="w-full py-2.5 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] font-mono text-xs rounded-full outline-none text-[#111111] dark:text-white"
+                  className="w-full py-3 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] font-mono text-xs rounded-full outline-none text-[#111111] dark:text-white"
                   required
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 flex items-center gap-1.5">
+              <div className="space-y-2">
+                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 flex items-center gap-1.5 mb-2">
                   <Globe className="w-3.5 h-3.5 text-[#800000]" /> LIVE DEMO / DEPLOYMENT URL
                 </label>
                 <input
                   type="url"
                   value={demoUrl}
                   onChange={(e) => setDemoUrl(e.target.value)}
-                  className="w-full py-2.5 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] font-mono text-xs rounded-full outline-none text-[#111111] dark:text-white"
+                  className="w-full py-3 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] font-mono text-xs rounded-full outline-none text-[#111111] dark:text-white"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 flex items-center gap-1.5">
+              <div className="space-y-2">
+                <label className="font-mono text-[10px] font-bold text-[#777777] dark:text-neutral-400 flex items-center gap-1.5 mb-2">
                   <FileText className="w-3.5 h-3.5 text-[#800000]" /> PRESENTATION PITCH DECK URL
                 </label>
                 <input
                   type="url"
                   value={presentationUrl}
                   onChange={(e) => setPresentationUrl(e.target.value)}
-                  className="w-full py-2.5 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] font-mono text-xs rounded-full outline-none text-[#111111] dark:text-white"
+                  className="w-full py-3 px-4 bg-[#F7F7F5] dark:bg-neutral-900 border border-[#E5E5E2] dark:border-neutral-800 focus:border-[#800000] font-mono text-xs rounded-full outline-none text-[#111111] dark:text-white"
                 />
               </div>
             </div>
