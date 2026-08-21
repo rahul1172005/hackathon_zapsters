@@ -46,7 +46,7 @@ export default function MyTeamsListPage() {
             
             <Link
               href={`/my-teams/${team.id}/overview`}
-              className="px-5 py-2.5 bg-[#111111] dark:bg-white hover:bg-[#222222] dark:hover:bg-neutral-200 text-white dark:text-[#111111] text-xs font-inter font-bold uppercase rounded-full transition-colors flex items-center justify-center gap-2 shadow-xs w-full sm:w-auto"
+              className="px-5 py-2.5 bg-[#111111] dark:bg-white hover:bg-[#222222] dark:hover:bg-neutral-200 text-white dark:text-[#111111] text-xs font-inter font-bold uppercase rounded-full transition-all flex items-center justify-center gap-2 shadow-xs w-full sm:w-auto outline-none focus:outline-none focus:ring-0 select-none active:scale-[0.98]"
             >
               Open Team Workspace <ArrowRight className="w-4 h-4" />
             </Link>

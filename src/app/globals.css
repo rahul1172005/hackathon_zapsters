@@ -37,6 +37,21 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
   transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+/* Reset mobile click tap highlight and blue focus border */
+*, *::before, *::after {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+button, a, input, select, textarea, [role="button"] {
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none;
+}
+
+button:focus, a:focus, button:focus-visible, a:focus-visible {
+  outline: none !important;
 }
 
 /* Dark Mode Base Styles */
