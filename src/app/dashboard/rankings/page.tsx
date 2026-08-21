@@ -171,12 +171,12 @@ export default function DashboardRankingsPage() {
   const progressPercent = Math.min(100, Math.round((currentScore / targetScore) * 100));
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-white flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-white flex flex-col lg:flex-row font-inter">
       {/* Navigation Sidebar anchored on the left */}
       <ParticipantSidebar />
 
       {/* Main Workspace Body */}
-      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8 overflow-y-auto pb-28 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 sm:space-y-8 overflow-y-auto pb-28 lg:pb-8 w-full max-w-full min-w-0">
         
         {/* Top Navigation Back Link */}
         <div>

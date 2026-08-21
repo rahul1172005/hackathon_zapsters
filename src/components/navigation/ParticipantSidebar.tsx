@@ -18,6 +18,8 @@ import {
   Layers,
   Settings,
   LogOut,
+  Menu,
+  X,
 } from 'lucide-react';
 
 export const ParticipantSidebar: React.FC = () => {
@@ -25,6 +27,7 @@ export const ParticipantSidebar: React.FC = () => {
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [showSignOutModal, setShowSignOutModal] = useState(false);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [userName, setUserName] = useState('Rahul Sharma');
   const [userAvatar, setUserAvatar] = useState<string>('');
 
@@ -85,21 +88,33 @@ export const ParticipantSidebar: React.FC = () => {
       window.dispatchEvent(new Event('storage'));
     }
     setShowSignOutModal(false);
+    setMobileDrawerOpen(false);
     router.push('/');
   };
 
   return (
     <>
       {/* ===================== MOBILE TOP HEADER BAR ===================== */}
-      <header className="lg:hidden sticky top-0 z-40 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-md px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between font-inter transition-colors">
-        <Link href="/dashboard" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shadow-xs">
-            Z
-          </div>
-          <span className="font-geist font-bold text-sm text-[#111111] dark:text-white tracking-tight">
-            Dashboard
-          </span>
-        </Link>
+      <header className="lg:hidden sticky top-0 z-40 bg-[#F7F7F5]/95 dark:bg-[#0A0A0A]/95 backdrop-blur-md px-4 py-3 flex items-center justify-between font-inter transition-colors w-full border-b border-transparent dark:border-neutral-900">
+        <div className="flex items-center gap-2.5">
+          <button
+            type="button"
+            onClick={() => setMobileDrawerOpen(true)}
+            aria-label="Open navigation menu"
+            className="w-9 h-9 flex items-center justify-center rounded-xl bg-white dark:bg-[#141414] text-[#111111] dark:text-white shadow-xs cursor-pointer border border-[#E5E5E2] dark:border-neutral-800"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+          
+          <Link href="/dashboard" className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-xs shadow-xs">
+              Z
+            </div>
+            <span className="font-geist font-bold text-sm text-[#111111] dark:text-white tracking-tight">
+              Dashboard
+            </span>
+          </Link>
+        </div>
 
         <div className="flex items-center gap-2.5">
           <ThemeToggle />
@@ -115,6 +130,92 @@ export const ParticipantSidebar: React.FC = () => {
           </Link>
         </div>
       </header>
+
+      {/* ===================== MOBILE FULL NAVIGATION DRAWER ===================== */}
+      {mobileDrawerOpen && (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          {/* Backdrop */}
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm transition-opacity"
+            onClick={() => setMobileDrawerOpen(false)}
+          />
+
+          {/* Drawer Content */}
+          <div className="fixed top-0 bottom-0 left-0 w-4/5 max-w-xs bg-[#FFFFFF] dark:bg-[#141414] p-5 flex flex-col justify-between z-10 shadow-2xl animate-in slide-in-from-left duration-200">
+            <div className="space-y-5 overflow-y-auto">
+              {/* Header inside drawer */}
+              <div className="flex items-center justify-between pb-3 border-b border-neutral-100 dark:border-neutral-800">
+                <div className="flex items-center gap-3 min-w-0">
+                  <div className="w-10 h-10 rounded-full bg-[#800000] text-white flex items-center justify-center font-geist font-bold text-base shrink-0 overflow-hidden shadow-xs">
+                    {userAvatar ? (
+                      <img src={userAvatar} alt={userName} className="w-full h-full object-cover" />
+                    ) : (
+                      firstLetter
+                    )}
+                  </div>
+                  <div className="min-w-0">
+                    <h2 className="text-sm font-geist font-bold text-[#111111] dark:text-white truncate">{userName}</h2>
+                    <span className="text-[10px] font-mono text-[#800000] dark:text-red-400 font-bold uppercase">Hacker Workspace</span>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setMobileDrawerOpen(false)}
+                  className="w-8 h-8 rounded-full bg-[#F7F7F5] dark:bg-neutral-900 text-[#777777] hover:text-[#111111] dark:hover:text-white flex items-center justify-center cursor-pointer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+
+              {/* Public Home Link */}
+              <Link
+                href="/"
+                onClick={() => setMobileDrawerOpen(false)}
+                className="flex items-center gap-2.5 px-3.5 py-2.5 text-xs text-[#777777] dark:text-neutral-400 hover:text-[#111111] dark:hover:text-white font-inter font-semibold transition-colors bg-[#F7F7F5] dark:bg-neutral-900 rounded-xl"
+              >
+                <ArrowLeft className="w-4 h-4 text-[#800000]" /> Back to Public Home
+              </Link>
+
+              {/* All Navigation Links */}
+              <nav className="space-y-1.5 pt-1">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href;
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.label}
+                      href={item.href}
+                      onClick={() => setMobileDrawerOpen(false)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-xs font-inter transition-all ${
+                        isActive
+                          ? 'bg-[#800000] text-white font-bold shadow-xs'
+                          : 'text-[#777777] dark:text-neutral-400 hover:text-[#111111] dark:hover:text-white hover:bg-[#F7F7F5] dark:hover:bg-neutral-900'
+                      }`}
+                    >
+                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? 'text-white' : 'text-[#800000] dark:text-red-400'}`} />
+                      <span className="truncate">{item.label}</span>
+                    </Link>
+                  );
+                })}
+              </nav>
+            </div>
+
+            {/* Footer Sign Out */}
+            <div className="pt-4 border-t border-neutral-100 dark:border-neutral-800">
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileDrawerOpen(false);
+                  setShowSignOutModal(true);
+                }}
+                className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-red-500/10 hover:bg-red-500/20 text-[#800000] dark:text-red-400 rounded-2xl font-bold transition-colors cursor-pointer text-xs"
+              >
+                <LogOut className="w-4 h-4" /> Sign Out
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* ===================== DESKTOP SIDEBAR ===================== */}
       <aside

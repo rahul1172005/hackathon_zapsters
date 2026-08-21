@@ -85,7 +85,7 @@ export default function DashboardProfileWorkspacePage() {
 
   if (!participant) {
     return (
-      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-white flex font-inter">
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-white flex flex-col lg:flex-row font-inter">
         <ParticipantSidebar />
         <main className="flex-1 p-12 flex items-center justify-center text-xs font-inter text-[#777777]">
           Loading Profile...
@@ -209,12 +209,12 @@ export default function DashboardProfileWorkspacePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-white flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] text-[#111111] dark:text-white flex flex-col lg:flex-row font-inter">
       {/* Sidebar stays fixed/anchored on the left */}
       <ParticipantSidebar />
 
       {/* Main Profile View inside the Workspace */}
-      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8 w-full max-w-full min-w-0">
 
         {/* Header Profile Summary Card */}
         <div className="bg-[#FFFFFF] dark:bg-[#141414] p-5 sm:p-8 space-y-6 rounded-3xl shadow-xs border border-transparent dark:border-neutral-800">

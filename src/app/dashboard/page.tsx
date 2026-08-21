@@ -38,7 +38,7 @@ export default function HackerDashboardPage() {
 
   if (!activeHackathon || !myTeam || leaderboardTeams.length === 0) {
     return (
-      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
         <ParticipantSidebar />
         <div className="flex-1 flex items-center justify-center p-12 text-xs font-inter text-[#777777]">
           Loading Dashboard...
@@ -48,11 +48,11 @@ export default function HackerDashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
       <ParticipantSidebar />
 
       {/* Main Content Area */}
-      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 md:space-y-8 overflow-y-auto pb-28 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 md:space-y-8 overflow-y-auto pb-28 lg:pb-8 w-full max-w-full min-w-0">
         
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1">
@@ -188,8 +188,8 @@ export default function HackerDashboardPage() {
         {/* Competition Intelligence (Live Leaderboard Table inside Dashboard) */}
         <div className="space-y-4 pt-4">
           <div>
-            <h2 className="text-2xl font-geist font-bold text-[#111111]">Competition Intelligence</h2>
-            <p className="text-xs text-[#777777] font-inter mt-0.5">Dynamic rankings updated live via judge rubric scores and code activity.</p>
+            <h2 className="text-2xl font-geist font-bold text-[#111111] dark:text-white">Competition Intelligence</h2>
+            <p className="text-xs text-[#777777] dark:text-neutral-400 font-inter mt-0.5">Dynamic rankings updated live via judge rubric scores and code activity.</p>
           </div>
 
           <LiveLeaderboardTable teams={leaderboardTeams} isCompact={false} />

@@ -105,7 +105,7 @@ export const OrganizerSidebar: React.FC<OrganizerSidebarProps> = ({
   return (
     <>
       {/* ===================== MOBILE TOP HEADER BAR ===================== */}
-      <header className="lg:hidden sticky top-0 z-40 bg-white/95 dark:bg-[#111111]/95 backdrop-blur-md px-4 py-3 border-b border-neutral-200 dark:border-neutral-800 flex items-center justify-between font-inter transition-colors">
+      <header className="lg:hidden sticky top-0 z-40 bg-[#F7F7F5]/95 dark:bg-[#0A0A0A]/95 backdrop-blur-md px-4 py-3 flex items-center justify-between font-inter transition-colors w-full border-b border-transparent dark:border-neutral-900">
         <Link href="/" className="flex items-center gap-2">
           <img
             src="/images (4)/navbar.png"
