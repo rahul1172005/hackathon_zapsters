@@ -22,7 +22,7 @@ export default function OrganizerOverviewConnectedPage() {
 
   if (!hackathon) {
     return (
-      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
         <OrganizerSidebar hackathonId={hackathonId} />
         <div className="flex-1 flex items-center justify-center p-12 text-xs font-inter text-[#777777]">
           Loading Command Center Overview...
@@ -32,10 +32,10 @@ export default function OrganizerOverviewConnectedPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
       <OrganizerSidebar hackathonId={hackathonId} />
 
-      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8 w-full max-w-full min-w-0">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
           <div>
             <h1 className="text-2xl sm:text-3xl font-geist font-bold text-[#111111] dark:text-white">{hackathon.title} Command Center</h1>

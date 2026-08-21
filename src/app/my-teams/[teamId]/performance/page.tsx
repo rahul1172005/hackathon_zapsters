@@ -14,10 +14,10 @@ export default function TeamPerformancePage() {
   const evalData = MOCK_EVALUATIONS.find((e) => e.teamId === team.id) || MOCK_EVALUATIONS[0];
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
       <ParticipantSidebar />
 
-      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8 w-full max-w-full min-w-0">
         <TeamWorkspaceHeader team={team} />
 
         {/* Section 14 Performance Metrics */}

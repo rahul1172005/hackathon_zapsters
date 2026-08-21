@@ -80,7 +80,7 @@ export default function OrganizerTeamEvaluationStudioPage() {
 
   if (!team) {
     return (
-      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+      <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
         <OrganizerSidebar hackathonId={hackathonId} />
         <div className="flex-1 flex items-center justify-center p-12 text-xs font-mono text-[#666666]">
           Loading Evaluation Studio...
@@ -90,10 +90,10 @@ export default function OrganizerTeamEvaluationStudioPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex font-inter">
+    <div className="min-h-screen bg-[#F7F7F5] dark:bg-[#0A0A0A] flex flex-col lg:flex-row font-inter">
       <OrganizerSidebar hackathonId={hackathonId} />
 
-      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8">
+      <main className="flex-1 p-3.5 sm:p-6 lg:p-8 space-y-6 overflow-y-auto pb-28 lg:pb-8 w-full max-w-full min-w-0">
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2">
           <div>
